@@ -5,1779 +5,281 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#1A1714">
-<title>HQ · Центр оркестрации — ИнструментБург</title>
-<meta name="description" content="Хаб агент-оркестрации. Один человек, два контура, тридцать проектов. Единый источник правды — AGENTS.md.">
+<title>Хаб — центр оркестрации</title>
+<meta name="description" content="Один человек, два контура, 30 проектов. Операционная панель задач.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     TOKENS · editorial dark · OKLCH + sRGB fallback
-     ============================================================ */
   :root {
-    /* Surface — 4 уровня elevation (warm charcoal) */
-    --surface-0: #1A1714;
-    --surface-1: #221F1B;
-    --surface-2: #2B2722;
-    --surface-3: #362F29;
-
-    /* Text */
-    --ink-hi:  #E8E3DB;
+    --bg:      #1A1714;
+    --surface: #221F1B;
+    --ink:     #E8E3DB;
     --ink-mid: #B0A99B;
     --ink-lo:  #78725F;
-
-    /* Semantic (бренд, сохраняем преемственность oxide/brass/moss/amber) */
     --oxide:   #D06A3E;
-    --oxide-b: #E8824D;
-    --brass:   #D9B36B;
     --moss:    #6FC17A;
     --amber:   #E8C56A;
-    --stale:   #A14D37;
-
-    --border:       rgba(185, 172, 150, 0.14);
-    --border-hi:    rgba(185, 172, 150, 0.28);
-    --border-oxide: rgba(208, 106, 62, 0.45);
-
-    --serif: "Instrument Serif", "Didot", "Bodoni 72", Georgia, serif;
-    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-
-    --shadow-card: 0 1px 0 rgba(255,255,255,0.02) inset, 0 12px 32px -24px rgba(0,0,0,0.8);
-    --shadow-hero: 0 1px 0 rgba(255,255,255,0.025) inset, 0 20px 60px -32px rgba(0,0,0,0.9);
+    --border:  rgba(185, 172, 150, 0.14);
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   }
-
   @supports (color: oklch(0 0 0)) {
     :root {
-      --surface-0: oklch(0.14 0.012 65);
-      --surface-1: oklch(0.18 0.012 65);
-      --surface-2: oklch(0.22 0.015 65);
-      --surface-3: oklch(0.27 0.018 65);
-      --ink-hi:    oklch(0.93 0.012 80);
-      --ink-mid:   oklch(0.72 0.020 80);
-      --ink-lo:    oklch(0.55 0.020 80);
-      --oxide:     oklch(0.66 0.18 30);
-      --oxide-b:   oklch(0.74 0.17 30);
-      --brass:     oklch(0.76 0.12 75);
-      --moss:      oklch(0.74 0.17 145);
-      --amber:     oklch(0.80 0.15 82);
-      --stale:     oklch(0.55 0.16 28);
-      --border:       oklch(0.70 0.015 65 / 0.14);
-      --border-hi:    oklch(0.70 0.015 65 / 0.28);
-      --border-oxide: oklch(0.66 0.18 30 / 0.45);
+      --bg:      oklch(0.14 0.012 65);
+      --surface: oklch(0.18 0.012 65);
+      --ink:     oklch(0.93 0.012 80);
+      --ink-mid: oklch(0.72 0.020 80);
+      --ink-lo:  oklch(0.55 0.020 80);
+      --oxide:   oklch(0.66 0.18 30);
+      --moss:    oklch(0.74 0.17 145);
+      --amber:   oklch(0.80 0.15 82);
+      --border:  oklch(0.70 0.015 65 / 0.14);
     }
   }
-
-  /* Light fallback — уважение prefers-color-scheme, тёплая paper-палитра */
   @media (prefers-color-scheme: light) {
     :root {
-      --surface-0: #E8E3D5;
-      --surface-1: #F1ECDE;
-      --surface-2: #D8D2C1;
-      --surface-3: #CDC7B5;
-      --ink-hi:    #141210;
-      --ink-mid:   #3A332A;
-      --ink-lo:    #7B7468;
-      --oxide:     #B53A22;
-      --oxide-b:   #C24A2E;
-      --brass:     #AE832F;
-      --moss:      #4F6B35;
-      --amber:     #D8A43F;
-      --stale:     #8A3A20;
-      --border:       rgba(20, 18, 16, 0.14);
-      --border-hi:    rgba(20, 18, 16, 0.30);
-      --border-oxide: rgba(181, 58, 34, 0.45);
+      --bg:      #F1ECDE;
+      --surface: #E8E3D5;
+      --ink:     #141210;
+      --ink-mid: #3A332A;
+      --ink-lo:  #7B7468;
+      --oxide:   #B53A22;
+      --moss:    #4F6B35;
+      --amber:   #AE832F;
+      --border:  rgba(20, 18, 16, 0.14);
     }
   }
 
-  /* High-contrast accessibility */
-  @media (prefers-contrast: more) {
-    :root {
-      --border:    var(--ink-hi);
-      --border-hi: var(--ink-hi);
-    }
-  }
-
-  /* Reset */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; }
-  html, body {
-    background: var(--surface-0);
-    color: var(--ink-hi);
-  }
+  html, body { background: var(--bg); color: var(--ink); }
   body {
     font-family: var(--sans);
     font-weight: 400;
-    line-height: 1.55;
-    min-height: 100vh;
-    font-feature-settings: "ss01", "ss02", "cv11", "tnum";
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    background-image:
-      radial-gradient(circle at 16% 14%, rgba(208, 106, 62, 0.08) 0%, transparent 42%),
-      radial-gradient(circle at 86% 82%, rgba(217, 179, 107, 0.06) 0%, transparent 50%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.92  0 0 0 0 0.89  0 0 0 0 0.82  0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 2.5rem 1.25rem 3rem;
   }
-  @media (max-width: 720px) {
-    body { background-attachment: scroll; }
-  }
+  .page { max-width: 760px; margin: 0 auto; }
 
-  ::selection { background: var(--oxide); color: var(--surface-0); }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid var(--border-oxide);
-    padding-bottom: 1px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  a:hover { border-bottom-color: var(--oxide); color: var(--oxide-b); }
-  a:focus-visible {
-    outline: 2px solid var(--oxide);
-    outline-offset: 3px;
-    border-radius: 2px;
-    border-bottom-color: transparent;
-  }
-
-  .page {
-    max-width: 1260px;
-    margin: 0 auto;
-    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
-  }
-
-  /* ============================================================
-     MASTHEAD  ·  hero D-hybrid
-     ============================================================ */
-  .masthead {
-    border-top: 2px solid var(--ink-hi);
-    padding-top: 0.85rem;
-    position: relative;
-  }
-
-  .rail {
+  .head {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     gap: 1rem;
-    flex-wrap: wrap;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-mid);
-    padding-bottom: 1rem;
+    padding-bottom: 0.85rem;
     border-bottom: 1px solid var(--border);
-  }
-  .rail .live {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    color: var(--ink-hi);
-  }
-  .rail a { color: var(--ink-mid); border-bottom-color: transparent; }
-  .rail a:hover { color: var(--oxide-b); }
-  .rail-sep { color: var(--ink-lo); opacity: 0.55; }
-
-  .dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--moss);
-    box-shadow: 0 0 0 0 rgba(111, 193, 122, 0.55);
-    animation: pulse 2.4s ease-out infinite;
-    flex: 0 0 auto;
-  }
-  .dot.paused { background: var(--amber); box-shadow: 0 0 0 0 rgba(232, 197, 106, 0.45); }
-  .dot.stale  { background: var(--stale); animation: none; opacity: 0.7; }
-
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(111, 193, 122, 0.55); }
-    70%  { box-shadow: 0 0 0 8px rgba(111, 193, 122, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(111, 193, 122, 0); }
-  }
-
-  .masthead-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    line-height: 0.86;
-    letter-spacing: -0.035em;
-    padding: 1.6rem 0 1.1rem;
-    display: flex;
-    align-items: flex-end;
-    gap: clamp(0.8rem, 2.4vw, 2.25rem);
+    margin-bottom: 1.25rem;
     flex-wrap: wrap;
-    position: relative;
   }
-  .masthead-title .mono-mark {
-    font-family: var(--mono);
-    font-size: clamp(9rem, 22vw, 18rem);
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    line-height: 0.82;
-    color: var(--ink-hi);
-    text-shadow: 0 0 1px currentColor;
-  }
-  .masthead-title .mono-mark sup {
-    font-size: 0.18em;
-    vertical-align: top;
-    color: var(--ink-lo);
-    font-weight: 400;
-    margin-left: 0.2em;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .masthead-title .amp {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(3rem, 8vw, 6.2rem);
-    color: var(--oxide-b);
-    line-height: 1;
-    transform: translateY(-0.35em);
-  }
-  .masthead-title .caption {
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(2rem, 5.2vw, 4.2rem);
-    line-height: 0.95;
-    max-width: 14ch;
-    color: var(--ink-hi);
-    padding-bottom: 0.45em;
-    text-shadow: 0 0 1px currentColor;
-  }
-
-  .masthead-lede {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    border-top: 1px solid var(--border-hi);
-    padding-top: 1.25rem;
-  }
-  .masthead-lede p.lede {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
-    color: var(--ink-hi);
-    max-width: 44ch;
-    line-height: 1.35;
-  }
-  .masthead-lede p.lede a {
-    font-style: normal;
+  .head-title {
     font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .head-title .sep {
+    color: var(--ink-lo);
+    font-weight: 400;
+    margin: 0 0.5rem;
+  }
+  .head-title .date {
+    color: var(--ink-mid);
+    font-weight: 400;
+  }
+  .head-link {
     font-size: 0.9rem;
-    color: var(--oxide-b);
-    margin-left: 0.4em;
-  }
-
-  .pulse-strip {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
     color: var(--ink-mid);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.35rem 1.1rem;
-    border-left: 1px solid var(--border-hi);
-    padding-left: 1.25rem;
-    align-self: start;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
-  .pulse-strip dt {
-    text-transform: uppercase;
-    color: var(--ink-lo);
-    font-weight: 500;
-  }
-  .pulse-strip dd {
-    color: var(--ink-hi);
-  }
-  .pulse-strip dd em {
-    color: var(--moss);
-    font-style: normal;
-  }
-  .pulse-strip dd.paused em { color: var(--amber); }
-  .pulse-strip dd.stale em  { color: var(--stale); }
-
-  .corp-chip {
-    position: absolute;
-    top: 1.1rem;
-    right: 0;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-mid);
-    border: 1px solid var(--border-oxide);
-    padding: 0.45rem 0.75rem;
-    border-radius: 999px;
-    background: transparent;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  .corp-chip:hover {
-    background: var(--oxide);
-    color: var(--surface-0);
-    border-color: var(--oxide);
-    border-bottom: 1px solid var(--oxide);
+  .head-link:hover,
+  .head-link:focus-visible {
+    color: var(--oxide);
+    border-bottom-color: var(--oxide);
+    outline: none;
   }
 
-  /* ============================================================
-     §0  KPI STRIP
-     ============================================================ */
-  .kpi {
-    margin-top: 2.75rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--border-hi);
-    border-bottom: 1px solid var(--border-hi);
-  }
-  .kpi-tile {
-    padding: 1.5rem 1.35rem 1.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    border-right: 1px solid var(--border);
-    position: relative;
-  }
-  .kpi-tile:last-child { border-right: none; }
-  .kpi-tile .num {
+  .lede {
     font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(2.4rem, 4.2vw, 3.6rem);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    color: var(--ink-hi);
-    text-shadow: 0 0 1px currentColor;
-  }
-  .kpi-tile.accent .num { color: var(--oxide-b); }
-  .kpi-tile .label {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-lo);
-    margin-top: 0.45rem;
-  }
-  .kpi-tile .sub {
-    font-size: 0.88rem;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
     color: var(--ink-mid);
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+    max-width: 46ch;
+  }
+
+  .block { margin-bottom: 2.25rem; }
+  .block-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: space-between;
     gap: 0.5rem;
   }
-
-  /* ============================================================
-     Section · общая шапка
-     ============================================================ */
-  .section {
-    margin-top: 3.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--border-hi);
-  }
-  .section-head {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: baseline;
-    gap: 1.25rem;
-    margin-bottom: 1.85rem;
-  }
-  .section-num {
-    font-family: var(--mono);
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--oxide-b);
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(1.9rem, 3.2vw, 2.8rem);
-    letter-spacing: -0.025em;
-    color: var(--ink-hi);
-    line-height: 1;
-  }
-  .section-title em {
-    font-style: italic;
-    color: var(--oxide-b);
+  .block-title .count {
     font-weight: 400;
-  }
-  .section-meta {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
     color: var(--ink-lo);
-    text-align: right;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
   }
+  .block.in-work  .block-title { color: var(--moss); }
+  .block.queue    .block-title { color: var(--oxide); }
+  .block.waiting  .block-title { color: var(--amber); }
 
-  /* ============================================================
-     §I CHRONICLE
-     ============================================================ */
-  .chronicle {
-    list-style: none;
+  .tasks { list-style: none; }
+  .task {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-  .chronicle li {
-    display: grid;
-    grid-template-columns: 3.5rem 1rem 6.5rem 1fr;
-    gap: 1rem;
-    align-items: baseline;
-    padding: 0.65rem 0;
+    gap: 0.9rem;
+    padding: 0.55rem 0;
     border-bottom: 1px solid var(--border);
+    align-items: baseline;
   }
-  .chronicle li:last-child { border-bottom: none; }
-  .chronicle time {
-    font-family: var(--mono);
-    font-size: 0.8rem;
+  .task:last-child { border-bottom: none; }
+  .task-project {
+    font-family: var(--sans);
     font-weight: 500;
-    color: var(--brass);
-    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+    color: var(--ink);
+    min-width: 13rem;
+    flex-shrink: 0;
   }
-  .ch-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--moss);
-    justify-self: center;
-    align-self: center;
-    margin-top: 0.1em;
-  }
-  .ch-dot.release { background: var(--oxide); }
-  .ch-dot.paused  { background: var(--amber); }
-  .ch-ticker {
-    font-family: var(--mono);
-    font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .ch-ticker[data-ticker="hq"]         { color: var(--brass); }
-  .ch-ticker[data-ticker="dashboard"]  { color: var(--moss); }
-  .ch-ticker[data-ticker="calculator"] { color: var(--amber); }
-  .ch-ticker[data-ticker="avito-ads"]  { color: var(--oxide-b); }
-  .ch-ticker[data-ticker="website"]    { color: #9FC4D9; }
-  .ch-ticker[data-ticker="corp"]       { color: var(--ink-mid); }
-  .ch-ticker[data-ticker="blagoystroystvo"] { color: var(--amber); }
-  .ch-event {
+  .task-what {
     font-family: var(--serif);
     font-style: italic;
     font-size: 1.08rem;
-    color: var(--ink-hi);
-    line-height: 1.35;
-  }
-  @media (max-width: 640px) {
-    .chronicle li {
-      grid-template-columns: 3rem 0.75rem 1fr;
-      grid-template-rows: auto auto;
-      gap: 0.4rem 0.75rem;
-    }
-    .chronicle .ch-ticker { grid-column: 2 / -1; grid-row: 2; }
-    .chronicle .ch-event  { grid-column: 1 / -1; grid-row: 3; padding-left: 3.75rem; }
-  }
-
-  /* ============================================================
-     §II  P1 BENTO · projects grid
-     ============================================================ */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-  .project {
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.4rem 1.4rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    position: relative;
-    min-height: 180px;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    box-shadow: var(--shadow-card);
-  }
-  .project.hero {
-    grid-column: span 2;
-    min-height: 210px;
-    padding: 1.65rem 1.75rem 1.5rem;
-    background: linear-gradient(
-      155deg,
-      var(--surface-1) 0%,
-      var(--surface-2) 100%
-    );
-    box-shadow: var(--shadow-hero);
-  }
-  .project:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-oxide);
-    background: var(--surface-2);
-  }
-  .project.hero:hover {
-    background: linear-gradient(155deg, var(--surface-2) 0%, var(--surface-3) 100%);
-  }
-  .project-num {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--ink-lo);
-    letter-spacing: 0.18em;
-    position: absolute;
-    top: 1rem;
-    left: 1.4rem;
-  }
-  .project.hero .project-num { left: 1.75rem; }
-  .project-priority {
-    align-self: flex-end;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    padding: 0.25rem 0.55rem;
-    border-radius: 999px;
-    border: 1px solid var(--border-hi);
-    color: var(--ink-mid);
-    display: inline-flex;
-    gap: 0.4rem;
-    align-items: center;
-  }
-  .project-priority.p1 {
-    border-color: var(--border-oxide);
-    color: var(--oxide-b);
-    background: rgba(208, 106, 62, 0.06);
-  }
-  .project-priority .s-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--moss);
-  }
-  .project-priority.paused .s-dot { background: var(--amber); }
-  .project-name {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 1.35rem;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    color: var(--ink-hi);
-    margin-top: 1.1rem;
-  }
-  .project.hero .project-name { font-size: 1.65rem; }
-  .project-name .slash {
-    color: var(--ink-lo);
-    font-weight: 300;
-    margin: 0 0.18em;
-  }
-  .project-name em {
-    font-style: italic;
-    color: var(--oxide-b);
-    font-weight: 400;
-  }
-  .project-goal {
-    font-size: 0.95rem;
-    color: var(--ink-mid);
-    line-height: 1.45;
-    flex-grow: 1;
-  }
-  .project.hero .project-goal { font-size: 1rem; max-width: 42ch; }
-  .project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.85rem;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--ink-lo);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-top: 1px solid var(--border);
-    padding-top: 0.7rem;
-    margin-top: 0.15rem;
-  }
-  .project-meta .stack { color: var(--ink-mid); }
-  .project-meta a { color: var(--oxide-b); border-bottom-color: transparent; }
-  .project-meta a:hover { border-bottom-color: var(--oxide); }
-
-  .recency {
-    display: inline-flex;
-    gap: 0.15rem;
-    align-items: center;
-    margin-right: auto;
-  }
-  .recency-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--surface-3);
-  }
-  .recency-dot.on { background: var(--moss); }
-  .recency[data-heat="hot"]  .recency-dot.on { background: var(--moss); }
-  .recency[data-heat="warm"] .recency-dot.on { background: var(--brass); }
-  .recency[data-heat="cool"] .recency-dot.on { background: var(--brass); opacity: 0.7; }
-  .recency[data-heat="cold"] .recency-dot.on { background: var(--stale); }
-  .recency[data-heat="paused"] .recency-dot { background: var(--amber); opacity: 0.55; }
-
-  @media (max-width: 960px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-    .project.hero { grid-column: span 2; }
-  }
-  @media (max-width: 560px) {
-    .projects-grid { grid-template-columns: 1fr; }
-    .project.hero, .project { grid-column: auto; min-height: 150px; }
-    .project.hero { min-height: 200px; }
-  }
-
-  /* ============================================================
-     §III  OPENCLAW · editorial list
-     ============================================================ */
-  .openclaw {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2.5rem;
-    row-gap: 0.25rem;
-    list-style: none;
-  }
-  .openclaw > li:nth-child(n+6) {
-    border-left: 1px solid var(--border);
-    padding-left: 1.25rem;
-    margin-left: -1.25rem;
-  }
-  .openclaw li {
-    display: grid;
-    grid-template-columns: 1rem 9.5rem 1fr;
-    align-items: baseline;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .openclaw .oc-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    justify-self: center;
-    background: var(--moss);
-  }
-  .openclaw .oc-dot.partial { background: var(--amber); }
-  .openclaw .oc-dot.paused  { background: var(--stale); }
-  .openclaw .oc-name {
-    font-family: var(--mono);
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink-hi);
-    letter-spacing: 0.01em;
-  }
-  .openclaw .oc-name.conductor {
-    color: var(--oxide-b);
-    font-weight: 600;
-  }
-  .openclaw .oc-role {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink-mid);
-    line-height: 1.3;
-  }
-  .oc-legend {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-lo);
-    margin-top: 1.25rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-  .oc-legend b { color: var(--ink-hi); font-weight: 500; }
-  @media (max-width: 720px) {
-    .openclaw { grid-template-columns: 1fr; }
-    .openclaw > li:nth-child(n+6) {
-      border-left: none;
-      padding-left: 0;
-      margin-left: 0;
-    }
-    .openclaw li { grid-template-columns: 1rem 1fr; row-gap: 0.15rem; }
-    .openclaw .oc-role { grid-column: 2; }
-  }
-
-  /* ============================================================
-     §IV  FULL REGISTRY · 8 groups
-     ============================================================ */
-  .registry {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
-  .reg-group {
-    border-top: 1px solid var(--border-hi);
-    padding-top: 1rem;
-  }
-  .reg-group.contour-2 {
-    border-top-color: var(--border-oxide);
-    background: linear-gradient(180deg, rgba(208, 106, 62, 0.035) 0%, transparent 55%);
-    padding-left: 1rem;
-    margin-left: -1rem;
-    padding-right: 1rem;
-    margin-right: -1rem;
-    border-radius: 2px;
-  }
-  .reg-group-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.6rem;
-    gap: 1rem;
-  }
-  .reg-group-name {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 1.15rem;
-    color: var(--ink-hi);
-    letter-spacing: -0.005em;
-  }
-  .reg-group.contour-2 .reg-group-name {
-    color: var(--brass);
-  }
-  .reg-group-name em {
-    color: var(--ink-lo);
-    font-weight: 300;
-    font-style: normal;
-    margin: 0 0.25em;
-  }
-  .reg-group-note {
-    font-family: var(--mono);
-    font-style: italic;
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--oxide-b);
-    margin-bottom: 0.35rem;
-  }
-  .reg-group-count {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-lo);
-  }
-  .reg-list {
-    list-style: none;
-  }
-  .reg-row {
-    display: grid;
-    grid-template-columns: 2rem 0.8rem 1fr auto auto;
-    gap: 0.9rem;
-    align-items: baseline;
-    padding: 0.55rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.92rem;
-    transition: background 0.15s ease;
-  }
-  .reg-row:hover { background: var(--surface-1); }
-  .reg-prio {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.18rem 0.4rem;
-    border-radius: 2px;
-    border: 1px solid var(--border-hi);
-    color: var(--ink-mid);
-    text-align: center;
-    justify-self: start;
-  }
-  .reg-prio.p1 {
-    color: var(--oxide-b);
-    border-color: var(--border-oxide);
-    background: rgba(208, 106, 62, 0.06);
-  }
-  .reg-prio.p2 {
-    color: var(--brass);
-    border-color: rgba(217, 179, 107, 0.3);
-  }
-  .reg-prio.p3 {
-    color: var(--ink-lo);
-    opacity: 0.8;
-  }
-  .reg-status {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    justify-self: center;
-    align-self: center;
-    background: var(--moss);
-  }
-  .reg-status.s-paused { background: var(--amber); }
-  .reg-status.s-stale  { background: var(--stale); opacity: 0.75; }
-  .reg-name {
-    font-family: var(--mono);
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--ink-hi);
-  }
-  .reg-sub {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--ink-mid);
-    display: block;
-    margin-top: 0.15rem;
-    letter-spacing: 0.005em;
-  }
-  .reg-stack {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-lo);
-    text-align: right;
-  }
-  .reg-date {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--brass);
-    letter-spacing: 0.04em;
-    text-align: right;
-    min-width: 3.5rem;
-  }
-  .reg-date.stale { color: var(--stale); opacity: 0.75; }
-  @media (max-width: 760px) {
-    .reg-row {
-      grid-template-columns: 2rem 0.8rem 1fr auto;
-      grid-template-rows: auto auto;
-    }
-    .reg-stack {
-      grid-column: 3 / 5;
-      grid-row: 2;
-      text-align: left;
-      padding-top: 0.2rem;
-    }
-    .reg-date { grid-column: 4; grid-row: 1; }
-  }
-
-  /* ============================================================
-     §V  TASKS
-     ============================================================ */
-  .tasks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .task-col {
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.3rem 1.4rem 1.1rem;
-  }
-  .task-col h3 {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 1.35rem;
-    color: var(--ink-hi);
-    letter-spacing: -0.01em;
-    margin-bottom: 1.1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .task-col h3 .count {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-lo);
-  }
-  .empty {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-  .empty-mark {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    font-style: italic;
-    color: var(--ink-lo);
-    line-height: 1;
-    margin-bottom: 0.35rem;
-  }
-  .empty-msg {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.05rem;
     color: var(--ink-mid);
     line-height: 1.35;
-  }
-  .empty-hint {
-    display: grid;
-    grid-template-columns: 1.2rem 1fr auto;
-    gap: 0.5rem;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--ink-lo);
-    letter-spacing: 0.04em;
-    padding: 0.45rem 0;
-    border-top: 1px dashed var(--border);
-    margin-top: 0.75rem;
-  }
-  .empty-hint span:first-child { color: var(--oxide-b); }
-  .empty-hint code {
-    font-family: var(--mono);
-    color: var(--brass);
-    background: transparent;
-  }
-  @media (max-width: 720px) {
-    .tasks { grid-template-columns: 1fr; }
+    flex: 1;
   }
 
-  /* ============================================================
-     §VI  COURSE · Personal Corp
-     ============================================================ */
-  .course {
-    margin-top: 3.5rem;
-    padding: 2.5rem 0 0;
-    border-top: 1px solid var(--border-hi);
+  @media (max-width: 620px) {
+    body { padding: 1.75rem 1rem 2.5rem; }
+    .task {
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.65rem 0;
+    }
+    .task-project {
+      min-width: 0;
+      font-size: 0.82rem;
+      color: var(--ink-lo);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .task-what { font-size: 1.05rem; }
   }
-  .course-head {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.25rem;
-    align-items: baseline;
-    margin-bottom: 1.25rem;
-  }
-  .course-num {
-    font-family: var(--mono);
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--oxide-b);
-  }
-  .course-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    letter-spacing: -0.025em;
-  }
-  .course-title em {
-    font-style: italic;
-    color: var(--brass);
-    font-weight: 400;
-  }
-  .course-lede {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--ink-mid);
-    max-width: 62ch;
-    margin-bottom: 1.85rem;
-    line-height: 1.4;
-  }
-  .lesson {
-    display: grid;
-    grid-template-columns: 1fr 3fr auto;
-    gap: 1.25rem;
-    align-items: center;
-    padding: 0.65rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .lesson-name {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    color: var(--ink-hi);
-  }
-  .lesson-name.done a,
-  a.lesson-name {
-    color: var(--amber);
-    border-bottom: 1px solid rgba(232, 197, 106, 0.35);
-  }
-  .lesson-name.done a:hover,
-  a.lesson-name:hover {
-    border-bottom-color: var(--amber);
-    color: var(--amber);
-  }
-  .bar {
-    height: 3px;
-    background: var(--surface-2);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-  }
-  .bar-fill {
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: calc(100% * var(--pct, 0));
-    background: linear-gradient(90deg, var(--brass) 0%, var(--oxide) 100%);
-    border-radius: 2px;
-    transition: width 0.8s ease-out;
-  }
-  .lesson-pct {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--ink-mid);
-    letter-spacing: 0.06em;
-    min-width: 3rem;
-    text-align: right;
-  }
-  .lesson-pct.muted { color: var(--ink-lo); }
-  .course-note {
-    margin-top: 1.5rem;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink-mid);
-    max-width: 66ch;
-    line-height: 1.45;
-  }
-  .course-note a { color: var(--amber); border-bottom-color: rgba(232,197,106,0.35); }
-  .course-note a:hover { border-bottom-color: var(--amber); }
 
-  /* ============================================================
-     FOOTER
-     ============================================================ */
   footer {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--ink-hi);
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem 2rem;
     flex-wrap: wrap;
-    gap: 1rem;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
+    font-size: 0.88rem;
     color: var(--ink-mid);
   }
-  footer a { color: var(--ink-mid); border-bottom-color: transparent; }
-  footer a:hover { color: var(--oxide-b); }
+  footer a {
+    color: var(--ink-mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  footer a:hover,
+  footer a:focus-visible {
+    color: var(--oxide);
+    border-bottom-color: var(--oxide);
+    outline: none;
+  }
 
-  /* ============================================================
-     MOTION RESPECT
-     ============================================================ */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-    .dot, .bar-fill { transition: none; }
   }
-
-  /* Cascading reveal (load-in) */
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
-  }
-  .masthead-title,
-  .masthead-lede,
-  .kpi,
-  .section,
-  .course,
-  footer {
-    animation: reveal 0.6s ease-out both;
-  }
-  .masthead-lede { animation-delay: 120ms; }
-  .kpi           { animation-delay: 200ms; }
-  .section:nth-of-type(1) { animation-delay: 280ms; }
-  .section:nth-of-type(2) { animation-delay: 340ms; }
-  .section:nth-of-type(3) { animation-delay: 400ms; }
-  .section:nth-of-type(4) { animation-delay: 460ms; }
-  .section:nth-of-type(5) { animation-delay: 520ms; }
-  .course        { animation-delay: 580ms; }
-  footer         { animation-delay: 640ms; }
-
-  /* Forced-colors (Windows HC) */
   @media (forced-colors: active) {
-    a, .reg-prio, .project-priority, .corp-chip, .ch-ticker {
-      forced-color-adjust: none;
-    }
-    .reg-prio.p1 { color: LinkText; border-color: LinkText; background: Canvas; }
-    .project-priority.p1 { color: LinkText; border-color: LinkText; }
+    .head-link, footer a { forced-color-adjust: none; }
   }
 </style>
 </head>
 <body>
 <main class="page">
 
-  <!-- ========================  MASTHEAD  ======================== -->
-  <header class="masthead">
-
-    <nav class="rail" aria-label="глобальная навигация">
-      <span class="live"><span class="dot" aria-hidden="true"></span> LIVE · hq</span>
-      <span class="rail-links">
-        <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq ↗</a>
-        <span class="rail-sep"> · </span>
-        <a href="./AGENTS.md">AGENTS.md</a>
-        <span class="rail-sep"> · </span>
-        <span>build <time datetime="2026-04-22">22·04·2026</time></span>
-      </span>
-    </nav>
-
-    <h1 class="masthead-title">
-      <span class="mono-mark" aria-label="30">30<sup>p1 · p2 · p3</sup></span>
-      <span class="amp">&amp;</span>
-      <span class="caption">hq —<br>центр оркестрации</span>
-    </h1>
-
-    <a class="corp-chip" href="https://sereja.tech" target="_blank" rel="noopener">ex Personal&nbsp;Corp · sereja.tech ↗</a>
-
-    <div class="masthead-lede">
-      <p class="lede">
-        Хаб агент-оркестрации. Один человек, два юридических контура, тридцать проектов. Единый источник правды — <a href="./AGENTS.md">AGENTS.md</a>.
-      </p>
-      <dl class="pulse-strip">
-        <dt>updated</dt>    <dd>22·04·2026</dd>
-        <dt>active</dt>     <dd>14 <em>●</em> · paused 10 · stale 6</dd>
-        <dt>priorities</dt> <dd>P1 10 · P2 14 · P3 6</dd>
-        <dt>last</dt>       <dd>apps/dashboard · 22·04</dd>
-        <dt>course</dt>     <dd>Personal Corp · lesson 01 ✓</dd>
-      </dl>
-    </div>
+  <header class="head">
+    <h1 class="head-title">Хаб<span class="sep">·</span><span class="date">22 апреля</span></h1>
+    <a class="head-link" href="./AGENTS.md">AGENTS.md</a>
   </header>
 
-  <!-- ========================  §0 KPI STRIP  ======================== -->
-  <section class="kpi" aria-label="сводные показатели">
-    <div class="kpi-tile accent">
-      <span class="num">30</span>
-      <span class="label">проектов в хабе</span>
-      <span class="sub">8 групп · 2 контура</span>
-    </div>
-    <div class="kpi-tile">
-      <span class="num">14</span>
-      <span class="label">active</span>
-      <span class="sub"><span class="dot" aria-hidden="true"></span> живая разработка</span>
-    </div>
-    <div class="kpi-tile">
-      <span class="num">10</span>
-      <span class="label">P1 · ядро</span>
-      <span class="sub">4 hero · 6 compact</span>
-    </div>
-    <div class="kpi-tile">
-      <span class="num">22·04</span>
-      <span class="label">updated · live</span>
-      <span class="sub">следующий билд — по изменению</span>
-    </div>
-  </section>
+  <p class="lede">Один человек, два контура, 30 проектов.</p>
 
-  <!-- ========================  §I  CHRONICLE  ======================== -->
-  <section class="section" aria-labelledby="chronicle-head">
-    <div class="section-head">
-      <span class="section-num">§ I</span>
-      <h2 class="section-title" id="chronicle-head"><em>Хроника</em> недели</h2>
-      <span class="section-meta">/LOG · WEEKLY · 05/05</span>
-    </div>
-    <ol class="chronicle" reversed>
-      <li>
-        <time datetime="2026-04-22">22·04</time>
-        <span class="ch-dot" aria-hidden="true"></span>
-        <span class="ch-ticker" data-ticker="hq">HQ</span>
-        <span class="ch-event">dashboard пересобран в editorial dark (2026 best practices)</span>
+  <section class="block in-work" aria-labelledby="b-now">
+    <h2 class="block-title" id="b-now">В работе <span class="count">— 2</span></h2>
+    <ul class="tasks">
+      <li class="task">
+        <span class="task-project">Blagoystroystvo</span>
+        <span class="task-what">КС-3 за март — подрядчик Россети Урал</span>
       </li>
-      <li>
-        <time datetime="2026-04-22">22·04</time>
-        <span class="ch-dot" aria-hidden="true"></span>
-        <span class="ch-ticker" data-ticker="dashboard">DASHBOARD</span>
-        <span class="ch-event">fetch_modulbank cron 18:00 EKB — ok</span>
-      </li>
-      <li>
-        <time datetime="2026-04-22">22·04</time>
-        <span class="ch-dot release" aria-hidden="true"></span>
-        <span class="ch-ticker" data-ticker="blagoystroystvo">BLAGO</span>
-        <span class="ch-event">свежий коммит по контуру Россети Урал</span>
-      </li>
-      <li>
-        <time datetime="2026-04-21">21·04</time>
-        <span class="ch-dot" aria-hidden="true"></span>
-        <span class="ch-ticker" data-ticker="calculator">CALC</span>
-        <span class="ch-event">калькулятор СЦ — доработка метрик</span>
-      </li>
-      <li>
-        <time datetime="2026-04-20">20·04</time>
-        <span class="ch-dot" aria-hidden="true"></span>
-        <span class="ch-ticker" data-ticker="avito-ads">AVITO</span>
-        <span class="ch-event">партия каруселей v12 — деплой на автозагрузку</span>
-      </li>
-    </ol>
-  </section>
-
-  <!-- ========================  §II  P1 BENTO  ======================== -->
-  <section class="section" aria-labelledby="p1-head">
-    <div class="section-head">
-      <span class="section-num">§ II</span>
-      <h2 class="section-title" id="p1-head"><em>Ядро</em> P1</h2>
-      <span class="section-meta">10 проектов · 4 hero + 6 compact</span>
-    </div>
-
-    <div class="projects-grid">
-
-      <!-- HERO 1 -->
-      <article class="project hero">
-        <span class="project-num">01</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> <em>монорепо</em></h3>
-        <p class="project-goal">Convex backend, Telegram-бот онбординга, Obsidian-like база знаний и все <code>apps/*</code> подпроекты.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot" title="обновлено 1 день назад">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span class="stack">Convex · Node.js · MD vault</span>
-          <span>04·21</span>
-        </div>
-      </article>
-
-      <!-- HERO 2 -->
-      <article class="project hero">
-        <span class="project-num">02</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> <em>website</em></h3>
-        <p class="project-goal">Основной сайт instrumentburg.ru. SEO-продвижение категорий ремонта, мониторинг Вебмастера и Метрики.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="warm" title="обновлено 14 дней назад">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot"></span><span class="recency-dot"></span>
-          </span>
-          <span class="stack">ocStore 3 · Twig · PHP 8.3</span>
-          <a href="https://instrumentburg.ru" target="_blank" rel="noopener">instrumentburg.ru ↗</a>
-        </div>
-      </article>
-
-      <!-- HERO 3 — Blagoystroystvo · контур 2 -->
-      <article class="project hero">
-        <span class="project-num">03</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">Blagoystroystvo <span class="slash">/</span> <em>Россети Урал</em></h3>
-        <p class="project-goal">Внутренний сервис ИП Дедков — договор благоустройства, КС-2/КС-3/ЛС, учёт расходов, маржа. Второй юр-контур.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot" title="обновлено сегодня">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span class="stack">Next.js 16 · Convex · Tailwind v4</span>
-          <span>04·22</span>
-        </div>
-      </article>
-
-      <!-- HERO 4 -->
-      <article class="project hero">
-        <span class="project-num">04</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> <em>avito-ads</em></h3>
-        <p class="project-goal">Пайплайн объявлений Авито: YAML-объявления, 9-слайдовые карусели, XML-фид, деплой на автозагрузку с security-валидацией.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot" title="обновлено 2 дня назад">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span class="stack">Python · YAML · XML</span>
-          <span>04·20</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 5 -->
-      <article class="project">
-        <span class="project-num">05</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> dashboard</h3>
-        <p class="project-goal">Финансовый и маркетинговый дашборд: 7 вкладок, cron 18:00 EKB.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>04·22</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 6 -->
-      <article class="project">
-        <span class="project-num">06</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> calculator</h3>
-        <p class="project-goal">Калькулятор СЦ: расчёт ремонта, смета, трекер запчастей.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>04·21</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 7 -->
-      <article class="project">
-        <span class="project-num">07</span>
-        <span class="project-priority p1 paused"><span class="s-dot" aria-hidden="true"></span> P1 · paused</span>
-        <h3 class="project-name">apps <span class="slash">/</span> avito-responder</h3>
-        <p class="project-goal">AI-автоответчик по Авито. Мигрирует в единый responder.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="paused">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>03·08</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 8 -->
-      <article class="project">
-        <span class="project-num">08</span>
-        <span class="project-priority p1 paused"><span class="s-dot" aria-hidden="true"></span> P1 · paused</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> responder</h3>
-        <p class="project-goal">Единый агент-ответчик: Авито, MAX, Telegram, сайт.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="paused">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>03·09</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 9 -->
-      <article class="project">
-        <span class="project-num">09</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">hq</h3>
-        <p class="project-goal">Этот хаб. Реестр проектов, dashboard, правила оркестрации.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>04·22</span>
-        </div>
-      </article>
-
-      <!-- COMPACT 10 -->
-      <article class="project">
-        <span class="project-num">10</span>
-        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
-        <h3 class="project-name">claude-skills</h3>
-        <p class="project-goal">66+ кастомных скиллов: GEO, audit, humanizer-ru, avito-feed, налоги.</p>
-        <div class="project-meta">
-          <span class="recency" data-heat="hot">
-            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
-          </span>
-          <span>04·21</span>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ========================  §III  OPENCLAW  ======================== -->
-  <section class="section" aria-labelledby="oc-head">
-    <div class="section-head">
-      <span class="section-num">§ III</span>
-      <h2 class="section-title" id="oc-head"><em>Оркестра</em> OpenClaw</h2>
-      <span class="section-meta">10 агентов · Telegram · см. AGENTS.md §11</span>
-    </div>
-
-    <ul class="openclaw">
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name conductor">main clawd</span>
-        <span class="oc-role">дирижёр, общий контроль</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">sitebuilder</span>
-        <span class="oc-role">сайт instrumentburg.ru (SEO)</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">master</span>
-        <span class="oc-role">мастер-агент категорий</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">marketer</span>
-        <span class="oc-role">Метрика, Wordstat, Direct</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">advertiser</span>
-        <span class="oc-role">Avito, Direct-объявления</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">chaser</span>
-        <span class="oc-role">заказы Ozon / WB</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">mailer</span>
-        <span class="oc-role">рассылки клиентам</span>
-      </li>
-      <li>
-        <span class="oc-dot" aria-hidden="true"></span>
-        <span class="oc-name">dispatcher</span>
-        <span class="oc-role">маршрутизация сообщений</span>
-      </li>
-      <li>
-        <span class="oc-dot partial" aria-hidden="true"></span>
-        <span class="oc-name">finik</span>
-        <span class="oc-role">финансовый ассистент</span>
-      </li>
-      <li>
-        <span class="oc-dot partial" aria-hidden="true"></span>
-        <span class="oc-name">nutritionist</span>
-        <span class="oc-role">личный, вне ИБ</span>
+      <li class="task">
+        <span class="task-project">hq</span>
+        <span class="task-what">пересобрать панель в минимализм</span>
       </li>
     </ul>
-    <p class="oc-legend">
-      легенда: <b>●</b> active · <b>◐</b> partial · <b>○</b> paused  ·  @handle ботов не публикуем (AGENTS.md §9.3)
-    </p>
   </section>
 
-  <!-- ========================  §IV  FULL REGISTRY  ======================== -->
-  <section class="section" aria-labelledby="reg-head">
-    <div class="section-head">
-      <span class="section-num">§ IV</span>
-      <h2 class="section-title" id="reg-head"><em>Полный</em> реестр</h2>
-      <span class="section-meta">30 проектов · 8 групп · два юр-контура</span>
-    </div>
-
-    <div class="registry">
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">ИнструментБург <em>·</em> ядро</span>
-          <span class="reg-group-count">3</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active" aria-label="active"></span>
-            <span class="reg-name">instrumentburg<span class="reg-sub">монорепо, Convex + vault</span></span>
-            <span class="reg-stack">Convex · Node.js · MD</span>
-            <span class="reg-date">04·21</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/website">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active" aria-label="active"></span>
-            <span class="reg-name">apps/website<span class="reg-sub">instrumentburg.ru</span></span>
-            <span class="reg-stack">ocStore 3 · Twig · PHP</span>
-            <span class="reg-date">04·08</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg-responder">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-paused" aria-label="paused"></span>
-            <span class="reg-name">instrumentburg-responder<span class="reg-sub">единый agent-ответчик</span></span>
-            <span class="reg-stack">Python · Anthropic SDK</span>
-            <span class="reg-date">03·09</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">ИнструментБург <em>·</em> операции</span>
-          <span class="reg-group-count">10</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-ads">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">apps/avito-ads<span class="reg-sub">YAML + 9-слайд фид</span></span>
-            <span class="reg-stack">Python · YAML · XML</span>
-            <span class="reg-date">04·20</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-responder">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">apps/avito-responder<span class="reg-sub">AI-автоответчик</span></span>
-            <span class="reg-stack">Python · Anthropic · systemd</span>
-            <span class="reg-date">03·08</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/calculator">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">apps/calculator<span class="reg-sub">Калькулятор СЦ</span></span>
-            <span class="reg-stack">Vite · TS · Convex · Vercel</span>
-            <span class="reg-date">04·21</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/dashboard">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">apps/dashboard<span class="reg-sub">7 вкладок фин/марк</span></span>
-            <span class="reg-stack">HTML · ApexCharts · cron</span>
-            <span class="reg-date">04·22</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/b2b-outreach">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">apps/b2b-outreach<span class="reg-sub">2ГИС · HH · DaData</span></span>
-            <span class="reg-stack">Python · CSV · DaData</span>
-            <span class="reg-date">03·10</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/max-miniapp">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">apps/max-miniapp<span class="reg-sub">MAX Messenger</span></span>
-            <span class="reg-stack">Vite · React · FastAPI</span>
-            <span class="reg-date">03·04</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/AIzakaznaryad">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">AIzakaznaryad<span class="reg-sub">заказ-наряды Karcher</span></span>
-            <span class="reg-stack">Vite · Supabase · jsPDF</span>
-            <span class="reg-date">03·23</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Rentalnew">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">Rentalnew<span class="reg-sub">ToolRent Manager</span></span>
-            <span class="reg-stack">Next.js 14 · Supabase · shadcn</span>
-            <span class="reg-date">03·04</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Tenders">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">Tenders<span class="reg-sub">КП-пайплайн, 44-ФЗ</span></span>
-            <span class="reg-stack">JSON state · DOCX · XLSX</span>
-            <span class="reg-date">live</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/DMDGU">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">apps/DMDGU<span class="reg-sub">тендерный пакет ДГУ</span></span>
-            <span class="reg-stack">DOCX · PDF · XLSX</span>
-            <span class="reg-date stale">02·02</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">ИнструментБург <em>·</em> база знаний</span>
-          <span class="reg-group-count">2</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/ib-digest">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">ib-digest<span class="reg-sub">утренний AI-дайджест</span></span>
-            <span class="reg-stack">Python · HTML · cron</span>
-            <span class="reg-date">04·22</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/ib-vault">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">ib-vault<span class="reg-sub">Obsidian-vault ИБ</span></span>
-            <span class="reg-stack">Markdown · JSON schema</span>
-            <span class="reg-date">live</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ↓ ВТОРОЙ ЮР-КОНТУР ↓ -->
-      <div class="reg-group contour-2">
-        <div class="reg-group-note">↓ юр. контур 2 — ИП Дедков как подрядчик ↓</div>
-        <div class="reg-group-head">
-          <span class="reg-group-name">ИП Дедков <em>·</em> Россети Урал</span>
-          <span class="reg-group-count">1</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Blagoystroystvo">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">Blagoystroystvo<span class="reg-sub">договор благоустройства, КС-2/КС-3</span></span>
-            <span class="reg-stack">Next.js 16 · Convex · Tailwind</span>
-            <span class="reg-date">04·22</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">Клиенты</span>
-          <span class="reg-group-count">3</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/tagil-instrument">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">tagil-instrument<span class="reg-sub">ТагилИнструмент / прокат</span></span>
-            <span class="reg-stack">Next.js 15 · Payload · Postgres</span>
-            <span class="reg-date">04·01</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/TheJungle">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">TheJungle<span class="reg-sub">студия загара, Mini App</span></span>
-            <span class="reg-stack">FastAPI · React · Docker</span>
-            <span class="reg-date">04·02</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Stroyka">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">Stroyka<span class="reg-sub">ИП Пихенек, СОШ Кушва</span></span>
-            <span class="reg-stack">документы · pandoc</span>
-            <span class="reg-date stale">закрыт</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">Персональные</span>
-          <span class="reg-group-count">2</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Githab/personal corp">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">personal-corp<span class="reg-sub">курс Серёжи Риса</span></span>
-            <span class="reg-stack">HTML · JSON · MD</span>
-            <span class="reg-date">live</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/health-tracker">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">health-tracker<span class="reg-sub">здоровье семьи</span></span>
-            <span class="reg-stack">Markdown · Obsidian-like</span>
-            <span class="reg-date">03·04</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">Платформенные</span>
-          <span class="reg-group-count">6</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Githab/hq">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">hq<span class="reg-sub">этот хаб + dashboard</span></span>
-            <span class="reg-stack">Markdown · HTML static</span>
-            <span class="reg-date">04·22</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/claude-skills">
-            <span class="reg-prio p1">P1</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">claude-skills<span class="reg-sub">66+ кастомных скиллов</span></span>
-            <span class="reg-stack">MD · shell · python</span>
-            <span class="reg-date">04·21</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/agent-second-brain">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-active"></span>
-            <span class="reg-name">agent-second-brain<span class="reg-sub">голосовой AI-ассистент</span></span>
-            <span class="reg-stack">Python · aiogram · Todoist</span>
-            <span class="reg-date">04·13</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/openclaw-hub">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">openclaw-hub<span class="reg-sub">bootstrap VPS-агентов</span></span>
-            <span class="reg-stack">Python · MD templates</span>
-            <span class="reg-date">03·09</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/srv-kvm">
-            <span class="reg-prio p2">P2</span>
-            <span class="reg-status s-paused"></span>
-            <span class="reg-name">srv-kvm<span class="reg-sub">docs сервера виртуализации</span></span>
-            <span class="reg-stack">KVM · libvirtd · ZFS</span>
-            <span class="reg-date">docs</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/telethon">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">telethon<span class="reg-sub">единичный login.py</span></span>
-            <span class="reg-stack">Python · Telethon</span>
-            <span class="reg-date stale">stale</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reg-group">
-        <div class="reg-group-head">
-          <span class="reg-group-name">Архив <em>·</em> эксперименты</span>
-          <span class="reg-group-count">3</span>
-        </div>
-        <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">Brainstorm<span class="reg-sub">InfographicsGen, только docs</span></span>
-            <span class="reg-stack">Next.js · Convex · fal.ai</span>
-            <span class="reg-date stale">01·22</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm ">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">Brainstorm␣<span class="reg-sub">случайная папка с пробелом</span></span>
-            <span class="reg-stack">XLSX шаблон</span>
-            <span class="reg-date stale">—</span>
-          </li>
-          <li class="reg-row" title="/home/iamsohappy/projects/DashboardAI">
-            <span class="reg-prio p3">P3</span>
-            <span class="reg-status s-stale"></span>
-            <span class="reg-name">DashboardAI<span class="reg-sub">заменён apps/dashboard</span></span>
-            <span class="reg-stack">Node · Express · pg · OpenAI</span>
-            <span class="reg-date stale">—</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
+  <section class="block queue" aria-labelledby="b-queue">
+    <h2 class="block-title" id="b-queue">На очереди <span class="count">— 3</span></h2>
+    <ul class="tasks">
+      <li class="task">
+        <span class="task-project">apps/website</span>
+        <span class="task-what">вернуть трафик категории «перфораторы»</span>
+      </li>
+      <li class="task">
+        <span class="task-project">apps/dashboard</span>
+        <span class="task-what">сверить автоматическое обновление 18:00</span>
+      </li>
+      <li class="task">
+        <span class="task-project">Personal Corp</span>
+        <span class="task-what">начать урок 2</span>
+      </li>
+    </ul>
   </section>
 
-  <!-- ========================  §V  TASKS  ======================== -->
-  <section class="section" aria-labelledby="tasks-head">
-    <div class="section-head">
-      <span class="section-num">§ V</span>
-      <h2 class="section-title" id="tasks-head"><em>Задачи</em> в работе</h2>
-      <span class="section-meta">инбокс пуст · направлений без владельца нет</span>
-    </div>
-
-    <div class="tasks">
-      <div class="task-col">
-        <h3>Длинные<span class="count">0 / 0 открыты</span></h3>
-        <div class="empty">
-          <span class="empty-mark">—</span>
-          <span class="empty-msg">инбокс пуст</span>
-          <span class="empty-hint"><span>⌘</span><span>новая длинная — шаблон из <code>AGENTS.md §5.1</code></span><span>/tasks/long/</span></span>
-          <span class="empty-hint"><span>↳</span><span>архив пуст</span><span>/tasks/done/</span></span>
-        </div>
-      </div>
-      <div class="task-col">
-        <h3>Короткие<span class="count">0 / 0 открыты</span></h3>
-        <div class="empty">
-          <span class="empty-mark">—</span>
-          <span class="empty-msg">инбокс пуст</span>
-          <span class="empty-hint"><span>⌘</span><span>новая короткая — шаблон из <code>AGENTS.md §5.2</code></span><span>/tasks/short/</span></span>
-          <span class="empty-hint"><span>↳</span><span>архив пуст</span><span>/tasks/done/</span></span>
-        </div>
-      </div>
-    </div>
+  <section class="block waiting" aria-labelledby="b-wait">
+    <h2 class="block-title" id="b-wait">Ждёт <span class="count">— 2</span></h2>
+    <ul class="tasks">
+      <li class="task">
+        <span class="task-project">instrumentburg-responder</span>
+        <span class="task-what">merge канальных адаптеров — Авито, MAX, Telegram, сайт</span>
+      </li>
+      <li class="task">
+        <span class="task-project">apps/avito-responder</span>
+        <span class="task-what">миграция в единый responder</span>
+      </li>
+    </ul>
   </section>
 
-  <!-- ========================  §VI  COURSE  ======================== -->
-  <section class="course" aria-labelledby="course-head">
-    <div class="course-head">
-      <span class="course-num">§ VI · курс</span>
-      <h2 class="course-title" id="course-head"><em>Personal Corp</em> — прогресс</h2>
-    </div>
-    <p class="course-lede">
-      Применение практик Серёжи Риса на реальном бизнесе: HQ-хаб, AGENTS.md как источник правды, dashboard, делегирование субагентам.
-    </p>
-
-    <div class="lesson" data-pct="100" style="--pct: 1;">
-      <a class="lesson-name" href="./course/lesson1.html">Урок 01 · Хаб ↗</a>
-      <div class="bar"><div class="bar-fill"></div></div>
-      <span class="lesson-pct">100%</span>
-    </div>
-    <div class="lesson" data-pct="0" style="--pct: 0;">
-      <span class="lesson-name">Урок 02</span>
-      <div class="bar"><div class="bar-fill"></div></div>
-      <span class="lesson-pct muted">—</span>
-    </div>
-
-    <p class="course-note">
-      HQ собран, AGENTS.md структурирован (11 секций, 30 проектов, 10 агентов OpenClaw), dashboard публикуется на GitHub Pages. Следующий урок — в <a href="./course/lesson2.html">course/lesson2.html</a> после его выхода.
-    </p>
-  </section>
-
-  <!-- ========================  FOOTER  ======================== -->
   <footer>
-    <span>© MMXXVI · ИнструментБург</span>
-    <span>Правила: <a href="./AGENTS.md">AGENTS.md</a></span>
-    <span>Репо: <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq ↗</a></span>
-    <span>Build · <time datetime="2026-04-22">22·04·2026</time></span>
+    <a href="./AGENTS.md#6-проекты">все проекты (30)</a>
+    <a href="./AGENTS.md#11-openclaw-агенты">агенты (10)</a>
+    <a href="./course/lesson1.html">курс Personal Corp</a>
+    <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">репозиторий</a>
   </footer>
 
 </main>
