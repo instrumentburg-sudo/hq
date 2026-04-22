@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HQ — Центр управления</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-hover: #1c222b;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-strong: #f0f6fc;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --p1: #f85149;
+    --p2: #d29922;
+    --p3: #56d364;
+    --ok: #3fb950;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+    padding: 2.5rem 1.25rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  h1 { font-size: 1.9rem; color: var(--text-strong); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .stat-value { color: var(--text-strong); font-weight: 600; }
+  h2 {
+    font-size: 1.15rem;
+    color: var(--text-strong);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.005em;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    transition: background 0.15s;
+  }
+  .panel:hover { background: var(--panel-hover); }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .name { font-weight: 600; color: var(--accent); font-size: 1rem; }
+  .priority {
+    font-size: 0.7rem;
+    padding: 2px 9px;
+    border-radius: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    flex-shrink: 0;
+  }
+  .p1 { background: rgba(248, 81, 73, 0.15); color: var(--p1); }
+  .p2 { background: rgba(210, 153, 34, 0.15); color: var(--p2); }
+  .p3 { background: rgba(86, 211, 100, 0.15); color: var(--p3); }
+  .goal { color: var(--text); margin-bottom: 0.4rem; }
+  .meta { font-size: 0.82rem; color: var(--muted); }
+  .meta span + span::before { content: " · "; margin: 0 0.2rem; }
+  .empty {
+    background: var(--panel);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    padding: 1.75rem 1rem;
+    font-size: 0.92rem;
+  }
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HQ — Центр управления</h1>
+  <div class="subtitle">Оркестрация агентов и проектов · ИнструментБург</div>
+  <div class="stats">
+    <span>Проектов: <span class="stat-value">3</span></span>
+    <span>Длинных задач: <span class="stat-value">0</span></span>
+    <span>Коротких задач: <span class="stat-value">0</span></span>
+    <span>Обновлено: <span class="stat-value">2026-04-22</span></span>
+  </div>
+</header>
+
+<h2>Проекты</h2>
+
+<div class="panel">
+  <div class="panel-head">
+    <span class="name">instrumentburg-website</span>
+    <span class="priority p1">P1</span>
+  </div>
+  <div class="goal">SEO-продвижение категорий ремонта и рост органического трафика.</div>
+  <div class="meta">
+    <span>Стек: OpenCart + Twig</span>
+    <span>активный</span>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <span class="name">instrumentburg-bot</span>
+    <span class="priority p1">P1</span>
+  </div>
+  <div class="goal">Онбординг-бот клиентов и интеграция с LiveSklad.</div>
+  <div class="meta">
+    <span>Стек: Convex (dev)</span>
+    <span>активный</span>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <span class="name">personal-corp</span>
+    <span class="priority p2">P2</span>
+  </div>
+  <div class="goal">Материалы курса по агент-оркестрации (Personal Corp, Серёжа Рис).</div>
+  <div class="meta">
+    <span>активный</span>
+  </div>
+</div>
+
+<h2>Длинные задачи</h2>
+<div class="empty">Активных длинных задач нет.</div>
+
+<h2>Короткие задачи</h2>
+<div class="empty">Активных коротких задач нет.</div>
+
+<h2>Архив завершённых</h2>
+<div class="empty">Архив пуст.</div>
+
+<footer>
+  Правила работы в <a href="./AGENTS.md">AGENTS.md</a> ·
+  Источник: <a href="https://github.com/instrumentburg-sudo/hq">github.com/instrumentburg-sudo/hq</a>
+</footer>
+
+</body>
+</html>
