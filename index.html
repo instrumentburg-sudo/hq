@@ -380,6 +380,131 @@
   }
   .project-meta a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
 
+  /* ======================= REGISTRY ======================= */
+
+  .section-registry { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+
+  .registry {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .reg-group { border: 1px solid var(--ink); background: var(--paper-card); }
+  .reg-group-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.8rem 1.1rem 0.7rem;
+    border-bottom: 1px solid var(--ink);
+    background: var(--paper-deep);
+  }
+  .reg-group-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .reg-group-name em { font-style: normal; color: var(--oxide); font-family: var(--sans); font-weight: 500; }
+  .reg-group-count {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .reg-list { list-style: none; }
+
+  .reg-row {
+    display: grid;
+    grid-template-columns: 2.25rem 0.7rem minmax(0, 2fr) minmax(0, 2fr) 4rem;
+    column-gap: 0.9rem;
+    align-items: baseline;
+    padding: 0.65rem 1.1rem;
+    border-bottom: 1px solid rgba(20, 18, 16, 0.08);
+    transition: background 0.18s ease;
+    cursor: default;
+  }
+  .reg-row:last-child { border-bottom: none; }
+  .reg-row:hover { background: var(--paper); }
+
+  .reg-prio {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.18rem 0;
+    border: 1px solid currentColor;
+  }
+  .reg-prio.p1 { color: var(--oxide); }
+  .reg-prio.p2 { color: var(--brass); }
+  .reg-prio.p3 { color: var(--muted); }
+
+  .reg-status {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+  }
+  .reg-status.s-active { background: var(--moss); box-shadow: 0 0 0 2px rgba(79, 107, 53, 0.18); }
+  .reg-status.s-paused { background: var(--brass); box-shadow: 0 0 0 2px rgba(174, 131, 47, 0.18); }
+  .reg-status.s-stale  { background: var(--muted); box-shadow: 0 0 0 2px rgba(123, 116, 104, 0.18); opacity: 0.6; }
+
+  .reg-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .reg-name .reg-sub {
+    font-family: var(--sans);
+    font-size: 0.74rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-top: 0.1rem;
+    font-style: normal;
+  }
+
+  .reg-stack {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .reg-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 780px) {
+    .reg-row {
+      grid-template-columns: 2.25rem 0.7rem minmax(0, 1fr) auto;
+      row-gap: 0.2rem;
+    }
+    .reg-stack {
+      grid-column: 3 / span 2;
+      white-space: normal;
+    }
+    .reg-date {
+      grid-column: 4 / 5;
+      grid-row: 1;
+    }
+  }
+
   /* ======================= TASKS ======================= */
 
   .tasks {
@@ -606,7 +731,8 @@
   .masthead        { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
   .stats           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.12s both; }
   .section-projects{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.22s both; }
-  .section-tasks   { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.34s both; }
+  .section-registry{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.30s both; }
+  .section-tasks   { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.38s both; }
   .course          { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.46s both; }
   footer           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.58s both; }
 
@@ -648,18 +774,18 @@
   <section class="stats" aria-label="Сводные показатели">
     <div class="stat">
       <div class="stat-label"><span>§ 01</span><span>реестр</span></div>
-      <div class="stat-value">03<sup>акт</sup></div>
-      <div class="stat-caption">активных проекта</div>
+      <div class="stat-value">30<sup>всего</sup></div>
+      <div class="stat-caption">проектов в реестре</div>
     </div>
     <div class="stat">
-      <div class="stat-label"><span>§ 02</span><span>long</span></div>
-      <div class="stat-value">00</div>
-      <div class="stat-caption">длинных задач в работе</div>
+      <div class="stat-label"><span>§ 02</span><span>active</span></div>
+      <div class="stat-value">14</div>
+      <div class="stat-caption">активных · 10 паузе · 6 архив</div>
     </div>
     <div class="stat">
-      <div class="stat-label"><span>§ 03</span><span>short</span></div>
+      <div class="stat-label"><span>§ 03</span><span>задачи</span></div>
       <div class="stat-value">00</div>
-      <div class="stat-caption">коротких задач в работе</div>
+      <div class="stat-caption">long · 00 short в работе</div>
     </div>
     <div class="stat">
       <div class="stat-label"><span>§ 04</span><span>ред.</span></div>
@@ -672,43 +798,182 @@
   <section class="section section-projects">
     <div class="section-head">
       <span class="section-num">§ I.</span>
-      <h2 class="section-title">Реестр проектов</h2>
-      <span class="section-meta">3 активных · 0 на паузе · 0 завершено</span>
+      <h2 class="section-title">Ядро проектов</h2>
+      <span class="section-meta">6 P1 в работе · полный реестр ниже</span>
     </div>
 
     <div class="projects-grid">
       <article class="project">
         <div class="project-num">01</div>
-        <span class="project-priority p1">P1 · активный</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Website</h3>
-        <p class="project-goal">SEO-продвижение категорий ремонта. Рост органического трафика и позиций в Вебмастере.</p>
+        <span class="project-priority p1">P1 · active</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> монорепо</h3>
+        <p class="project-goal">Convex backend, Telegram-бот онбординга, база знаний Obsidian-like и все apps-подпроекты.</p>
         <div class="project-meta">
-          <span>OpenCart / Twig</span>
-          <a href="https://instrumentburg.ru" target="_blank" rel="noopener">instrumentburg.ru ↗</a>
+          <span>Convex · Node.js</span>
+          <span>commit 04·21</span>
         </div>
       </article>
 
       <article class="project">
         <div class="project-num">02</div>
-        <span class="project-priority p1">P1 · активный</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Bot</h3>
-        <p class="project-goal">Онбординг-бот клиентов мастерской и двусторонняя синхронизация с&nbsp;LiveSklad.</p>
+        <span class="project-priority p1">P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> website</h3>
+        <p class="project-goal">Основной сайт instrumentburg.ru. SEO-оптимизация, контент, мониторинг Вебмастера.</p>
         <div class="project-meta">
-          <span>Convex · dev</span>
-          <span>bot / alpha</span>
+          <span>ocStore · Twig · PHP</span>
+          <a href="https://instrumentburg.ru" target="_blank" rel="noopener">instrumentburg.ru ↗</a>
         </div>
       </article>
 
       <article class="project">
         <div class="project-num">03</div>
-        <span class="project-priority p2">P2 · активный</span>
-        <h3 class="project-name">Personal <span class="slash">/</span> Corp</h3>
-        <p class="project-goal">Курс агент-оркестрации Серёжи Риса. Применение практик на реальном бизнесе.</p>
+        <span class="project-priority p1">P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> dashboard</h3>
+        <p class="project-goal">Финансовый и маркетинговый дашборд: Метрика, Avito, Direct, LiveSklad, Модульбанк. Cron 18:00 EKB.</p>
         <div class="project-meta">
-          <span>Course · lesson 01</span>
-          <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech ↗</a>
+          <span>HTML · ApexCharts · cron</span>
+          <span>commit 04·22</span>
         </div>
       </article>
+
+      <article class="project">
+        <div class="project-num">04</div>
+        <span class="project-priority p1">P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> avito-ads</h3>
+        <p class="project-goal">Пайплайн объявлений Авито: YAML, 9-слайдовые карусели, XML-фид, деплой на автозагрузку.</p>
+        <div class="project-meta">
+          <span>Python · YAML · XML</span>
+          <span>commit 04·20</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-num">05</div>
+        <span class="project-priority p1">P1 · active</span>
+        <h3 class="project-name">Blagoystroystvo</h3>
+        <p class="project-goal">Сервис ИП Дедков для работы по договору с&nbsp;Россети Урал: КС-2/КС-3/ЛС, учёт расходов, маржа.</p>
+        <div class="project-meta">
+          <span>Next.js 16 · Convex · Tailwind</span>
+          <span>commit 04·22</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-num">06</div>
+        <span class="project-priority p1">P1 · paused</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Responder</h3>
+        <p class="project-goal">Единый агент-ответчик во всех каналах: Авито, MAX, Telegram, сайт. Наследник раздельных responders.</p>
+        <div class="project-meta">
+          <span>Python · Anthropic SDK</span>
+          <span>commit 03·09</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================  FULL REGISTRY  ========================= -->
+  <section class="section section-registry">
+    <div class="section-head">
+      <span class="section-num">§ I·b</span>
+      <h2 class="section-title">Полный реестр</h2>
+      <span class="section-meta">30 проектов по 7 группам · абсолютные пути в AGENTS.md §6.1</span>
+    </div>
+
+    <div class="registry">
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">ИнструментБург <em>·</em> ядро</span>
+          <span class="reg-group-count">3</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg"><span class="reg-prio p1">P1</span><span class="reg-status s-active" aria-label="active"></span><span class="reg-name">instrumentburg<span class="reg-sub">монорепо</span></span><span class="reg-stack">Convex · Node.js · MD vault</span><span class="reg-date">04·21</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/website"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/website<span class="reg-sub">instrumentburg.ru</span></span><span class="reg-stack">ocStore 3 · OpenCart · Twig</span><span class="reg-date">04·08</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg-responder"><span class="reg-prio p1">P1</span><span class="reg-status s-paused"></span><span class="reg-name">instrumentburg-responder<span class="reg-sub">agent multi-channel</span></span><span class="reg-stack">Python · Anthropic SDK</span><span class="reg-date">03·09</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">ИнструментБург <em>·</em> операции</span>
+          <span class="reg-group-count">11</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-ads"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/avito-ads<span class="reg-sub">YAML + 9-slide feed</span></span><span class="reg-stack">Python · YAML · XML</span><span class="reg-date">04·20</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-responder"><span class="reg-prio p1">P1</span><span class="reg-status s-paused"></span><span class="reg-name">apps/avito-responder<span class="reg-sub">AI-автоответчик</span></span><span class="reg-stack">Python · Anthropic · systemd</span><span class="reg-date">03·08</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/calculator"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/calculator<span class="reg-sub">Калькулятор СЦ</span></span><span class="reg-stack">Vite · TS · Convex · Vercel</span><span class="reg-date">04·21</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/dashboard"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/dashboard<span class="reg-sub">7 вкладок фин/марк</span></span><span class="reg-stack">HTML · ApexCharts · cron</span><span class="reg-date">04·22</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Blagoystroystvo"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">Blagoystroystvo<span class="reg-sub">Россети Урал, КС-2/3</span></span><span class="reg-stack">Next.js 16 · Convex · Tailwind v4</span><span class="reg-date">04·22</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/b2b-outreach"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">apps/b2b-outreach<span class="reg-sub">2ГИС · HH · DaData</span></span><span class="reg-stack">Python · CSV · DaData</span><span class="reg-date">03·10</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/max-miniapp"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">apps/max-miniapp<span class="reg-sub">MAX Messenger</span></span><span class="reg-stack">Vite · React · FastAPI</span><span class="reg-date">03·04</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/AIzakaznaryad"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">AIzakaznaryad<span class="reg-sub">заказ-наряды Karcher</span></span><span class="reg-stack">Vite · Supabase · jsPDF</span><span class="reg-date">03·23</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Rentalnew"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">Rentalnew<span class="reg-sub">ToolRent Manager</span></span><span class="reg-stack">Next.js 14 · Supabase · shadcn</span><span class="reg-date">03·04</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Tenders"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">Tenders<span class="reg-sub">КП-пайплайн, 44-ФЗ</span></span><span class="reg-stack">JSON state · DOCX · XLSX</span><span class="reg-date">live</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/DMDGU"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">apps/DMDGU<span class="reg-sub">тендерный пакет ДГУ</span></span><span class="reg-stack">DOCX · PDF · XLSX</span><span class="reg-date">02·02</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">ИнструментБург <em>·</em> база знаний</span>
+          <span class="reg-group-count">2</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/ib-digest"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">ib-digest<span class="reg-sub">утренний AI-дайджест</span></span><span class="reg-stack">Python · HTML · OpenClaw cron</span><span class="reg-date">04·22</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/ib-vault"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">ib-vault<span class="reg-sub">Obsidian-vault ИБ</span></span><span class="reg-stack">Markdown · JSON schema</span><span class="reg-date">live</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">Клиенты</span>
+          <span class="reg-group-count">3</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/tagil-instrument"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">tagil-instrument<span class="reg-sub">ТагилИнструмент / прокат</span></span><span class="reg-stack">Next.js 15 · Payload CMS · Postgres</span><span class="reg-date">04·01</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/TheJungle"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">TheJungle<span class="reg-sub">студия загара, Mini App</span></span><span class="reg-stack">FastAPI · React · Docker</span><span class="reg-date">04·02</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Stroyka"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Stroyka<span class="reg-sub">ИП Пихенек, СОШ Кушва</span></span><span class="reg-stack">документы · pandoc</span><span class="reg-date">закрыт</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">Персональные</span>
+          <span class="reg-group-count">2</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/Githab/personal corp"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">personal-corp<span class="reg-sub">курс Серёжи Риса</span></span><span class="reg-stack">HTML · JSON · MD транскрипты</span><span class="reg-date">live</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/health-tracker"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">health-tracker<span class="reg-sub">здоровье семьи</span></span><span class="reg-stack">Markdown (Obsidian-like)</span><span class="reg-date">03·04</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">Платформенные</span>
+          <span class="reg-group-count">6</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/Githab/hq"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">hq<span class="reg-sub">этот хаб + dashboard</span></span><span class="reg-stack">Markdown · HTML static</span><span class="reg-date">04·22</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/claude-skills"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">claude-skills<span class="reg-sub">66+ кастомных скиллов</span></span><span class="reg-stack">Markdown · shell · python</span><span class="reg-date">04·21</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/agent-second-brain"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">agent-second-brain<span class="reg-sub">голосовой AI-ассистент</span></span><span class="reg-stack">Python · aiogram · Todoist</span><span class="reg-date">04·13</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/openclaw-hub"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">openclaw-hub<span class="reg-sub">bootstrap VPS-агентов</span></span><span class="reg-stack">Python · MD templates</span><span class="reg-date">03·09</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/srv-kvm"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">srv-kvm<span class="reg-sub">docs сервера виртуализации</span></span><span class="reg-stack">KVM · libvirtd · ZFS</span><span class="reg-date">docs</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/telethon"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">telethon<span class="reg-sub">единичный login.py</span></span><span class="reg-stack">Python · Telethon</span><span class="reg-date">stale</span></li>
+        </ul>
+      </div>
+
+      <div class="reg-group">
+        <div class="reg-group-head">
+          <span class="reg-group-name">Архив <em>·</em> эксперименты</span>
+          <span class="reg-group-count">3</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Brainstorm<span class="reg-sub">InfographicsGen, только docs</span></span><span class="reg-stack">(docs) Next.js · Convex · fal.ai</span><span class="reg-date">01·22</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm "><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Brainstorm␣<span class="reg-sub">случайная папка с пробелом</span></span><span class="reg-stack">XLSX шаблон</span><span class="reg-date">—</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/DashboardAI"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">DashboardAI<span class="reg-sub">заменён apps/dashboard</span></span><span class="reg-stack">Node · Express · pg · OpenAI</span><span class="reg-date">—</span></li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
