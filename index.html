@@ -3,172 +3,774 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HQ — Центр управления</title>
+<title>HQ · Центр управления — ИнструментБург</title>
+<meta name="description" content="Оркестрация агентов и проектов. Единый источник правды — AGENTS.md.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117;
-    --panel: #161b22;
-    --panel-hover: #1c222b;
-    --border: #30363d;
-    --text: #c9d1d9;
-    --text-strong: #f0f6fc;
-    --muted: #8b949e;
-    --accent: #58a6ff;
-    --p1: #f85149;
-    --p2: #d29922;
-    --p3: #56d364;
-    --ok: #3fb950;
+    --paper:       #E8E3D5;
+    --paper-deep:  #D8D2C1;
+    --paper-card:  #F1ECDE;
+    --ink:         #141210;
+    --ink-soft:    #3A332A;
+    --muted:       #7B7468;
+    --oxide:       #B53A22;
+    --brass:       #AE832F;
+    --moss:        #4F6B35;
+    --amber:       #D8A43F;
+    --serif: "Instrument Serif", "Didot", Georgia, serif;
+    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { background: var(--paper); color: var(--ink); }
+
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
+    font-weight: 400;
     line-height: 1.55;
-    padding: 2.5rem 1.25rem 4rem;
-    max-width: 860px;
+    min-height: 100vh;
+    font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(181, 58, 34, 0.055) 0%, transparent 42%),
+      radial-gradient(circle at 82% 78%, rgba(174, 131, 47, 0.06) 0%, transparent 52%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.06  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
+  }
+
+  ::selection { background: var(--oxide); color: var(--paper); }
+
+  a { color: inherit; }
+
+  .page {
+    max-width: 1260px;
     margin: 0 auto;
+    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) 5rem;
   }
-  header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.25rem;
-    margin-bottom: 2rem;
+
+  /* ======================= MASTHEAD ======================= */
+
+  .masthead {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.75rem;
+    position: relative;
   }
-  h1 { font-size: 1.9rem; color: var(--text-strong); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
-  .subtitle { color: var(--muted); font-size: 0.95rem; }
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1rem;
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-  .stat-value { color: var(--text-strong); font-weight: 600; }
-  h2 {
-    font-size: 1.15rem;
-    color: var(--text-strong);
-    margin: 2.5rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-    letter-spacing: -0.005em;
-  }
-  .panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
-    transition: background 0.15s;
-  }
-  .panel:hover { background: var(--panel-hover); }
-  .panel-head {
+
+  .masthead-rail {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ink);
+  }
+  .masthead-rail .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--moss);
+    box-shadow: 0 0 0 0 rgba(79, 107, 53, 0.55);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(79, 107, 53, 0.6); }
+    70%  { box-shadow: 0 0 0 8px rgba(79, 107, 53, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(79, 107, 53, 0); }
+  }
+
+  .masthead-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    padding: 1.6rem 0 1rem;
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(0.8rem, 2.4vw, 2.25rem);
+    flex-wrap: wrap;
+  }
+  .masthead-title .mono-mark {
+    font-family: var(--mono);
+    font-size: clamp(9rem, 22vw, 18rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.82;
+    color: var(--ink);
+  }
+  .masthead-title .amp {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(3rem, 8vw, 6.2rem);
+    color: var(--oxide);
+    line-height: 1;
+    transform: translateY(-0.35em);
+  }
+  .masthead-title .caption {
+    font-style: italic;
+    font-size: clamp(2rem, 5.2vw, 4.2rem);
+    line-height: 0.95;
+    max-width: 12ch;
+    color: var(--ink);
+    padding-bottom: 0.45em;
+  }
+
+  .masthead-lede {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    border-top: 1px solid var(--ink);
+    padding-top: 1rem;
+  }
+  .masthead-lede p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    color: var(--ink-soft);
+    max-width: 48ch;
+    line-height: 1.4;
+  }
+  .masthead-lede p a {
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--oxide);
+    text-decoration: none;
+    border-bottom: 1px solid var(--oxide);
+    padding-bottom: 1px;
+  }
+  .masthead-lede p a:hover { background: var(--oxide); color: var(--paper); border-color: var(--oxide); }
+  .masthead-issue {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 0.35rem;
+  }
+  .masthead-issue b { color: var(--ink); font-weight: 500; }
+
+  /* ======================= STATS ======================= */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 2rem;
+    border: 1px solid var(--ink);
+    background: var(--paper-deep);
+    overflow: hidden;
+  }
+  .stat {
+    padding: 1.4rem 1.5rem 1.2rem;
+    border-right: 1px solid var(--ink);
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 100%),
+      var(--paper-deep);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4.5vw, 3.6rem);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-top: 0.35rem;
+  }
+  .stat-value sup {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    vertical-align: top;
+    color: var(--oxide);
+    letter-spacing: 0.1em;
+    margin-left: 0.3rem;
+    position: relative;
+    top: 0.6em;
+  }
+  .stat-caption {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-bottom: 1px solid var(--ink); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-child(n+3) { border-bottom: none; }
+  }
+
+  /* ======================= SECTION HEAD ======================= */
+
+  .section { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--oxide);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+  .section-meta {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* ======================= PROJECTS ======================= */
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+  }
+  .projects-grid > * + * { border-left: 1px solid var(--ink); }
+  @media (max-width: 940px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid > * + * { border-left: none; border-top: 1px solid var(--ink); }
+  }
+
+  .project {
+    background: var(--paper-card);
+    padding: 1.75rem 1.6rem 1.4rem;
+    position: relative;
+    transition: background 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+  }
+  .project::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    color: var(--oxide);
+  }
+  .project:hover { background: var(--paper); transform: translateY(-3px); }
+  .project:hover::after { transform: scaleX(1); }
+
+  .project-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 6rem;
+    line-height: 0.85;
+    color: var(--ink);
+    opacity: 0.08;
+    position: absolute;
+    top: 0.5rem;
+    right: 1.2rem;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .project-priority {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.28rem 0.6rem;
+    border: 1px solid currentColor;
+    margin-bottom: 0.9rem;
+    align-self: flex-start;
+  }
+  .project-priority::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+  }
+  .p1 { color: var(--oxide); }
+  .p2 { color: var(--brass); }
+  .p3 { color: var(--moss); }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: clamp(1.55rem, 2.4vw, 1.95rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .project-name .slash {
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.75em;
+  }
+  .project-goal {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.25rem;
+    max-width: 32ch;
+    line-height: 1.45;
+  }
+  .project-meta {
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-top: 1px dashed rgba(20, 18, 16, 0.25);
+    padding-top: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .project-meta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .project-meta a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+
+  /* ======================= TASKS ======================= */
+
+  .tasks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 820px) { .tasks { grid-template-columns: 1fr; } }
+
+  .task-col h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.45rem;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .task-col h3::before {
+    content: "";
+    display: inline-block;
+    width: 1.75rem;
+    height: 1px;
+    background: var(--ink);
+    transform: translateY(-0.35em);
+  }
+  .task-col h3 .count {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  .empty {
+    border: 1px dashed rgba(20, 18, 16, 0.3);
+    padding: 2rem 1.5rem 1.75rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .empty-mark {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-style: italic;
+    line-height: 1;
+    color: var(--muted);
+  }
+  .empty-msg {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+  .empty-serial {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 0.35rem;
+  }
+
+  /* ======================= COURSE CARD ======================= */
+
+  .course {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(2rem, 3.5vw, 2.75rem);
+    margin-top: clamp(2.75rem, 5vw, 4.5rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .course::before {
+    content: "PERSONAL · CORP";
+    position: absolute;
+    top: -0.1em;
+    right: -0.05em;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(5rem, 15vw, 13rem);
+    line-height: 0.82;
+    color: rgba(232, 227, 213, 0.06);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .course-head {
+    display: flex;
     align-items: baseline;
     gap: 1rem;
     margin-bottom: 0.4rem;
+    position: relative;
+    flex-wrap: wrap;
   }
-  .name { font-weight: 600; color: var(--accent); font-size: 1rem; }
-  .priority {
-    font-size: 0.7rem;
-    padding: 2px 9px;
-    border-radius: 11px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    flex-shrink: 0;
+  .course-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
-  .p1 { background: rgba(248, 81, 73, 0.15); color: var(--p1); }
-  .p2 { background: rgba(210, 153, 34, 0.15); color: var(--p2); }
-  .p3 { background: rgba(86, 211, 100, 0.15); color: var(--p3); }
-  .goal { color: var(--text); margin-bottom: 0.4rem; }
-  .meta { font-size: 0.82rem; color: var(--muted); }
-  .meta span + span::before { content: " · "; margin: 0 0.2rem; }
-  .empty {
-    background: var(--panel);
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    color: var(--muted);
+  .course-title {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
     font-style: italic;
-    text-align: center;
-    padding: 1.75rem 1rem;
-    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1;
   }
+  .course-lede {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--paper-deep);
+    opacity: 0.8;
+    max-width: 54ch;
+    margin-bottom: 1.75rem;
+    font-size: 1.02rem;
+    position: relative;
+  }
+
+  .lesson {
+    display: grid;
+    grid-template-columns: 13ch 1fr 5ch;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(232, 227, 213, 0.12);
+    position: relative;
+  }
+  .lesson:last-child { border-bottom: 1px solid rgba(232, 227, 213, 0.12); }
+
+  .lesson-name {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--paper);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .bar {
+    position: relative;
+    height: 4px;
+    background: rgba(232, 227, 213, 0.12);
+    overflow: hidden;
+  }
+  .bar-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--amber) 0%, var(--oxide) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: fill 1.4s cubic-bezier(0.2, 0.75, 0.15, 1) 0.4s forwards;
+  }
+  .lesson[data-pct="0"] .bar-fill { animation: none; }
+
+  @keyframes fill {
+    to { transform: scaleX(var(--pct, 0)); }
+  }
+
+  .lesson-pct {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--amber);
+    text-align: right;
+    letter-spacing: -0.01em;
+  }
+  .lesson-pct.muted { color: var(--muted); font-style: italic; }
+
+  .course-note {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--paper-deep);
+    opacity: 0.7;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    max-width: 60ch;
+    position: relative;
+    border-left: 2px solid var(--amber);
+    padding-left: 1rem;
+  }
+
+  /* ======================= FOOTER ======================= */
+
   footer {
-    margin-top: 3.5rem;
+    margin-top: clamp(3rem, 5vw, 5rem);
     padding-top: 1.25rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
     color: var(--muted);
-    font-size: 0.82rem;
-    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
   }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  footer > *:nth-child(2) { text-align: center; }
+  footer > *:nth-child(3) { text-align: right; }
+  footer a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  footer a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+  @media (max-width: 720px) {
+    footer { grid-template-columns: 1fr; }
+    footer > * { text-align: left !important; }
+  }
+
+  /* ======================= ENTRY ANIMATION ======================= */
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .masthead        { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  .stats           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.12s both; }
+  .section-projects{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.22s both; }
+  .section-tasks   { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.34s both; }
+  .course          { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.46s both; }
+  footer           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.58s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .bar-fill { transform: scaleX(var(--pct, 0)); }
+  }
 </style>
 </head>
 <body>
+<main class="page">
 
-<header>
-  <h1>HQ — Центр управления</h1>
-  <div class="subtitle">Оркестрация агентов и проектов · ИнструментБург</div>
-  <div class="stats">
-    <span>Проектов: <span class="stat-value">3</span></span>
-    <span>Длинных задач: <span class="stat-value">0</span></span>
-    <span>Коротких задач: <span class="stat-value">0</span></span>
-    <span>Обновлено: <span class="stat-value">2026-04-22</span></span>
-  </div>
-</header>
+  <!-- =========================  MASTHEAD  ========================= -->
+  <header class="masthead">
+    <div class="masthead-rail">
+      <span class="live"><span class="dot"></span>Система активна · сессия открыта</span>
+      <span>Центр·Управления · HQ / ИнструментБург</span>
+      <span>Ср · 22·IV·MMXXVI</span>
+    </div>
 
-<h2>Проекты</h2>
+    <h1 class="masthead-title">
+      <span class="mono-mark">HQ</span>
+      <span class="amp">&amp;</span>
+      <span class="caption">центр&nbsp;/&nbsp;управления</span>
+    </h1>
 
-<div class="panel">
-  <div class="panel-head">
-    <span class="name">instrumentburg-website</span>
-    <span class="priority p1">P1</span>
-  </div>
-  <div class="goal">SEO-продвижение категорий ремонта и рост органического трафика.</div>
-  <div class="meta">
-    <span>Стек: OpenCart + Twig</span>
-    <span>активный</span>
-  </div>
-</div>
+    <div class="masthead-lede">
+      <p>
+        Оркестрация агентов, длинные и короткие задачи, реестр активных проектов
+        — единый источник правды&nbsp;<a href="./AGENTS.md">AGENTS.md</a>.
+      </p>
+      <div class="masthead-issue">
+        № выпуска<br><b>004 · ред. 22·04·26</b>
+      </div>
+    </div>
+  </header>
 
-<div class="panel">
-  <div class="panel-head">
-    <span class="name">instrumentburg-bot</span>
-    <span class="priority p1">P1</span>
-  </div>
-  <div class="goal">Онбординг-бот клиентов и интеграция с LiveSklad.</div>
-  <div class="meta">
-    <span>Стек: Convex (dev)</span>
-    <span>активный</span>
-  </div>
-</div>
+  <!-- =========================  STATS STRIP  ========================= -->
+  <section class="stats" aria-label="Сводные показатели">
+    <div class="stat">
+      <div class="stat-label"><span>§ 01</span><span>реестр</span></div>
+      <div class="stat-value">03<sup>акт</sup></div>
+      <div class="stat-caption">активных проекта</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span>§ 02</span><span>long</span></div>
+      <div class="stat-value">00</div>
+      <div class="stat-caption">длинных задач в работе</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span>§ 03</span><span>short</span></div>
+      <div class="stat-value">00</div>
+      <div class="stat-caption">коротких задач в работе</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span>§ 04</span><span>ред.</span></div>
+      <div class="stat-value" style="font-size: clamp(1.6rem, 2.6vw, 2.1rem); letter-spacing: 0.02em;">2026·04·22</div>
+      <div class="stat-caption">последнее обновление</div>
+    </div>
+  </section>
 
-<div class="panel">
-  <div class="panel-head">
-    <span class="name">personal-corp</span>
-    <span class="priority p2">P2</span>
-  </div>
-  <div class="goal">Материалы курса по агент-оркестрации (Personal Corp, Серёжа Рис).</div>
-  <div class="meta">
-    <span>активный</span>
-  </div>
-</div>
+  <!-- =========================  PROJECTS  ========================= -->
+  <section class="section section-projects">
+    <div class="section-head">
+      <span class="section-num">§ I.</span>
+      <h2 class="section-title">Реестр проектов</h2>
+      <span class="section-meta">3 активных · 0 на паузе · 0 завершено</span>
+    </div>
 
-<h2>Длинные задачи</h2>
-<div class="empty">Активных длинных задач нет.</div>
+    <div class="projects-grid">
+      <article class="project">
+        <div class="project-num">01</div>
+        <span class="project-priority p1">P1 · активный</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Website</h3>
+        <p class="project-goal">SEO-продвижение категорий ремонта. Рост органического трафика и позиций в Вебмастере.</p>
+        <div class="project-meta">
+          <span>OpenCart / Twig</span>
+          <a href="https://instrumentburg.ru" target="_blank" rel="noopener">instrumentburg.ru ↗</a>
+        </div>
+      </article>
 
-<h2>Короткие задачи</h2>
-<div class="empty">Активных коротких задач нет.</div>
+      <article class="project">
+        <div class="project-num">02</div>
+        <span class="project-priority p1">P1 · активный</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Bot</h3>
+        <p class="project-goal">Онбординг-бот клиентов мастерской и двусторонняя синхронизация с&nbsp;LiveSklad.</p>
+        <div class="project-meta">
+          <span>Convex · dev</span>
+          <span>bot / alpha</span>
+        </div>
+      </article>
 
-<h2>Архив завершённых</h2>
-<div class="empty">Архив пуст.</div>
+      <article class="project">
+        <div class="project-num">03</div>
+        <span class="project-priority p2">P2 · активный</span>
+        <h3 class="project-name">Personal <span class="slash">/</span> Corp</h3>
+        <p class="project-goal">Курс агент-оркестрации Серёжи Риса. Применение практик на реальном бизнесе.</p>
+        <div class="project-meta">
+          <span>Course · lesson 01</span>
+          <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-<footer>
-  Правила работы в <a href="./AGENTS.md">AGENTS.md</a> ·
-  Источник: <a href="https://github.com/instrumentburg-sudo/hq">github.com/instrumentburg-sudo/hq</a>
-</footer>
+  <!-- =========================  TASKS  ========================= -->
+  <section class="section section-tasks">
+    <div class="section-head">
+      <span class="section-num">§ II.</span>
+      <h2 class="section-title">Задачи в работе</h2>
+      <span class="section-meta">инбокс пуст · направлений без владельца нет</span>
+    </div>
 
+    <div class="tasks">
+      <div class="task-col">
+        <h3>Длинные<span class="count">0 / 0 открыты</span></h3>
+        <div class="empty">
+          <span class="empty-mark">—</span>
+          <span class="empty-msg">никаких открытых длинных задач</span>
+          <span class="empty-serial">/LONG · 00/00</span>
+        </div>
+      </div>
+      <div class="task-col">
+        <h3>Короткие<span class="count">0 / 0 открыты</span></h3>
+        <div class="empty">
+          <span class="empty-mark">—</span>
+          <span class="empty-msg">никаких открытых коротких задач</span>
+          <span class="empty-serial">/SHORT · 00/00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================  COURSE / PERSONAL CORP  ========================= -->
+  <section class="course">
+    <div class="course-head">
+      <span class="course-num">§ III · курс</span>
+      <h2 class="course-title">Personal Corp — прогресс</h2>
+    </div>
+    <p class="course-lede">Применение практик Серёжи Риса на реальном бизнесе: HQ-хаб, AGENTS.md, dashboard, делегирование субагентам.</p>
+
+    <div class="lesson" data-pct="50" style="--pct: 0.5;">
+      <span class="lesson-name">Урок 01 · Хаб</span>
+      <div class="bar"><div class="bar-fill"></div></div>
+      <span class="lesson-pct">50%</span>
+    </div>
+    <div class="lesson" data-pct="0" style="--pct: 0;">
+      <span class="lesson-name">Урок 02</span>
+      <div class="bar"><div class="bar-fill"></div></div>
+      <span class="lesson-pct muted">—</span>
+    </div>
+
+    <p class="course-note">
+      HQ собран, AGENTS.md структурирован, dashboard публикуется на GitHub&nbsp;Pages. Домашка первого урока — сгенерировать HTML-дашборд курса из транскрипта и привязать реальный рабочий проект — ещё впереди.
+    </p>
+  </section>
+
+  <!-- =========================  FOOTER  ========================= -->
+  <footer>
+    <span>© MMXXVI · ИнструментБург</span>
+    <span>Правила: <a href="./AGENTS.md">AGENTS.md</a></span>
+    <span>Репозиторий: <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq</a></span>
+  </footer>
+
+</main>
 </body>
 </html>
