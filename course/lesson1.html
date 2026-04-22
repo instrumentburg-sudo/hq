@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 01 · HQ — первый шаг к агент-оркестрации · Personal Corp</title>
+<meta name="description" content="Выжимок первого урока Серёжи Риса из курса Personal Corp: термины, методы, инструменты, цели, домашние задания.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal:     #1a1a1a;
+    --charcoal-2:   #242220;
+    --charcoal-3:   #2d2a27;
+    --paper:        #EBE6DC;
+    --paper-dim:    rgba(235, 230, 220, 0.72);
+    --paper-mute:   rgba(235, 230, 220, 0.52);
+    --paper-ghost:  rgba(235, 230, 220, 0.12);
+    --paper-edge:   rgba(235, 230, 220, 0.18);
+    --oxide:        #E05A32;
+    --oxide-soft:   rgba(224, 90, 50, 0.16);
+    --brass:        #D09840;
+    --moss:         #7A9A52;
+    --display: "Oswald", "Impact", "Arial Narrow", sans-serif;
+    --body:    "Roboto Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--charcoal); }
+  body {
+    background: var(--charcoal);
+    color: var(--paper);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.55;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(224, 90, 50, 0.08) 0%, transparent 38%),
+      radial-gradient(circle at 88% 92%, rgba(208, 152, 64, 0.06) 0%, transparent 44%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--oxide); color: var(--charcoal); }
+
+  a { color: inherit; }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.1rem, 3.5vw, 2.5rem) 5rem;
+  }
+
+  /* ================= MASTHEAD ================= */
+
+  .masthead { position: relative; padding-top: 1rem; }
+
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--paper-edge);
+  }
+  .rail .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--paper);
+  }
+  .rail .live::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--oxide);
+    box-shadow: 0 0 0 0 var(--oxide);
+    animation: pulse 2.6s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(224, 90, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0); }
+  }
+  .rail .sep { color: var(--paper-ghost); }
+
+  .lesson-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin: 2.25rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .lesson-tag::before {
+    content: "";
+    display: inline-block;
+    width: 2.4rem;
+    height: 2px;
+    background: var(--oxide);
+  }
+
+  h1.hero {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(3.4rem, 9.5vw, 8.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    max-width: 18ch;
+  }
+  h1.hero em {
+    font-style: normal;
+    color: var(--oxide);
+    font-weight: 500;
+  }
+  h1.hero .ampersand {
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--paper-dim);
+    font-size: 0.75em;
+    padding: 0 0.15em;
+  }
+
+  .summary {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--paper-edge);
+  }
+  .summary p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--paper-dim);
+    max-width: 58ch;
+  }
+  .summary-meta {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 0.25rem;
+    line-height: 1.8;
+  }
+  .summary-meta b { color: var(--paper); font-weight: 500; }
+  @media (max-width: 680px) {
+    .summary { grid-template-columns: 1fr; gap: 1.25rem; }
+    .summary-meta { text-align: left; }
+  }
+
+  /* ================= SECTION HEAD ================= */
+
+  section.block { margin-top: clamp(3rem, 5vw, 4.5rem); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-num {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .section-kicker {
+    margin-left: auto;
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.92rem;
+    color: var(--paper-mute);
+    max-width: 32ch;
+    text-align: right;
+  }
+  @media (max-width: 720px) {
+    .section-kicker { margin-left: 0; text-align: left; }
+  }
+
+  /* ================= TERMS ================= */
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--paper-edge);
+    border: 1px solid var(--paper-edge);
+  }
+  @media (max-width: 760px) { .terms-grid { grid-template-columns: 1fr; } }
+
+  .term {
+    background: var(--charcoal-2);
+    padding: 1.4rem 1.5rem 1.35rem;
+    position: relative;
+    transition: background 0.25s ease;
+  }
+  .term:hover { background: var(--charcoal-3); }
+  .term-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    padding-right: 2.25rem;
+  }
+  .term-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.4rem;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--paper-mute);
+  }
+  .term-def {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.96rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= METHODS ================= */
+
+  .methods-list { display: grid; gap: 0; }
+  .method {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0.25rem 1.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    align-items: start;
+    transition: background 0.2s ease;
+  }
+  .method:hover { background: rgba(235, 230, 220, 0.025); }
+  .method:first-child { border-top: 1px solid var(--paper-edge); }
+  .method-num {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 0.9;
+    color: var(--oxide);
+    letter-spacing: -0.02em;
+  }
+  .method-body h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 1.85vw, 1.5rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    line-height: 1.15;
+  }
+  .method-body p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    max-width: 70ch;
+  }
+  @media (max-width: 620px) {
+    .method { grid-template-columns: 1fr; gap: 0.4rem; }
+    .method-num { font-size: 1.75rem; }
+  }
+
+  /* ================= TOOLS ================= */
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .tool {
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--paper-edge);
+    background: var(--charcoal-2);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .tool:hover { border-color: var(--oxide); transform: translateY(-2px); }
+  .tool-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .tool-mark {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--oxide);
+  }
+  .tool-role {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= GOALS & HOMEWORK ================= */
+
+  .objectives {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  @media (max-width: 860px) { .objectives { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .objectives h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .objectives h3 .tally {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--paper-mute);
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+
+  .checklist { list-style: none; display: grid; gap: 0.75rem; }
+  .check {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--paper-ghost);
+  }
+  .check:last-child { border-bottom: none; }
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem; height: 1.4rem;
+    border: 1.5px solid var(--paper-edge);
+    font-family: var(--display);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--paper);
+    margin-top: 0.15rem;
+  }
+  .check.done .mark { background: var(--moss); border-color: var(--moss); color: var(--charcoal); }
+  .check.partial .mark { background: var(--brass); border-color: var(--brass); color: var(--charcoal); }
+  .check.todo .mark { background: transparent; border-color: var(--paper-edge); color: var(--paper-mute); }
+  .check.done .mark::before { content: "✓"; }
+  .check.partial .mark::before { content: "◐"; }
+  .check.todo .mark::before { content: "○"; }
+
+  .check-body .label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
+  }
+  .check-body .how {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+  .check.todo .check-body .label { color: var(--paper-dim); }
+
+  /* ================= QUOTES ================= */
+
+  .quotes-wrap {
+    padding: clamp(2rem, 4vw, 3rem) 0 0;
+    border-top: 1px solid var(--paper-edge);
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+  }
+  .quotes-label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .quotes-label::before {
+    content: "";
+    width: 2rem; height: 1px; background: var(--oxide);
+  }
+
+  .quotes {
+    display: grid;
+    gap: 1.4rem;
+  }
+  blockquote {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    line-height: 1.35;
+    color: var(--paper);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--oxide);
+    max-width: 72ch;
+  }
+  blockquote::before { content: "«"; color: var(--oxide); margin-right: 0.08em; }
+  blockquote::after  { content: "»"; color: var(--oxide); margin-left: 0.08em; }
+
+  /* ================= CTA / FOOTER ================= */
+
+  .cta-row {
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+    padding: clamp(1.75rem, 3vw, 2.4rem);
+    background: var(--charcoal-2);
+    border: 1px solid var(--paper-edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .cta-row::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--oxide-soft), transparent 45%);
+    pointer-events: none;
+  }
+  .cta-text {
+    position: relative;
+  }
+  .cta-text .eyebrow {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.76rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 0.4rem;
+  }
+  .cta-text h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+  .cta-text p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--paper-dim);
+    max-width: 52ch;
+  }
+  .cta-btn {
+    position: relative;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    background: var(--oxide);
+    padding: 1.1rem 1.6rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid var(--oxide);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .cta-btn:hover { background: var(--paper); border-color: var(--paper); transform: translateX(4px); }
+  .cta-btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-btn:hover .arrow { transform: translateX(4px); }
+
+  footer.pagefoot {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--paper-edge);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  footer.pagefoot > :nth-child(2) { text-align: center; }
+  footer.pagefoot > :nth-child(3) { text-align: right; }
+  footer.pagefoot a {
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  footer.pagefoot a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+  @media (max-width: 680px) {
+    footer.pagefoot { grid-template-columns: 1fr; }
+    footer.pagefoot > * { text-align: left !important; }
+  }
+
+  /* ================= ENTRY ANIMATIONS ================= */
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .masthead    { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block.b1 { animation-delay: 0.1s; }
+  section.block.b2 { animation-delay: 0.2s; }
+  section.block.b3 { animation-delay: 0.3s; }
+  section.block.b4 { animation-delay: 0.4s; }
+  .quotes-wrap { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.5s both; }
+  .cta-row     { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.6s both; }
+  footer.pagefoot { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.7s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- ============== MASTHEAD ============== -->
+  <header class="masthead">
+    <div class="rail">
+      <span class="live">Сессия открыта</span>
+      <span>Personal Corp <span class="sep">·</span> Серёжа Рис <span class="sep">·</span> ~1.5 часа</span>
+      <span>22·IV·MMXXVI</span>
+    </div>
+
+    <div class="lesson-tag">Урок 01 — введение</div>
+
+    <h1 class="hero">
+      HQ — первый шаг
+      к <em>агент-оркестрации</em>
+    </h1>
+
+    <div class="summary">
+      <p>
+        Вводный практический урок: создаём папку-штаб (<em style="color:var(--oxide); font-style:normal;">HQ</em>) с единым файлом правил для агента, подключаем транскрипт и собираем HTML-дашборд — скелет персональной агент-системы.
+      </p>
+      <div class="summary-meta">
+        № выпуска<br><b>I · 22·04·26</b><br>
+        формат<br><b>live + демо</b>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== I · TERMS ============== -->
+  <section class="block b1">
+    <div class="section-head">
+      <span class="section-num">§ I.</span>
+      <h2 class="section-title">Термины</h2>
+      <span class="section-kicker">Словарь, без которого остальной урок не соберётся в целое.</span>
+    </div>
+    <div class="terms-grid">
+      <article class="term"><span class="term-num">01</span><h3 class="term-name">HQ — штаб</h3><p class="term-def">Главная папка, в которой лежит весь контекст про пользователя и ссылки на все проекты. Точка старта для агента и объединяющий узел сетки.</p></article>
+      <article class="term"><span class="term-num">02</span><h3 class="term-name">AGENTS.md</h3><p class="term-def">Открытый формат файла правил для агентов (инициатива OpenAI). Агент читает его перед тем, как начать думать — кто он, как работает, какова структура папки.</p></article>
+      <article class="term"><span class="term-num">03</span><h3 class="term-name">CLAUDE.md</h3><p class="term-def">Аналогичный файл-точка входа для Claude. Обычно — зеркало со ссылкой на AGENTS.md, чтобы правила были универсальны для любого агента.</p></article>
+      <article class="term"><span class="term-num">04</span><h3 class="term-name">Markdown (.md)</h3><p class="term-def">Формат файлов — золотая середина между кодом и текстом. Удобно читать и людям, и агентам; на нём строится вся файловая база знаний HQ.</p></article>
+      <article class="term"><span class="term-num">05</span><h3 class="term-name">Obsidian</h3><p class="term-def">Бесплатная программа-интерфейс для просмотра markdown-файлов. Визуальная надстройка над той же папкой HQ, с которой работает агент.</p></article>
+      <article class="term"><span class="term-num">06</span><h3 class="term-name">Dashboard (HTML)</h3><p class="term-def">Один HTML-файл в HQ, показывающий текущие задачи и связанные проекты. Агент по правилу автоматически обновляет его при каждом изменении задач.</p></article>
+      <article class="term"><span class="term-num">07</span><h3 class="term-name">База знаний</h3><p class="term-def">Отдельный файл в HQ, куда агент записывает ключевые понятия и факты: что такое markdown, AGENTS.md, факты про людей и проекты из CRM.</p></article>
+      <article class="term"><span class="term-num">08</span><h3 class="term-name">Transcript</h3><p class="term-def">Текстовая расшифровка урока или разговора (Серёжа собирает через Granola). Кладётся в папку курса как сырьё для извлечения терминов, методов и задач.</p></article>
+      <article class="term"><span class="term-num">09</span><h3 class="term-name">Prompt</h3><p class="term-def">Текстовый запрос к агенту. Серёжа подчёркивает: общаться нужно как с человеком и вкладывать время в передачу намерения — чем подробнее, тем лучше результат.</p></article>
+      <article class="term"><span class="term-num">10</span><h3 class="term-name">Composer (Cursor)</h3><p class="term-def">Быстрый агент-режим в Cursor. На уроке — дефолтный инструмент, потому что очень быстро рисует HTML-дашборды и презентации.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== II · METHODS ============== -->
+  <section class="block b2">
+    <div class="section-head">
+      <span class="section-num">§ II.</span>
+      <h2 class="section-title">Методы</h2>
+      <span class="section-kicker">Практики, которые Серёжа повторяет из урока в урок.</span>
+    </div>
+    <div class="methods-list">
+      <article class="method"><div class="method-num">01</div><div class="method-body"><h3>Начинать с простого — один файл</h3><p>Любая система начинается с одного файла правил; не строить сложные системы сразу. Усложнять только когда упрёшься в реальные ограничения.</p></div></article>
+      <article class="method"><div class="method-num">02</div><div class="method-body"><h3>Папка без кириллицы в пути</h3><p>HQ и все вложенные папки/файлы создавать только латиницей; русские символы в пути могут ломать команды агента. Системные папки типа Documents — ок.</p></div></article>
+      <article class="method"><div class="method-num">03</div><div class="method-body"><h3>Локальная работа, сервер потом</h3><p>Разворачивать HQ на локальном компьютере, где работаешь ежедневно. Сервер — отдельный слой friction; перенос будет позже, отдельным занятием.</p></div></article>
+      <article class="method"><div class="method-num">04</div><div class="method-body"><h3>Отдельные репозитории, а не один гигант</h3><p>Каждый проект — отдельная папка/репозиторий рядом с HQ. HQ играет роль архивариуса со ссылками, а не склада всего кода в одной куче.</p></div></article>
+      <article class="method"><div class="method-num">05</div><div class="method-body"><h3>Улучшение правил через research-цикл</h3><p>После первого черновика AGENTS.md отправить его в ChatGPT/Claude с поиском и промптом про best practices ведущих лабораторий; результат заменяет исходник.</p></div></article>
+      <article class="method"><div class="method-num">06</div><div class="method-body"><h3>Универсальная точка входа: AGENTS.md + CLAUDE.md</h3><p>Держать оба файла; CLAUDE.md — зеркало со ссылкой на AGENTS.md, чтобы любой агент (Cursor, Claude Code, Codex) работал с одним источником правды.</p></div></article>
+      <article class="method"><div class="method-num">07</div><div class="method-body"><h3>Dashboard обновляется автоматически</h3><p>В правилах агента прописать: при любом изменении задач править dashboard.html. Интерфейс живёт рядом с данными и всегда синхронен без отдельного приложения.</p></div></article>
+      <article class="method"><div class="method-num">08</div><div class="method-body"><h3>Separation: правила отдельно от данных</h3><p>Один файл — инструкции и маршрутизация, остальное (задачи, стратегия, база знаний, транскрипты) — отдельные файлы. Раздулось до сотен строк — вынеси.</p></div></article>
+      <article class="method"><div class="method-num">09</div><div class="method-body"><h3>Итерация с агентом как с человеком</h3><p>Перед выполнением просить агента задать 2 уточняющих вопроса с 3 вариантами ответа. Чем больше вложено в передачу намерения, тем лучше результат.</p></div></article>
+    </div>
+  </section>
+
+  <!-- ============== III · TOOLS ============== -->
+  <section class="block b3">
+    <div class="section-head">
+      <span class="section-num">§ III.</span>
+      <h2 class="section-title">Инструменты</h2>
+      <span class="section-kicker">Фреймворки, модели и приложения, которые Серёжа упоминает в уроке.</span>
+    </div>
+    <div class="tools-grid">
+      <article class="tool"><div class="tool-name">Claude Code <span class="tool-mark">01</span></div><p class="tool-role">Основной агент Серёжи в терминале. Opus — для сложных задач, Sonnet — для поиска и research.</p></article>
+      <article class="tool"><div class="tool-name">Cursor · Composer <span class="tool-mark">02</span></div><p class="tool-role">IDE-агент для тех, кому некомфортен терминал. Composer быстро рисует HTML-дашборды и презентации.</p></article>
+      <article class="tool"><div class="tool-name">Codex <span class="tool-mark">03</span></div><p class="tool-role">Альтернативный агент; узнаваем по bento-стилю карточек. Используется наравне с Claude Code.</p></article>
+      <article class="tool"><div class="tool-name">ChatGPT / OpenAI <span class="tool-mark">04</span></div><p class="tool-role">Внешний чат с поиском, куда уходит черновой AGENTS.md для улучшения по best practices.</p></article>
+      <article class="tool"><div class="tool-name">Granola <span class="tool-mark">05</span></div><p class="tool-role">Бесплатное приложение для транскрипции встреч. Выдаёт текст, с которым можно сразу общаться; источник транскриптов для HQ.</p></article>
+      <article class="tool"><div class="tool-name">Obsidian <span class="tool-mark">06</span></div><p class="tool-role">Просмотрщик markdown-файлов HQ. Интерфейс поверх той же папки, с которой работает агент.</p></article>
+      <article class="tool"><div class="tool-name">Zoom · Telegram <span class="tool-mark">07</span></div><p class="tool-role">Каналы потока: Zoom — живые лайвы и демо; Telegram — обмен файлами и скриншотами результатов практики.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== IV · GOALS & HOMEWORK ============== -->
+  <section class="block b4">
+    <div class="section-head">
+      <span class="section-num">§ IV.</span>
+      <h2 class="section-title">Цели & домашка</h2>
+      <span class="section-kicker">Слева — что должно быть после урока. Справа — живой статус ДЗ в твоём HQ.</span>
+    </div>
+    <div class="objectives">
+
+      <div class="col goals-col">
+        <h3>Цели урока<span class="tally">5 пунктов</span></h3>
+        <ul class="checklist">
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Локальная папка HQ</div><div class="how">Без кириллицы в пути, открывается своим агентом.</div></div></li>
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Единый файл правил</div><div class="how">AGENTS.md / CLAUDE.md в HQ — самодостаточный, читается с нуля.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Research-цикл правил</div><div class="how">Прогнать черновик через ChatGPT/Claude с поиском и заменить исходник.</div></div></li>
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Папка курса рядом с HQ</div><div class="how">Personal Corp подключена, транскрипт 1-го урока сохранён.</div></div></li>
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Минимальный HTML-дашборд</div><div class="how">Обновляется агентом при изменении задач.</div></div></li>
+        </ul>
+      </div>
+
+      <div class="col homework-col">
+        <h3>Домашнее задание<span class="tally">3 из 5 закрыто</span></h3>
+        <ul class="checklist">
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Собрать HQ и файл правил</div><div class="how">HQ создан, AGENTS.md структурирован, CLAUDE.md — зеркало.</div></div></li>
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Сделать dashboard.html</div><div class="how">Публикуется на GitHub Pages, обновляется правилом §9.</div></div></li>
+          <li class="check partial"><span class="mark"></span><div class="check-body"><div class="label">Добавить реальный проект в HQ</div><div class="how">Карточки проектов есть, но поле «Путь» в `AGENTS.md` всё ещё `_(уточнить)_`.</div></div></li>
+          <li class="check done"><span class="mark"></span><div class="check-body"><div class="label">Учебные материалы из транскрипта</div><div class="how">Этот самый файл — выжимок 1-го урока из `transcripts/lesson1.txt`.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Поделиться с потоком</div><div class="how">Отправить скриншот HQ + dashboard в Telegram/Zoom курса.</div></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== QUOTES ============== -->
+  <aside class="quotes-wrap">
+    <div class="quotes-label">Из уст Серёжи</div>
+    <div class="quotes">
+      <blockquote>Всегда надо начинать с простого.</blockquote>
+      <blockquote>Есть способность LLM усложнять простые вещи.</blockquote>
+      <blockquote>Не нужно строить сложные системы — начинается с одного файла любая система.</blockquote>
+      <blockquote>Важно упереться в ограничения — пока сам не поймёшь, оно как не получится.</blockquote>
+      <blockquote>Самый классный путь что-то выучить — начать с одного кирпича, и потом добавить ещё один, ещё, ещё.</blockquote>
+    </div>
+  </aside>
+
+  <!-- ============== CTA ============== -->
+  <div class="cta-row">
+    <div class="cta-text">
+      <div class="eyebrow">Следующий шаг</div>
+      <h2>Открыть HQ-дашборд</h2>
+      <p>Реестр активных проектов, длинных и коротких задач. Единый источник правды — <em>AGENTS.md</em>.</p>
+    </div>
+    <a class="cta-btn" href="https://instrumentburg-sudo.github.io/hq/">
+      HQ / Центр управления
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Personal Corp · урок 01</span>
+    <span>Серёжа Рис <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech</a></span>
+    <span>Собрано 22·IV·MMXXVI</span>
+  </footer>
+
+</main>
+</body>
+</html>
