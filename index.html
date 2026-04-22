@@ -3,64 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HQ · Центр управления — ИнструментБург</title>
-<meta name="description" content="Оркестрация агентов и проектов. Единый источник правды — AGENTS.md.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#1A1714">
+<title>HQ · Центр оркестрации — ИнструментБург</title>
+<meta name="description" content="Хаб агент-оркестрации. Один человек, два контура, тридцать проектов. Единый источник правды — AGENTS.md.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ============================================================
+     TOKENS · editorial dark · OKLCH + sRGB fallback
+     ============================================================ */
   :root {
-    --paper:       #E8E3D5;
-    --paper-deep:  #D8D2C1;
-    --paper-card:  #F1ECDE;
-    --ink:         #141210;
-    --ink-soft:    #3A332A;
-    --muted:       #7B7468;
-    --oxide:       #B53A22;
-    --brass:       #AE832F;
-    --moss:        #4F6B35;
-    --amber:       #D8A43F;
-    --serif: "Instrument Serif", "Didot", Georgia, serif;
-    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-    --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    /* Surface — 4 уровня elevation (warm charcoal) */
+    --surface-0: #1A1714;
+    --surface-1: #221F1B;
+    --surface-2: #2B2722;
+    --surface-3: #362F29;
+
+    /* Text */
+    --ink-hi:  #E8E3DB;
+    --ink-mid: #B0A99B;
+    --ink-lo:  #78725F;
+
+    /* Semantic (бренд, сохраняем преемственность oxide/brass/moss/amber) */
+    --oxide:   #D06A3E;
+    --oxide-b: #E8824D;
+    --brass:   #D9B36B;
+    --moss:    #6FC17A;
+    --amber:   #E8C56A;
+    --stale:   #A14D37;
+
+    --border:       rgba(185, 172, 150, 0.14);
+    --border-hi:    rgba(185, 172, 150, 0.28);
+    --border-oxide: rgba(208, 106, 62, 0.45);
+
+    --serif: "Instrument Serif", "Didot", "Bodoni 72", Georgia, serif;
+    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.02) inset, 0 12px 32px -24px rgba(0,0,0,0.8);
+    --shadow-hero: 0 1px 0 rgba(255,255,255,0.025) inset, 0 20px 60px -32px rgba(0,0,0,0.9);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @supports (color: oklch(0 0 0)) {
+    :root {
+      --surface-0: oklch(0.14 0.012 65);
+      --surface-1: oklch(0.18 0.012 65);
+      --surface-2: oklch(0.22 0.015 65);
+      --surface-3: oklch(0.27 0.018 65);
+      --ink-hi:    oklch(0.93 0.012 80);
+      --ink-mid:   oklch(0.72 0.020 80);
+      --ink-lo:    oklch(0.55 0.020 80);
+      --oxide:     oklch(0.66 0.18 30);
+      --oxide-b:   oklch(0.74 0.17 30);
+      --brass:     oklch(0.76 0.12 75);
+      --moss:      oklch(0.74 0.17 145);
+      --amber:     oklch(0.80 0.15 82);
+      --stale:     oklch(0.55 0.16 28);
+      --border:       oklch(0.70 0.015 65 / 0.14);
+      --border-hi:    oklch(0.70 0.015 65 / 0.28);
+      --border-oxide: oklch(0.66 0.18 30 / 0.45);
+    }
+  }
 
-  html, body { background: var(--paper); color: var(--ink); }
+  /* Light fallback — уважение prefers-color-scheme, тёплая paper-палитра */
+  @media (prefers-color-scheme: light) {
+    :root {
+      --surface-0: #E8E3D5;
+      --surface-1: #F1ECDE;
+      --surface-2: #D8D2C1;
+      --surface-3: #CDC7B5;
+      --ink-hi:    #141210;
+      --ink-mid:   #3A332A;
+      --ink-lo:    #7B7468;
+      --oxide:     #B53A22;
+      --oxide-b:   #C24A2E;
+      --brass:     #AE832F;
+      --moss:      #4F6B35;
+      --amber:     #D8A43F;
+      --stale:     #8A3A20;
+      --border:       rgba(20, 18, 16, 0.14);
+      --border-hi:    rgba(20, 18, 16, 0.30);
+      --border-oxide: rgba(181, 58, 34, 0.45);
+    }
+  }
 
+  /* High-contrast accessibility */
+  @media (prefers-contrast: more) {
+    :root {
+      --border:    var(--ink-hi);
+      --border-hi: var(--ink-hi);
+    }
+  }
+
+  /* Reset */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body {
+    background: var(--surface-0);
+    color: var(--ink-hi);
+  }
   body {
     font-family: var(--sans);
     font-weight: 400;
     line-height: 1.55;
     min-height: 100vh;
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "ss01", "ss02", "cv11", "tnum";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     background-image:
-      radial-gradient(circle at 18% 22%, rgba(181, 58, 34, 0.055) 0%, transparent 42%),
-      radial-gradient(circle at 82% 78%, rgba(174, 131, 47, 0.06) 0%, transparent 52%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.06  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      radial-gradient(circle at 16% 14%, rgba(208, 106, 62, 0.08) 0%, transparent 42%),
+      radial-gradient(circle at 86% 82%, rgba(217, 179, 107, 0.06) 0%, transparent 50%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.92  0 0 0 0 0.89  0 0 0 0 0.82  0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     background-attachment: fixed;
   }
+  @media (max-width: 720px) {
+    body { background-attachment: scroll; }
+  }
 
-  ::selection { background: var(--oxide); color: var(--paper); }
+  ::selection { background: var(--oxide); color: var(--surface-0); }
 
-  a { color: inherit; }
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-oxide);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  a:hover { border-bottom-color: var(--oxide); color: var(--oxide-b); }
+  a:focus-visible {
+    outline: 2px solid var(--oxide);
+    outline-offset: 3px;
+    border-radius: 2px;
+    border-bottom-color: transparent;
+  }
 
   .page {
     max-width: 1260px;
     margin: 0 auto;
-    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) 5rem;
+    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
   }
 
-  /* ======================= MASTHEAD ======================= */
-
+  /* ============================================================
+     MASTHEAD  ·  hero D-hybrid
+     ============================================================ */
   .masthead {
-    border-top: 2px solid var(--ink);
-    padding-top: 0.75rem;
+    border-top: 2px solid var(--ink-hi);
+    padding-top: 0.85rem;
     position: relative;
   }
 
-  .masthead-rail {
+  .rail {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,39 +165,49 @@
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: var(--ink-soft);
+    color: var(--ink-mid);
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--border);
   }
-  .masthead-rail .live {
+  .rail .live {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
+    color: var(--ink-hi);
   }
+  .rail a { color: var(--ink-mid); border-bottom-color: transparent; }
+  .rail a:hover { color: var(--oxide-b); }
+  .rail-sep { color: var(--ink-lo); opacity: 0.55; }
+
   .dot {
+    display: inline-block;
     width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--moss);
-    box-shadow: 0 0 0 0 rgba(79, 107, 53, 0.55);
+    box-shadow: 0 0 0 0 rgba(111, 193, 122, 0.55);
     animation: pulse 2.4s ease-out infinite;
+    flex: 0 0 auto;
   }
+  .dot.paused { background: var(--amber); box-shadow: 0 0 0 0 rgba(232, 197, 106, 0.45); }
+  .dot.stale  { background: var(--stale); animation: none; opacity: 0.7; }
+
   @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(79, 107, 53, 0.6); }
-    70%  { box-shadow: 0 0 0 8px rgba(79, 107, 53, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(79, 107, 53, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(111, 193, 122, 0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(111, 193, 122, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(111, 193, 122, 0); }
   }
 
   .masthead-title {
     font-family: var(--serif);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 0.86;
     letter-spacing: -0.035em;
-    color: var(--ink);
-    padding: 1.6rem 0 1rem;
+    padding: 1.6rem 0 1.1rem;
     display: flex;
     align-items: flex-end;
     gap: clamp(0.8rem, 2.4vw, 2.25rem);
     flex-wrap: wrap;
+    position: relative;
   }
   .masthead-title .mono-mark {
     font-family: var(--mono);
@@ -110,773 +215,1216 @@
     font-weight: 300;
     letter-spacing: -0.04em;
     line-height: 0.82;
-    color: var(--ink);
+    color: var(--ink-hi);
+    text-shadow: 0 0 1px currentColor;
+  }
+  .masthead-title .mono-mark sup {
+    font-size: 0.18em;
+    vertical-align: top;
+    color: var(--ink-lo);
+    font-weight: 400;
+    margin-left: 0.2em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   .masthead-title .amp {
     font-family: var(--serif);
     font-style: italic;
+    font-weight: 400;
     font-size: clamp(3rem, 8vw, 6.2rem);
-    color: var(--oxide);
+    color: var(--oxide-b);
     line-height: 1;
     transform: translateY(-0.35em);
   }
   .masthead-title .caption {
     font-style: italic;
+    font-weight: 400;
     font-size: clamp(2rem, 5.2vw, 4.2rem);
     line-height: 0.95;
-    max-width: 12ch;
-    color: var(--ink);
+    max-width: 14ch;
+    color: var(--ink-hi);
     padding-bottom: 0.45em;
+    text-shadow: 0 0 1px currentColor;
   }
 
   .masthead-lede {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
     align-items: start;
-    border-top: 1px solid var(--ink);
-    padding-top: 1rem;
+    border-top: 1px solid var(--border-hi);
+    padding-top: 1.25rem;
   }
-  .masthead-lede p {
+  .masthead-lede p.lede {
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
-    color: var(--ink-soft);
-    max-width: 48ch;
-    line-height: 1.4;
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+    color: var(--ink-hi);
+    max-width: 44ch;
+    line-height: 1.35;
   }
-  .masthead-lede p a {
+  .masthead-lede p.lede a {
     font-style: normal;
     font-family: var(--sans);
-    font-weight: 500;
-    color: var(--oxide);
-    text-decoration: none;
-    border-bottom: 1px solid var(--oxide);
-    padding-bottom: 1px;
+    font-size: 0.9rem;
+    color: var(--oxide-b);
+    margin-left: 0.4em;
   }
-  .masthead-lede p a:hover { background: var(--oxide); color: var(--paper); border-color: var(--oxide); }
-  .masthead-issue {
+
+  .pulse-strip {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-mid);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 1.1rem;
+    border-left: 1px solid var(--border-hi);
+    padding-left: 1.25rem;
+    align-self: start;
+  }
+  .pulse-strip dt {
+    text-transform: uppercase;
+    color: var(--ink-lo);
+    font-weight: 500;
+  }
+  .pulse-strip dd {
+    color: var(--ink-hi);
+  }
+  .pulse-strip dd em {
+    color: var(--moss);
+    font-style: normal;
+  }
+  .pulse-strip dd.paused em { color: var(--amber); }
+  .pulse-strip dd.stale em  { color: var(--stale); }
+
+  .corp-chip {
+    position: absolute;
+    top: 1.1rem;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-mid);
+    border: 1px solid var(--border-oxide);
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .corp-chip:hover {
+    background: var(--oxide);
+    color: var(--surface-0);
+    border-color: var(--oxide);
+    border-bottom: 1px solid var(--oxide);
+  }
+
+  /* ============================================================
+     §0  KPI STRIP
+     ============================================================ */
+  .kpi {
+    margin-top: 2.75rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border-hi);
+    border-bottom: 1px solid var(--border-hi);
+  }
+  .kpi-tile {
+    padding: 1.5rem 1.35rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .kpi-tile:last-child { border-right: none; }
+  .kpi-tile .num {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink-hi);
+    text-shadow: 0 0 1px currentColor;
+  }
+  .kpi-tile.accent .num { color: var(--oxide-b); }
+  .kpi-tile .label {
     font-family: var(--mono);
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: var(--muted);
-    text-align: right;
-    white-space: nowrap;
-    padding-top: 0.35rem;
+    color: var(--ink-lo);
+    margin-top: 0.45rem;
   }
-  .masthead-issue b { color: var(--ink); font-weight: 500; }
-
-  /* ======================= STATS ======================= */
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-top: 2rem;
-    border: 1px solid var(--ink);
-    background: var(--paper-deep);
-    overflow: hidden;
-  }
-  .stat {
-    padding: 1.4rem 1.5rem 1.2rem;
-    border-right: 1px solid var(--ink);
-    position: relative;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 100%),
-      var(--paper-deep);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
+  .kpi-tile .sub {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
     display: flex;
-    justify-content: space-between;
-  }
-  .stat-value {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 4.5vw, 3.6rem);
-    line-height: 1;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    margin-top: 0.35rem;
-  }
-  .stat-value sup {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    vertical-align: top;
-    color: var(--oxide);
-    letter-spacing: 0.1em;
-    margin-left: 0.3rem;
-    position: relative;
-    top: 0.6em;
-  }
-  .stat-caption {
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    margin-top: 0.35rem;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  @media (max-width: 760px) {
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat { border-bottom: 1px solid var(--ink); }
-    .stat:nth-child(2n) { border-right: none; }
-    .stat:nth-child(n+3) { border-bottom: none; }
+  /* ============================================================
+     Section · общая шапка
+     ============================================================ */
+  .section {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border-hi);
   }
-
-  /* ======================= SECTION HEAD ======================= */
-
-  .section { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
   .section-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: baseline;
-    gap: 1.5rem;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.75rem;
-    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1.85rem;
   }
   .section-num {
     font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--oxide);
-    letter-spacing: 0.18em;
+    font-size: 0.76rem;
     text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--oxide-b);
   }
   .section-title {
     font-family: var(--serif);
-    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-    font-weight: 400;
-    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+    letter-spacing: -0.025em;
+    color: var(--ink-hi);
     line-height: 1;
-    letter-spacing: -0.015em;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--oxide-b);
+    font-weight: 400;
   }
   .section-meta {
-    margin-left: auto;
     font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--muted);
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
+    color: var(--ink-lo);
+    text-align: right;
   }
 
-  /* ======================= PROJECTS ======================= */
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid var(--ink);
-    background: var(--ink);
-  }
-  .projects-grid > * + * { border-left: 1px solid var(--ink); }
-  @media (max-width: 940px) {
-    .projects-grid { grid-template-columns: 1fr; }
-    .projects-grid > * + * { border-left: none; border-top: 1px solid var(--ink); }
-  }
-
-  .project {
-    background: var(--paper-card);
-    padding: 1.75rem 1.6rem 1.4rem;
-    position: relative;
-    transition: background 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
-    overflow: hidden;
+  /* ============================================================
+     §I CHRONICLE
+     ============================================================ */
+  .chronicle {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    min-height: 260px;
+    gap: 0.15rem;
   }
-  .project::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 3px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-    color: var(--oxide);
+  .chronicle li {
+    display: grid;
+    grid-template-columns: 3.5rem 1rem 6.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
   }
-  .project:hover { background: var(--paper); transform: translateY(-3px); }
-  .project:hover::after { transform: scaleX(1); }
-
-  .project-num {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 6rem;
-    line-height: 0.85;
-    color: var(--ink);
-    opacity: 0.08;
-    position: absolute;
-    top: 0.5rem;
-    right: 1.2rem;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .project-priority {
+  .chronicle li:last-child { border-bottom: none; }
+  .chronicle time {
     font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.28rem 0.6rem;
-    border: 1px solid currentColor;
-    margin-bottom: 0.9rem;
-    align-self: flex-start;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--brass);
+    letter-spacing: 0.04em;
   }
-  .project-priority::before {
-    content: "";
-    width: 6px; height: 6px;
-    background: currentColor;
+  .ch-dot {
+    width: 8px; height: 8px;
     border-radius: 50%;
+    background: var(--moss);
+    justify-self: center;
+    align-self: center;
+    margin-top: 0.1em;
   }
-  .p1 { color: var(--oxide); }
-  .p2 { color: var(--brass); }
-  .p3 { color: var(--moss); }
-
-  .project-name {
-    font-family: var(--serif);
-    font-size: clamp(1.55rem, 2.4vw, 1.95rem);
-    line-height: 1.02;
-    letter-spacing: -0.015em;
-    margin-bottom: 0.5rem;
-    color: var(--ink);
-  }
-  .project-name .slash {
-    color: var(--muted);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 0.75em;
-  }
-  .project-goal {
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-    margin-bottom: 1.25rem;
-    max-width: 32ch;
-    line-height: 1.45;
-  }
-  .project-meta {
-    margin-top: auto;
+  .ch-dot.release { background: var(--oxide); }
+  .ch-dot.paused  { background: var(--amber); }
+  .ch-ticker {
     font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-top: 1px dashed rgba(20, 18, 16, 0.25);
-    padding-top: 0.7rem;
-    display: flex;
-    justify-content: space-between;
+    letter-spacing: 0.14em;
+  }
+  .ch-ticker[data-ticker="hq"]         { color: var(--brass); }
+  .ch-ticker[data-ticker="dashboard"]  { color: var(--moss); }
+  .ch-ticker[data-ticker="calculator"] { color: var(--amber); }
+  .ch-ticker[data-ticker="avito-ads"]  { color: var(--oxide-b); }
+  .ch-ticker[data-ticker="website"]    { color: #9FC4D9; }
+  .ch-ticker[data-ticker="corp"]       { color: var(--ink-mid); }
+  .ch-ticker[data-ticker="blagoystroystvo"] { color: var(--amber); }
+  .ch-event {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--ink-hi);
+    line-height: 1.35;
+  }
+  @media (max-width: 640px) {
+    .chronicle li {
+      grid-template-columns: 3rem 0.75rem 1fr;
+      grid-template-rows: auto auto;
+      gap: 0.4rem 0.75rem;
+    }
+    .chronicle .ch-ticker { grid-column: 2 / -1; grid-row: 2; }
+    .chronicle .ch-event  { grid-column: 1 / -1; grid-row: 3; padding-left: 3.75rem; }
+  }
+
+  /* ============================================================
+     §II  P1 BENTO · projects grid
+     ============================================================ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
-  .project-meta a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
+  .project {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.4rem 1.4rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    position: relative;
+    min-height: 180px;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: var(--shadow-card);
   }
-  .project-meta a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+  .project.hero {
+    grid-column: span 2;
+    min-height: 210px;
+    padding: 1.65rem 1.75rem 1.5rem;
+    background: linear-gradient(
+      155deg,
+      var(--surface-1) 0%,
+      var(--surface-2) 100%
+    );
+    box-shadow: var(--shadow-hero);
+  }
+  .project:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-oxide);
+    background: var(--surface-2);
+  }
+  .project.hero:hover {
+    background: linear-gradient(155deg, var(--surface-2) 0%, var(--surface-3) 100%);
+  }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-lo);
+    letter-spacing: 0.18em;
+    position: absolute;
+    top: 1rem;
+    left: 1.4rem;
+  }
+  .project.hero .project-num { left: 1.75rem; }
+  .project-priority {
+    align-self: flex-end;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-hi);
+    color: var(--ink-mid);
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .project-priority.p1 {
+    border-color: var(--border-oxide);
+    color: var(--oxide-b);
+    background: rgba(208, 106, 62, 0.06);
+  }
+  .project-priority .s-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--moss);
+  }
+  .project-priority.paused .s-dot { background: var(--amber); }
+  .project-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink-hi);
+    margin-top: 1.1rem;
+  }
+  .project.hero .project-name { font-size: 1.65rem; }
+  .project-name .slash {
+    color: var(--ink-lo);
+    font-weight: 300;
+    margin: 0 0.18em;
+  }
+  .project-name em {
+    font-style: italic;
+    color: var(--oxide-b);
+    font-weight: 400;
+  }
+  .project-goal {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.45;
+    flex-grow: 1;
+  }
+  .project.hero .project-goal { font-size: 1rem; max-width: 42ch; }
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-lo);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--border);
+    padding-top: 0.7rem;
+    margin-top: 0.15rem;
+  }
+  .project-meta .stack { color: var(--ink-mid); }
+  .project-meta a { color: var(--oxide-b); border-bottom-color: transparent; }
+  .project-meta a:hover { border-bottom-color: var(--oxide); }
 
-  /* ======================= REGISTRY ======================= */
+  .recency {
+    display: inline-flex;
+    gap: 0.15rem;
+    align-items: center;
+    margin-right: auto;
+  }
+  .recency-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--surface-3);
+  }
+  .recency-dot.on { background: var(--moss); }
+  .recency[data-heat="hot"]  .recency-dot.on { background: var(--moss); }
+  .recency[data-heat="warm"] .recency-dot.on { background: var(--brass); }
+  .recency[data-heat="cool"] .recency-dot.on { background: var(--brass); opacity: 0.7; }
+  .recency[data-heat="cold"] .recency-dot.on { background: var(--stale); }
+  .recency[data-heat="paused"] .recency-dot { background: var(--amber); opacity: 0.55; }
 
-  .section-registry { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+  @media (max-width: 960px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .project.hero { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .project.hero, .project { grid-column: auto; min-height: 150px; }
+    .project.hero { min-height: 200px; }
+  }
 
+  /* ============================================================
+     §III  OPENCLAW · editorial list
+     ============================================================ */
+  .openclaw {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+    row-gap: 0.25rem;
+    list-style: none;
+  }
+  .openclaw > li:nth-child(n+6) {
+    border-left: 1px solid var(--border);
+    padding-left: 1.25rem;
+    margin-left: -1.25rem;
+  }
+  .openclaw li {
+    display: grid;
+    grid-template-columns: 1rem 9.5rem 1fr;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .openclaw .oc-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    justify-self: center;
+    background: var(--moss);
+  }
+  .openclaw .oc-dot.partial { background: var(--amber); }
+  .openclaw .oc-dot.paused  { background: var(--stale); }
+  .openclaw .oc-name {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-hi);
+    letter-spacing: 0.01em;
+  }
+  .openclaw .oc-name.conductor {
+    color: var(--oxide-b);
+    font-weight: 600;
+  }
+  .openclaw .oc-role {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.3;
+  }
+  .oc-legend {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-lo);
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .oc-legend b { color: var(--ink-hi); font-weight: 500; }
+  @media (max-width: 720px) {
+    .openclaw { grid-template-columns: 1fr; }
+    .openclaw > li:nth-child(n+6) {
+      border-left: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
+    .openclaw li { grid-template-columns: 1rem 1fr; row-gap: 0.15rem; }
+    .openclaw .oc-role { grid-column: 2; }
+  }
+
+  /* ============================================================
+     §IV  FULL REGISTRY · 8 groups
+     ============================================================ */
   .registry {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 1.75rem;
   }
-
-  .reg-group { border: 1px solid var(--ink); background: var(--paper-card); }
+  .reg-group {
+    border-top: 1px solid var(--border-hi);
+    padding-top: 1rem;
+  }
+  .reg-group.contour-2 {
+    border-top-color: var(--border-oxide);
+    background: linear-gradient(180deg, rgba(208, 106, 62, 0.035) 0%, transparent 55%);
+    padding-left: 1rem;
+    margin-left: -1rem;
+    padding-right: 1rem;
+    margin-right: -1rem;
+    border-radius: 2px;
+  }
   .reg-group-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 0.8rem 1.1rem 0.7rem;
-    border-bottom: 1px solid var(--ink);
-    background: var(--paper-deep);
+    margin-bottom: 0.6rem;
+    gap: 1rem;
   }
   .reg-group-name {
     font-family: var(--serif);
-    font-size: 1.2rem;
-    font-style: italic;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink-hi);
     letter-spacing: -0.005em;
-    color: var(--ink);
   }
-  .reg-group-name em { font-style: normal; color: var(--oxide); font-family: var(--sans); font-weight: 500; }
+  .reg-group.contour-2 .reg-group-name {
+    color: var(--brass);
+  }
+  .reg-group-name em {
+    color: var(--ink-lo);
+    font-weight: 300;
+    font-style: normal;
+    margin: 0 0.25em;
+  }
+  .reg-group-note {
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--oxide-b);
+    margin-bottom: 0.35rem;
+  }
   .reg-group-count {
     font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    color: var(--muted);
+    letter-spacing: 0.14em;
+    color: var(--ink-lo);
   }
-
-  .reg-list { list-style: none; }
-
+  .reg-list {
+    list-style: none;
+  }
   .reg-row {
     display: grid;
-    grid-template-columns: 2.25rem 0.7rem minmax(0, 2fr) minmax(0, 2fr) 4rem;
-    column-gap: 0.9rem;
+    grid-template-columns: 2rem 0.8rem 1fr auto auto;
+    gap: 0.9rem;
     align-items: baseline;
-    padding: 0.65rem 1.1rem;
-    border-bottom: 1px solid rgba(20, 18, 16, 0.08);
-    transition: background 0.18s ease;
-    cursor: default;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+    transition: background 0.15s ease;
   }
-  .reg-row:last-child { border-bottom: none; }
-  .reg-row:hover { background: var(--paper); }
-
+  .reg-row:hover { background: var(--surface-1); }
   .reg-prio {
     font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    font-weight: 500;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.4rem;
+    border-radius: 2px;
+    border: 1px solid var(--border-hi);
+    color: var(--ink-mid);
     text-align: center;
-    padding: 0.18rem 0;
-    border: 1px solid currentColor;
+    justify-self: start;
   }
-  .reg-prio.p1 { color: var(--oxide); }
-  .reg-prio.p2 { color: var(--brass); }
-  .reg-prio.p3 { color: var(--muted); }
-
+  .reg-prio.p1 {
+    color: var(--oxide-b);
+    border-color: var(--border-oxide);
+    background: rgba(208, 106, 62, 0.06);
+  }
+  .reg-prio.p2 {
+    color: var(--brass);
+    border-color: rgba(217, 179, 107, 0.3);
+  }
+  .reg-prio.p3 {
+    color: var(--ink-lo);
+    opacity: 0.8;
+  }
   .reg-status {
-    width: 7px; height: 7px;
+    width: 8px; height: 8px;
     border-radius: 50%;
-    align-self: center;
     justify-self: center;
+    align-self: center;
+    background: var(--moss);
   }
-  .reg-status.s-active { background: var(--moss); box-shadow: 0 0 0 2px rgba(79, 107, 53, 0.18); }
-  .reg-status.s-paused { background: var(--brass); box-shadow: 0 0 0 2px rgba(174, 131, 47, 0.18); }
-  .reg-status.s-stale  { background: var(--muted); box-shadow: 0 0 0 2px rgba(123, 116, 104, 0.18); opacity: 0.6; }
-
+  .reg-status.s-paused { background: var(--amber); }
+  .reg-status.s-stale  { background: var(--stale); opacity: 0.75; }
   .reg-name {
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-hi);
+  }
+  .reg-sub {
     font-family: var(--serif);
-    font-size: 1.05rem;
-    line-height: 1.15;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
-  .reg-name .reg-sub {
-    font-family: var(--sans);
-    font-size: 0.74rem;
+    font-style: italic;
+    font-size: 0.9rem;
     font-weight: 400;
-    color: var(--muted);
-    letter-spacing: 0.02em;
-    margin-top: 0.1rem;
-    font-style: normal;
+    color: var(--ink-mid);
+    display: block;
+    margin-top: 0.15rem;
+    letter-spacing: 0.005em;
   }
-
   .reg-stack {
     font-family: var(--mono);
     font-size: 0.72rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.02em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-lo);
+    text-align: right;
   }
   .reg-date {
     font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: var(--brass);
+    letter-spacing: 0.04em;
     text-align: right;
-    text-transform: uppercase;
+    min-width: 3.5rem;
   }
-
-  @media (max-width: 780px) {
+  .reg-date.stale { color: var(--stale); opacity: 0.75; }
+  @media (max-width: 760px) {
     .reg-row {
-      grid-template-columns: 2.25rem 0.7rem minmax(0, 1fr) auto;
-      row-gap: 0.2rem;
+      grid-template-columns: 2rem 0.8rem 1fr auto;
+      grid-template-rows: auto auto;
     }
     .reg-stack {
-      grid-column: 3 / span 2;
-      white-space: normal;
+      grid-column: 3 / 5;
+      grid-row: 2;
+      text-align: left;
+      padding-top: 0.2rem;
     }
-    .reg-date {
-      grid-column: 4 / 5;
-      grid-row: 1;
-    }
+    .reg-date { grid-column: 4; grid-row: 1; }
   }
 
-  /* ======================= TASKS ======================= */
-
+  /* ============================================================
+     §V  TASKS
+     ============================================================ */
   .tasks {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
   }
-  @media (max-width: 820px) { .tasks { grid-template-columns: 1fr; } }
-
-  .task-col h3 {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.45rem;
-    color: var(--ink);
-    margin-bottom: 0.9rem;
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
+  .task-col {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.3rem 1.4rem 1.1rem;
   }
-  .task-col h3::before {
-    content: "";
-    display: inline-block;
-    width: 1.75rem;
-    height: 1px;
-    background: var(--ink);
-    transform: translateY(-0.35em);
+  .task-col h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    color: var(--ink-hi);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
   }
   .task-col h3 .count {
     font-family: var(--mono);
-    font-style: normal;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.14em;
-    margin-left: auto;
+    font-size: 0.72rem;
+    font-weight: 400;
     text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-lo);
   }
-
   .empty {
-    border: 1px dashed rgba(20, 18, 16, 0.3);
-    padding: 2rem 1.5rem 1.75rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.25);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
   }
   .empty-mark {
     font-family: var(--serif);
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-style: italic;
+    color: var(--ink-lo);
     line-height: 1;
-    color: var(--muted);
+    margin-bottom: 0.35rem;
   }
   .empty-msg {
     font-family: var(--serif);
     font-style: italic;
-    color: var(--ink-soft);
     font-size: 1.05rem;
+    color: var(--ink-mid);
+    line-height: 1.35;
   }
-  .empty-serial {
+  .empty-hint {
+    display: grid;
+    grid-template-columns: 1.2rem 1fr auto;
+    gap: 0.5rem;
     font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--ink-lo);
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0;
+    border-top: 1px dashed var(--border);
+    margin-top: 0.75rem;
+  }
+  .empty-hint span:first-child { color: var(--oxide-b); }
+  .empty-hint code {
+    font-family: var(--mono);
+    color: var(--brass);
+    background: transparent;
+  }
+  @media (max-width: 720px) {
+    .tasks { grid-template-columns: 1fr; }
   }
 
-  /* ======================= COURSE CARD ======================= */
-
+  /* ============================================================
+     §VI  COURSE · Personal Corp
+     ============================================================ */
   .course {
-    background: var(--ink);
-    color: var(--paper);
-    padding: clamp(2rem, 3.5vw, 2.75rem);
-    margin-top: clamp(2.75rem, 5vw, 4.5rem);
-    position: relative;
-    overflow: hidden;
-  }
-  .course::before {
-    content: "PERSONAL · CORP";
-    position: absolute;
-    top: -0.1em;
-    right: -0.05em;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(5rem, 15vw, 13rem);
-    line-height: 0.82;
-    color: rgba(232, 227, 213, 0.06);
-    letter-spacing: -0.03em;
-    white-space: nowrap;
-    pointer-events: none;
+    margin-top: 3.5rem;
+    padding: 2.5rem 0 0;
+    border-top: 1px solid var(--border-hi);
   }
   .course-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
     align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0.4rem;
-    position: relative;
-    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
   }
   .course-num {
     font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--amber);
-    letter-spacing: 0.18em;
+    font-size: 0.76rem;
     text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--oxide-b);
   }
   .course-title {
     font-family: var(--serif);
-    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.025em;
+  }
+  .course-title em {
     font-style: italic;
+    color: var(--brass);
     font-weight: 400;
-    line-height: 1;
   }
   .course-lede {
     font-family: var(--serif);
     font-style: italic;
-    color: var(--paper-deep);
-    opacity: 0.8;
-    max-width: 54ch;
-    margin-bottom: 1.75rem;
-    font-size: 1.02rem;
-    position: relative;
+    font-size: 1.15rem;
+    color: var(--ink-mid);
+    max-width: 62ch;
+    margin-bottom: 1.85rem;
+    line-height: 1.4;
   }
-
   .lesson {
     display: grid;
-    grid-template-columns: 13ch 1fr 5ch;
-    align-items: center;
+    grid-template-columns: 1fr 3fr auto;
     gap: 1.25rem;
-    padding: 0.85rem 0;
-    border-top: 1px solid rgba(232, 227, 213, 0.12);
-    position: relative;
+    align-items: center;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
   }
-  .lesson:last-child { border-bottom: 1px solid rgba(232, 227, 213, 0.12); }
-
   .lesson-name {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--paper);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink-hi);
+  }
+  .lesson-name.done a,
+  a.lesson-name {
+    color: var(--amber);
+    border-bottom: 1px solid rgba(232, 197, 106, 0.35);
+  }
+  .lesson-name.done a:hover,
+  a.lesson-name:hover {
+    border-bottom-color: var(--amber);
+    color: var(--amber);
   }
   .bar {
-    position: relative;
-    height: 4px;
-    background: rgba(232, 227, 213, 0.12);
+    height: 3px;
+    background: var(--surface-2);
+    border-radius: 2px;
     overflow: hidden;
+    position: relative;
   }
   .bar-fill {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--amber) 0%, var(--oxide) 100%);
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: fill 1.4s cubic-bezier(0.2, 0.75, 0.15, 1) 0.4s forwards;
+    top: 0; left: 0; bottom: 0;
+    width: calc(100% * var(--pct, 0));
+    background: linear-gradient(90deg, var(--brass) 0%, var(--oxide) 100%);
+    border-radius: 2px;
+    transition: width 0.8s ease-out;
   }
-  .lesson[data-pct="0"] .bar-fill { animation: none; }
-
-  @keyframes fill {
-    to { transform: scaleX(var(--pct, 0)); }
-  }
-
   .lesson-pct {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    color: var(--amber);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-mid);
+    letter-spacing: 0.06em;
+    min-width: 3rem;
     text-align: right;
-    letter-spacing: -0.01em;
   }
-  .lesson-pct.muted { color: var(--muted); font-style: italic; }
-
+  .lesson-pct.muted { color: var(--ink-lo); }
   .course-note {
+    margin-top: 1.5rem;
     font-family: var(--serif);
     font-style: italic;
-    color: var(--paper-deep);
-    opacity: 0.7;
-    font-size: 0.9rem;
-    margin-top: 1.5rem;
-    max-width: 60ch;
-    position: relative;
-    border-left: 2px solid var(--amber);
-    padding-left: 1rem;
+    font-size: 1rem;
+    color: var(--ink-mid);
+    max-width: 66ch;
+    line-height: 1.45;
   }
+  .course-note a { color: var(--amber); border-bottom-color: rgba(232,197,106,0.35); }
+  .course-note a:hover { border-bottom-color: var(--amber); }
 
-  /* ======================= FOOTER ======================= */
-
+  /* ============================================================
+     FOOTER
+     ============================================================ */
   footer {
-    margin-top: clamp(3rem, 5vw, 5rem);
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--ink);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink-hi);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
     font-family: var(--mono);
     font-size: 0.72rem;
-    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.14em;
+    color: var(--ink-mid);
   }
-  footer > *:nth-child(2) { text-align: center; }
-  footer > *:nth-child(3) { text-align: right; }
-  footer a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 1px;
-    transition: color 0.15s, border-color 0.15s;
-  }
-  footer a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
-  @media (max-width: 720px) {
-    footer { grid-template-columns: 1fr; }
-    footer > * { text-align: left !important; }
+  footer a { color: var(--ink-mid); border-bottom-color: transparent; }
+  footer a:hover { color: var(--oxide-b); }
+
+  /* ============================================================
+     MOTION RESPECT
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .dot, .bar-fill { transition: none; }
   }
 
-  /* ======================= ENTRY ANIMATION ======================= */
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
+  /* Cascading reveal (load-in) */
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: none; }
   }
-  .masthead        { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
-  .stats           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.12s both; }
-  .section-projects{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.22s both; }
-  .section-registry{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.30s both; }
-  .section-tasks   { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.38s both; }
-  .course          { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.46s both; }
-  footer           { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.58s both; }
+  .masthead-title,
+  .masthead-lede,
+  .kpi,
+  .section,
+  .course,
+  footer {
+    animation: reveal 0.6s ease-out both;
+  }
+  .masthead-lede { animation-delay: 120ms; }
+  .kpi           { animation-delay: 200ms; }
+  .section:nth-of-type(1) { animation-delay: 280ms; }
+  .section:nth-of-type(2) { animation-delay: 340ms; }
+  .section:nth-of-type(3) { animation-delay: 400ms; }
+  .section:nth-of-type(4) { animation-delay: 460ms; }
+  .section:nth-of-type(5) { animation-delay: 520ms; }
+  .course        { animation-delay: 580ms; }
+  footer         { animation-delay: 640ms; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-    .bar-fill { transform: scaleX(var(--pct, 0)); }
+  /* Forced-colors (Windows HC) */
+  @media (forced-colors: active) {
+    a, .reg-prio, .project-priority, .corp-chip, .ch-ticker {
+      forced-color-adjust: none;
+    }
+    .reg-prio.p1 { color: LinkText; border-color: LinkText; background: Canvas; }
+    .project-priority.p1 { color: LinkText; border-color: LinkText; }
   }
 </style>
 </head>
 <body>
 <main class="page">
 
-  <!-- =========================  MASTHEAD  ========================= -->
+  <!-- ========================  MASTHEAD  ======================== -->
   <header class="masthead">
-    <div class="masthead-rail">
-      <span class="live"><span class="dot"></span>Система активна · сессия открыта</span>
-      <span>Центр·Управления · HQ / ИнструментБург</span>
-      <span>Ср · 22·IV·MMXXVI</span>
-    </div>
+
+    <nav class="rail" aria-label="глобальная навигация">
+      <span class="live"><span class="dot" aria-hidden="true"></span> LIVE · hq</span>
+      <span class="rail-links">
+        <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq ↗</a>
+        <span class="rail-sep"> · </span>
+        <a href="./AGENTS.md">AGENTS.md</a>
+        <span class="rail-sep"> · </span>
+        <span>build <time datetime="2026-04-22">22·04·2026</time></span>
+      </span>
+    </nav>
 
     <h1 class="masthead-title">
-      <span class="mono-mark">HQ</span>
+      <span class="mono-mark" aria-label="30">30<sup>p1 · p2 · p3</sup></span>
       <span class="amp">&amp;</span>
-      <span class="caption">центр&nbsp;/&nbsp;управления</span>
+      <span class="caption">hq —<br>центр оркестрации</span>
     </h1>
 
+    <a class="corp-chip" href="https://sereja.tech" target="_blank" rel="noopener">ex Personal&nbsp;Corp · sereja.tech ↗</a>
+
     <div class="masthead-lede">
-      <p>
-        Оркестрация агентов, длинные и короткие задачи, реестр активных проектов
-        — единый источник правды&nbsp;<a href="./AGENTS.md">AGENTS.md</a>.
+      <p class="lede">
+        Хаб агент-оркестрации. Один человек, два юридических контура, тридцать проектов. Единый источник правды — <a href="./AGENTS.md">AGENTS.md</a>.
       </p>
-      <div class="masthead-issue">
-        № выпуска<br><b>005 · ред. 22·04·26</b>
-      </div>
+      <dl class="pulse-strip">
+        <dt>updated</dt>    <dd>22·04·2026</dd>
+        <dt>active</dt>     <dd>14 <em>●</em> · paused 10 · stale 6</dd>
+        <dt>priorities</dt> <dd>P1 10 · P2 14 · P3 6</dd>
+        <dt>last</dt>       <dd>apps/dashboard · 22·04</dd>
+        <dt>course</dt>     <dd>Personal Corp · lesson 01 ✓</dd>
+      </dl>
     </div>
   </header>
 
-  <!-- =========================  STATS STRIP  ========================= -->
-  <section class="stats" aria-label="Сводные показатели">
-    <div class="stat">
-      <div class="stat-label"><span>§ 01</span><span>реестр</span></div>
-      <div class="stat-value">30<sup>всего</sup></div>
-      <div class="stat-caption">проектов в реестре</div>
+  <!-- ========================  §0 KPI STRIP  ======================== -->
+  <section class="kpi" aria-label="сводные показатели">
+    <div class="kpi-tile accent">
+      <span class="num">30</span>
+      <span class="label">проектов в хабе</span>
+      <span class="sub">8 групп · 2 контура</span>
     </div>
-    <div class="stat">
-      <div class="stat-label"><span>§ 02</span><span>active</span></div>
-      <div class="stat-value">14</div>
-      <div class="stat-caption">активных · 10 паузе · 6 архив</div>
+    <div class="kpi-tile">
+      <span class="num">14</span>
+      <span class="label">active</span>
+      <span class="sub"><span class="dot" aria-hidden="true"></span> живая разработка</span>
     </div>
-    <div class="stat">
-      <div class="stat-label"><span>§ 03</span><span>задачи</span></div>
-      <div class="stat-value">00</div>
-      <div class="stat-caption">long · 00 short в работе</div>
+    <div class="kpi-tile">
+      <span class="num">10</span>
+      <span class="label">P1 · ядро</span>
+      <span class="sub">4 hero · 6 compact</span>
     </div>
-    <div class="stat">
-      <div class="stat-label"><span>§ 04</span><span>ред.</span></div>
-      <div class="stat-value" style="font-size: clamp(1.6rem, 2.6vw, 2.1rem); letter-spacing: 0.02em;">2026·04·22</div>
-      <div class="stat-caption">последнее обновление</div>
+    <div class="kpi-tile">
+      <span class="num">22·04</span>
+      <span class="label">updated · live</span>
+      <span class="sub">следующий билд — по изменению</span>
     </div>
   </section>
 
-  <!-- =========================  PROJECTS  ========================= -->
-  <section class="section section-projects">
+  <!-- ========================  §I  CHRONICLE  ======================== -->
+  <section class="section" aria-labelledby="chronicle-head">
     <div class="section-head">
-      <span class="section-num">§ I.</span>
-      <h2 class="section-title">Ядро проектов</h2>
-      <span class="section-meta">6 P1 в работе · полный реестр ниже</span>
+      <span class="section-num">§ I</span>
+      <h2 class="section-title" id="chronicle-head"><em>Хроника</em> недели</h2>
+      <span class="section-meta">/LOG · WEEKLY · 05/05</span>
+    </div>
+    <ol class="chronicle" reversed>
+      <li>
+        <time datetime="2026-04-22">22·04</time>
+        <span class="ch-dot" aria-hidden="true"></span>
+        <span class="ch-ticker" data-ticker="hq">HQ</span>
+        <span class="ch-event">dashboard пересобран в editorial dark (2026 best practices)</span>
+      </li>
+      <li>
+        <time datetime="2026-04-22">22·04</time>
+        <span class="ch-dot" aria-hidden="true"></span>
+        <span class="ch-ticker" data-ticker="dashboard">DASHBOARD</span>
+        <span class="ch-event">fetch_modulbank cron 18:00 EKB — ok</span>
+      </li>
+      <li>
+        <time datetime="2026-04-22">22·04</time>
+        <span class="ch-dot release" aria-hidden="true"></span>
+        <span class="ch-ticker" data-ticker="blagoystroystvo">BLAGO</span>
+        <span class="ch-event">свежий коммит по контуру Россети Урал</span>
+      </li>
+      <li>
+        <time datetime="2026-04-21">21·04</time>
+        <span class="ch-dot" aria-hidden="true"></span>
+        <span class="ch-ticker" data-ticker="calculator">CALC</span>
+        <span class="ch-event">калькулятор СЦ — доработка метрик</span>
+      </li>
+      <li>
+        <time datetime="2026-04-20">20·04</time>
+        <span class="ch-dot" aria-hidden="true"></span>
+        <span class="ch-ticker" data-ticker="avito-ads">AVITO</span>
+        <span class="ch-event">партия каруселей v12 — деплой на автозагрузку</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ========================  §II  P1 BENTO  ======================== -->
+  <section class="section" aria-labelledby="p1-head">
+    <div class="section-head">
+      <span class="section-num">§ II</span>
+      <h2 class="section-title" id="p1-head"><em>Ядро</em> P1</h2>
+      <span class="section-meta">10 проектов · 4 hero + 6 compact</span>
     </div>
 
     <div class="projects-grid">
-      <article class="project">
-        <div class="project-num">01</div>
-        <span class="project-priority p1">P1 · active</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> монорепо</h3>
-        <p class="project-goal">Convex backend, Telegram-бот онбординга, база знаний Obsidian-like и все apps-подпроекты.</p>
+
+      <!-- HERO 1 -->
+      <article class="project hero">
+        <span class="project-num">01</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> <em>монорепо</em></h3>
+        <p class="project-goal">Convex backend, Telegram-бот онбординга, Obsidian-like база знаний и все <code>apps/*</code> подпроекты.</p>
         <div class="project-meta">
-          <span>Convex · Node.js</span>
-          <span>commit 04·21</span>
+          <span class="recency" data-heat="hot" title="обновлено 1 день назад">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span class="stack">Convex · Node.js · MD vault</span>
+          <span>04·21</span>
         </div>
       </article>
 
-      <article class="project">
-        <div class="project-num">02</div>
-        <span class="project-priority p1">P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> website</h3>
-        <p class="project-goal">Основной сайт instrumentburg.ru. SEO-оптимизация, контент, мониторинг Вебмастера.</p>
+      <!-- HERO 2 -->
+      <article class="project hero">
+        <span class="project-num">02</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> <em>website</em></h3>
+        <p class="project-goal">Основной сайт instrumentburg.ru. SEO-продвижение категорий ремонта, мониторинг Вебмастера и Метрики.</p>
         <div class="project-meta">
-          <span>ocStore · Twig · PHP</span>
+          <span class="recency" data-heat="warm" title="обновлено 14 дней назад">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot"></span><span class="recency-dot"></span>
+          </span>
+          <span class="stack">ocStore 3 · Twig · PHP 8.3</span>
           <a href="https://instrumentburg.ru" target="_blank" rel="noopener">instrumentburg.ru ↗</a>
         </div>
       </article>
 
+      <!-- HERO 3 — Blagoystroystvo · контур 2 -->
+      <article class="project hero">
+        <span class="project-num">03</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">Blagoystroystvo <span class="slash">/</span> <em>Россети Урал</em></h3>
+        <p class="project-goal">Внутренний сервис ИП Дедков — договор благоустройства, КС-2/КС-3/ЛС, учёт расходов, маржа. Второй юр-контур.</p>
+        <div class="project-meta">
+          <span class="recency" data-heat="hot" title="обновлено сегодня">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span class="stack">Next.js 16 · Convex · Tailwind v4</span>
+          <span>04·22</span>
+        </div>
+      </article>
+
+      <!-- HERO 4 -->
+      <article class="project hero">
+        <span class="project-num">04</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> <em>avito-ads</em></h3>
+        <p class="project-goal">Пайплайн объявлений Авито: YAML-объявления, 9-слайдовые карусели, XML-фид, деплой на автозагрузку с security-валидацией.</p>
+        <div class="project-meta">
+          <span class="recency" data-heat="hot" title="обновлено 2 дня назад">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span class="stack">Python · YAML · XML</span>
+          <span>04·20</span>
+        </div>
+      </article>
+
+      <!-- COMPACT 5 -->
       <article class="project">
-        <div class="project-num">03</div>
-        <span class="project-priority p1">P1 · active</span>
+        <span class="project-num">05</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
         <h3 class="project-name">apps <span class="slash">/</span> dashboard</h3>
-        <p class="project-goal">Финансовый и маркетинговый дашборд: Метрика, Avito, Direct, LiveSklad, Модульбанк. Cron 18:00 EKB.</p>
+        <p class="project-goal">Финансовый и маркетинговый дашборд: 7 вкладок, cron 18:00 EKB.</p>
         <div class="project-meta">
-          <span>HTML · ApexCharts · cron</span>
-          <span>commit 04·22</span>
+          <span class="recency" data-heat="hot">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>04·22</span>
         </div>
       </article>
 
+      <!-- COMPACT 6 -->
       <article class="project">
-        <div class="project-num">04</div>
-        <span class="project-priority p1">P1 · active</span>
-        <h3 class="project-name">apps <span class="slash">/</span> avito-ads</h3>
-        <p class="project-goal">Пайплайн объявлений Авито: YAML, 9-слайдовые карусели, XML-фид, деплой на автозагрузку.</p>
+        <span class="project-num">06</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">apps <span class="slash">/</span> calculator</h3>
+        <p class="project-goal">Калькулятор СЦ: расчёт ремонта, смета, трекер запчастей.</p>
         <div class="project-meta">
-          <span>Python · YAML · XML</span>
-          <span>commit 04·20</span>
+          <span class="recency" data-heat="hot">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>04·21</span>
         </div>
       </article>
 
+      <!-- COMPACT 7 -->
       <article class="project">
-        <div class="project-num">05</div>
-        <span class="project-priority p1">P1 · active</span>
-        <h3 class="project-name">Blagoystroystvo</h3>
-        <p class="project-goal">Сервис ИП Дедков для работы по договору с&nbsp;Россети Урал: КС-2/КС-3/ЛС, учёт расходов, маржа.</p>
+        <span class="project-num">07</span>
+        <span class="project-priority p1 paused"><span class="s-dot" aria-hidden="true"></span> P1 · paused</span>
+        <h3 class="project-name">apps <span class="slash">/</span> avito-responder</h3>
+        <p class="project-goal">AI-автоответчик по Авито. Мигрирует в единый responder.</p>
         <div class="project-meta">
-          <span>Next.js 16 · Convex · Tailwind</span>
-          <span>commit 04·22</span>
+          <span class="recency" data-heat="paused">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>03·08</span>
         </div>
       </article>
 
+      <!-- COMPACT 8 -->
       <article class="project">
-        <div class="project-num">06</div>
-        <span class="project-priority p1">P1 · paused</span>
-        <h3 class="project-name">Instrumentburg <span class="slash">/</span> Responder</h3>
-        <p class="project-goal">Единый агент-ответчик во всех каналах: Авито, MAX, Telegram, сайт. Наследник раздельных responders.</p>
+        <span class="project-num">08</span>
+        <span class="project-priority p1 paused"><span class="s-dot" aria-hidden="true"></span> P1 · paused</span>
+        <h3 class="project-name">Instrumentburg <span class="slash">/</span> responder</h3>
+        <p class="project-goal">Единый агент-ответчик: Авито, MAX, Telegram, сайт.</p>
         <div class="project-meta">
-          <span>Python · Anthropic SDK</span>
-          <span>commit 03·09</span>
+          <span class="recency" data-heat="paused">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>03·09</span>
         </div>
       </article>
+
+      <!-- COMPACT 9 -->
+      <article class="project">
+        <span class="project-num">09</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">hq</h3>
+        <p class="project-goal">Этот хаб. Реестр проектов, dashboard, правила оркестрации.</p>
+        <div class="project-meta">
+          <span class="recency" data-heat="hot">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>04·22</span>
+        </div>
+      </article>
+
+      <!-- COMPACT 10 -->
+      <article class="project">
+        <span class="project-num">10</span>
+        <span class="project-priority p1"><span class="s-dot" aria-hidden="true"></span> P1 · active</span>
+        <h3 class="project-name">claude-skills</h3>
+        <p class="project-goal">66+ кастомных скиллов: GEO, audit, humanizer-ru, avito-feed, налоги.</p>
+        <div class="project-meta">
+          <span class="recency" data-heat="hot">
+            <span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span><span class="recency-dot on"></span>
+          </span>
+          <span>04·21</span>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- =========================  FULL REGISTRY  ========================= -->
-  <section class="section section-registry">
+  <!-- ========================  §III  OPENCLAW  ======================== -->
+  <section class="section" aria-labelledby="oc-head">
     <div class="section-head">
-      <span class="section-num">§ I·b</span>
-      <h2 class="section-title">Полный реестр</h2>
-      <span class="section-meta">30 проектов по 7 группам · абсолютные пути в AGENTS.md §6.1</span>
+      <span class="section-num">§ III</span>
+      <h2 class="section-title" id="oc-head"><em>Оркестра</em> OpenClaw</h2>
+      <span class="section-meta">10 агентов · Telegram · см. AGENTS.md §11</span>
+    </div>
+
+    <ul class="openclaw">
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name conductor">main clawd</span>
+        <span class="oc-role">дирижёр, общий контроль</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">sitebuilder</span>
+        <span class="oc-role">сайт instrumentburg.ru (SEO)</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">master</span>
+        <span class="oc-role">мастер-агент категорий</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">marketer</span>
+        <span class="oc-role">Метрика, Wordstat, Direct</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">advertiser</span>
+        <span class="oc-role">Avito, Direct-объявления</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">chaser</span>
+        <span class="oc-role">заказы Ozon / WB</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">mailer</span>
+        <span class="oc-role">рассылки клиентам</span>
+      </li>
+      <li>
+        <span class="oc-dot" aria-hidden="true"></span>
+        <span class="oc-name">dispatcher</span>
+        <span class="oc-role">маршрутизация сообщений</span>
+      </li>
+      <li>
+        <span class="oc-dot partial" aria-hidden="true"></span>
+        <span class="oc-name">finik</span>
+        <span class="oc-role">финансовый ассистент</span>
+      </li>
+      <li>
+        <span class="oc-dot partial" aria-hidden="true"></span>
+        <span class="oc-name">nutritionist</span>
+        <span class="oc-role">личный, вне ИБ</span>
+      </li>
+    </ul>
+    <p class="oc-legend">
+      легенда: <b>●</b> active · <b>◐</b> partial · <b>○</b> paused  ·  @handle ботов не публикуем (AGENTS.md §9.3)
+    </p>
+  </section>
+
+  <!-- ========================  §IV  FULL REGISTRY  ======================== -->
+  <section class="section" aria-labelledby="reg-head">
+    <div class="section-head">
+      <span class="section-num">§ IV</span>
+      <h2 class="section-title" id="reg-head"><em>Полный</em> реестр</h2>
+      <span class="section-meta">30 проектов · 8 групп · два юр-контура</span>
     </div>
 
     <div class="registry">
@@ -887,29 +1435,106 @@
           <span class="reg-group-count">3</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg"><span class="reg-prio p1">P1</span><span class="reg-status s-active" aria-label="active"></span><span class="reg-name">instrumentburg<span class="reg-sub">монорепо</span></span><span class="reg-stack">Convex · Node.js · MD vault</span><span class="reg-date">04·21</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/website"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/website<span class="reg-sub">instrumentburg.ru</span></span><span class="reg-stack">ocStore 3 · OpenCart · Twig</span><span class="reg-date">04·08</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg-responder"><span class="reg-prio p1">P1</span><span class="reg-status s-paused"></span><span class="reg-name">instrumentburg-responder<span class="reg-sub">agent multi-channel</span></span><span class="reg-stack">Python · Anthropic SDK</span><span class="reg-date">03·09</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active" aria-label="active"></span>
+            <span class="reg-name">instrumentburg<span class="reg-sub">монорепо, Convex + vault</span></span>
+            <span class="reg-stack">Convex · Node.js · MD</span>
+            <span class="reg-date">04·21</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/website">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active" aria-label="active"></span>
+            <span class="reg-name">apps/website<span class="reg-sub">instrumentburg.ru</span></span>
+            <span class="reg-stack">ocStore 3 · Twig · PHP</span>
+            <span class="reg-date">04·08</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg-responder">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-paused" aria-label="paused"></span>
+            <span class="reg-name">instrumentburg-responder<span class="reg-sub">единый agent-ответчик</span></span>
+            <span class="reg-stack">Python · Anthropic SDK</span>
+            <span class="reg-date">03·09</span>
+          </li>
         </ul>
       </div>
 
       <div class="reg-group">
         <div class="reg-group-head">
           <span class="reg-group-name">ИнструментБург <em>·</em> операции</span>
-          <span class="reg-group-count">11</span>
+          <span class="reg-group-count">10</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-ads"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/avito-ads<span class="reg-sub">YAML + 9-slide feed</span></span><span class="reg-stack">Python · YAML · XML</span><span class="reg-date">04·20</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-responder"><span class="reg-prio p1">P1</span><span class="reg-status s-paused"></span><span class="reg-name">apps/avito-responder<span class="reg-sub">AI-автоответчик</span></span><span class="reg-stack">Python · Anthropic · systemd</span><span class="reg-date">03·08</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/calculator"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/calculator<span class="reg-sub">Калькулятор СЦ</span></span><span class="reg-stack">Vite · TS · Convex · Vercel</span><span class="reg-date">04·21</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/dashboard"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">apps/dashboard<span class="reg-sub">7 вкладок фин/марк</span></span><span class="reg-stack">HTML · ApexCharts · cron</span><span class="reg-date">04·22</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Blagoystroystvo"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">Blagoystroystvo<span class="reg-sub">Россети Урал, КС-2/3</span></span><span class="reg-stack">Next.js 16 · Convex · Tailwind v4</span><span class="reg-date">04·22</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/b2b-outreach"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">apps/b2b-outreach<span class="reg-sub">2ГИС · HH · DaData</span></span><span class="reg-stack">Python · CSV · DaData</span><span class="reg-date">03·10</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/max-miniapp"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">apps/max-miniapp<span class="reg-sub">MAX Messenger</span></span><span class="reg-stack">Vite · React · FastAPI</span><span class="reg-date">03·04</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/AIzakaznaryad"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">AIzakaznaryad<span class="reg-sub">заказ-наряды Karcher</span></span><span class="reg-stack">Vite · Supabase · jsPDF</span><span class="reg-date">03·23</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Rentalnew"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">Rentalnew<span class="reg-sub">ToolRent Manager</span></span><span class="reg-stack">Next.js 14 · Supabase · shadcn</span><span class="reg-date">03·04</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Tenders"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">Tenders<span class="reg-sub">КП-пайплайн, 44-ФЗ</span></span><span class="reg-stack">JSON state · DOCX · XLSX</span><span class="reg-date">live</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/DMDGU"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">apps/DMDGU<span class="reg-sub">тендерный пакет ДГУ</span></span><span class="reg-stack">DOCX · PDF · XLSX</span><span class="reg-date">02·02</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-ads">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">apps/avito-ads<span class="reg-sub">YAML + 9-слайд фид</span></span>
+            <span class="reg-stack">Python · YAML · XML</span>
+            <span class="reg-date">04·20</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/avito-responder">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">apps/avito-responder<span class="reg-sub">AI-автоответчик</span></span>
+            <span class="reg-stack">Python · Anthropic · systemd</span>
+            <span class="reg-date">03·08</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/calculator">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">apps/calculator<span class="reg-sub">Калькулятор СЦ</span></span>
+            <span class="reg-stack">Vite · TS · Convex · Vercel</span>
+            <span class="reg-date">04·21</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/dashboard">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">apps/dashboard<span class="reg-sub">7 вкладок фин/марк</span></span>
+            <span class="reg-stack">HTML · ApexCharts · cron</span>
+            <span class="reg-date">04·22</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/b2b-outreach">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">apps/b2b-outreach<span class="reg-sub">2ГИС · HH · DaData</span></span>
+            <span class="reg-stack">Python · CSV · DaData</span>
+            <span class="reg-date">03·10</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/max-miniapp">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">apps/max-miniapp<span class="reg-sub">MAX Messenger</span></span>
+            <span class="reg-stack">Vite · React · FastAPI</span>
+            <span class="reg-date">03·04</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/AIzakaznaryad">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">AIzakaznaryad<span class="reg-sub">заказ-наряды Karcher</span></span>
+            <span class="reg-stack">Vite · Supabase · jsPDF</span>
+            <span class="reg-date">03·23</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Rentalnew">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">Rentalnew<span class="reg-sub">ToolRent Manager</span></span>
+            <span class="reg-stack">Next.js 14 · Supabase · shadcn</span>
+            <span class="reg-date">03·04</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Tenders">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">Tenders<span class="reg-sub">КП-пайплайн, 44-ФЗ</span></span>
+            <span class="reg-stack">JSON state · DOCX · XLSX</span>
+            <span class="reg-date">live</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/instrumentburg/apps/DMDGU">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">apps/DMDGU<span class="reg-sub">тендерный пакет ДГУ</span></span>
+            <span class="reg-stack">DOCX · PDF · XLSX</span>
+            <span class="reg-date stale">02·02</span>
+          </li>
         </ul>
       </div>
 
@@ -919,8 +1544,38 @@
           <span class="reg-group-count">2</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/ib-digest"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">ib-digest<span class="reg-sub">утренний AI-дайджест</span></span><span class="reg-stack">Python · HTML · OpenClaw cron</span><span class="reg-date">04·22</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/ib-vault"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">ib-vault<span class="reg-sub">Obsidian-vault ИБ</span></span><span class="reg-stack">Markdown · JSON schema</span><span class="reg-date">live</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/ib-digest">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">ib-digest<span class="reg-sub">утренний AI-дайджест</span></span>
+            <span class="reg-stack">Python · HTML · cron</span>
+            <span class="reg-date">04·22</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/ib-vault">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">ib-vault<span class="reg-sub">Obsidian-vault ИБ</span></span>
+            <span class="reg-stack">Markdown · JSON schema</span>
+            <span class="reg-date">live</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ↓ ВТОРОЙ ЮР-КОНТУР ↓ -->
+      <div class="reg-group contour-2">
+        <div class="reg-group-note">↓ юр. контур 2 — ИП Дедков как подрядчик ↓</div>
+        <div class="reg-group-head">
+          <span class="reg-group-name">ИП Дедков <em>·</em> Россети Урал</span>
+          <span class="reg-group-count">1</span>
+        </div>
+        <ul class="reg-list">
+          <li class="reg-row" title="/home/iamsohappy/projects/Blagoystroystvo">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">Blagoystroystvo<span class="reg-sub">договор благоустройства, КС-2/КС-3</span></span>
+            <span class="reg-stack">Next.js 16 · Convex · Tailwind</span>
+            <span class="reg-date">04·22</span>
+          </li>
         </ul>
       </div>
 
@@ -930,9 +1585,27 @@
           <span class="reg-group-count">3</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/tagil-instrument"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">tagil-instrument<span class="reg-sub">ТагилИнструмент / прокат</span></span><span class="reg-stack">Next.js 15 · Payload CMS · Postgres</span><span class="reg-date">04·01</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/TheJungle"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">TheJungle<span class="reg-sub">студия загара, Mini App</span></span><span class="reg-stack">FastAPI · React · Docker</span><span class="reg-date">04·02</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Stroyka"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Stroyka<span class="reg-sub">ИП Пихенек, СОШ Кушва</span></span><span class="reg-stack">документы · pandoc</span><span class="reg-date">закрыт</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/tagil-instrument">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">tagil-instrument<span class="reg-sub">ТагилИнструмент / прокат</span></span>
+            <span class="reg-stack">Next.js 15 · Payload · Postgres</span>
+            <span class="reg-date">04·01</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/TheJungle">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">TheJungle<span class="reg-sub">студия загара, Mini App</span></span>
+            <span class="reg-stack">FastAPI · React · Docker</span>
+            <span class="reg-date">04·02</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Stroyka">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">Stroyka<span class="reg-sub">ИП Пихенек, СОШ Кушва</span></span>
+            <span class="reg-stack">документы · pandoc</span>
+            <span class="reg-date stale">закрыт</span>
+          </li>
         </ul>
       </div>
 
@@ -942,8 +1615,20 @@
           <span class="reg-group-count">2</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Githab/personal corp"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">personal-corp<span class="reg-sub">курс Серёжи Риса</span></span><span class="reg-stack">HTML · JSON · MD транскрипты</span><span class="reg-date">live</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/health-tracker"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">health-tracker<span class="reg-sub">здоровье семьи</span></span><span class="reg-stack">Markdown (Obsidian-like)</span><span class="reg-date">03·04</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Githab/personal corp">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">personal-corp<span class="reg-sub">курс Серёжи Риса</span></span>
+            <span class="reg-stack">HTML · JSON · MD</span>
+            <span class="reg-date">live</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/health-tracker">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">health-tracker<span class="reg-sub">здоровье семьи</span></span>
+            <span class="reg-stack">Markdown · Obsidian-like</span>
+            <span class="reg-date">03·04</span>
+          </li>
         </ul>
       </div>
 
@@ -953,12 +1638,48 @@
           <span class="reg-group-count">6</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Githab/hq"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">hq<span class="reg-sub">этот хаб + dashboard</span></span><span class="reg-stack">Markdown · HTML static</span><span class="reg-date">04·22</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/claude-skills"><span class="reg-prio p1">P1</span><span class="reg-status s-active"></span><span class="reg-name">claude-skills<span class="reg-sub">66+ кастомных скиллов</span></span><span class="reg-stack">Markdown · shell · python</span><span class="reg-date">04·21</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/agent-second-brain"><span class="reg-prio p2">P2</span><span class="reg-status s-active"></span><span class="reg-name">agent-second-brain<span class="reg-sub">голосовой AI-ассистент</span></span><span class="reg-stack">Python · aiogram · Todoist</span><span class="reg-date">04·13</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/openclaw-hub"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">openclaw-hub<span class="reg-sub">bootstrap VPS-агентов</span></span><span class="reg-stack">Python · MD templates</span><span class="reg-date">03·09</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/srv-kvm"><span class="reg-prio p2">P2</span><span class="reg-status s-paused"></span><span class="reg-name">srv-kvm<span class="reg-sub">docs сервера виртуализации</span></span><span class="reg-stack">KVM · libvirtd · ZFS</span><span class="reg-date">docs</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/telethon"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">telethon<span class="reg-sub">единичный login.py</span></span><span class="reg-stack">Python · Telethon</span><span class="reg-date">stale</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Githab/hq">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">hq<span class="reg-sub">этот хаб + dashboard</span></span>
+            <span class="reg-stack">Markdown · HTML static</span>
+            <span class="reg-date">04·22</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/claude-skills">
+            <span class="reg-prio p1">P1</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">claude-skills<span class="reg-sub">66+ кастомных скиллов</span></span>
+            <span class="reg-stack">MD · shell · python</span>
+            <span class="reg-date">04·21</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/agent-second-brain">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-active"></span>
+            <span class="reg-name">agent-second-brain<span class="reg-sub">голосовой AI-ассистент</span></span>
+            <span class="reg-stack">Python · aiogram · Todoist</span>
+            <span class="reg-date">04·13</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/openclaw-hub">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">openclaw-hub<span class="reg-sub">bootstrap VPS-агентов</span></span>
+            <span class="reg-stack">Python · MD templates</span>
+            <span class="reg-date">03·09</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/srv-kvm">
+            <span class="reg-prio p2">P2</span>
+            <span class="reg-status s-paused"></span>
+            <span class="reg-name">srv-kvm<span class="reg-sub">docs сервера виртуализации</span></span>
+            <span class="reg-stack">KVM · libvirtd · ZFS</span>
+            <span class="reg-date">docs</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/telethon">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">telethon<span class="reg-sub">единичный login.py</span></span>
+            <span class="reg-stack">Python · Telethon</span>
+            <span class="reg-date stale">stale</span>
+          </li>
         </ul>
       </div>
 
@@ -968,20 +1689,38 @@
           <span class="reg-group-count">3</span>
         </div>
         <ul class="reg-list">
-          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Brainstorm<span class="reg-sub">InfographicsGen, только docs</span></span><span class="reg-stack">(docs) Next.js · Convex · fal.ai</span><span class="reg-date">01·22</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm "><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">Brainstorm␣<span class="reg-sub">случайная папка с пробелом</span></span><span class="reg-stack">XLSX шаблон</span><span class="reg-date">—</span></li>
-          <li class="reg-row" title="/home/iamsohappy/projects/DashboardAI"><span class="reg-prio p3">P3</span><span class="reg-status s-stale"></span><span class="reg-name">DashboardAI<span class="reg-sub">заменён apps/dashboard</span></span><span class="reg-stack">Node · Express · pg · OpenAI</span><span class="reg-date">—</span></li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">Brainstorm<span class="reg-sub">InfographicsGen, только docs</span></span>
+            <span class="reg-stack">Next.js · Convex · fal.ai</span>
+            <span class="reg-date stale">01·22</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/Brainstorm ">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">Brainstorm␣<span class="reg-sub">случайная папка с пробелом</span></span>
+            <span class="reg-stack">XLSX шаблон</span>
+            <span class="reg-date stale">—</span>
+          </li>
+          <li class="reg-row" title="/home/iamsohappy/projects/DashboardAI">
+            <span class="reg-prio p3">P3</span>
+            <span class="reg-status s-stale"></span>
+            <span class="reg-name">DashboardAI<span class="reg-sub">заменён apps/dashboard</span></span>
+            <span class="reg-stack">Node · Express · pg · OpenAI</span>
+            <span class="reg-date stale">—</span>
+          </li>
         </ul>
       </div>
 
     </div>
   </section>
 
-  <!-- =========================  TASKS  ========================= -->
-  <section class="section section-tasks">
+  <!-- ========================  §V  TASKS  ======================== -->
+  <section class="section" aria-labelledby="tasks-head">
     <div class="section-head">
-      <span class="section-num">§ II.</span>
-      <h2 class="section-title">Задачи в работе</h2>
+      <span class="section-num">§ V</span>
+      <h2 class="section-title" id="tasks-head"><em>Задачи</em> в работе</h2>
       <span class="section-meta">инбокс пуст · направлений без владельца нет</span>
     </div>
 
@@ -990,31 +1729,35 @@
         <h3>Длинные<span class="count">0 / 0 открыты</span></h3>
         <div class="empty">
           <span class="empty-mark">—</span>
-          <span class="empty-msg">никаких открытых длинных задач</span>
-          <span class="empty-serial">/LONG · 00/00</span>
+          <span class="empty-msg">инбокс пуст</span>
+          <span class="empty-hint"><span>⌘</span><span>новая длинная — шаблон из <code>AGENTS.md §5.1</code></span><span>/tasks/long/</span></span>
+          <span class="empty-hint"><span>↳</span><span>архив пуст</span><span>/tasks/done/</span></span>
         </div>
       </div>
       <div class="task-col">
         <h3>Короткие<span class="count">0 / 0 открыты</span></h3>
         <div class="empty">
           <span class="empty-mark">—</span>
-          <span class="empty-msg">никаких открытых коротких задач</span>
-          <span class="empty-serial">/SHORT · 00/00</span>
+          <span class="empty-msg">инбокс пуст</span>
+          <span class="empty-hint"><span>⌘</span><span>новая короткая — шаблон из <code>AGENTS.md §5.2</code></span><span>/tasks/short/</span></span>
+          <span class="empty-hint"><span>↳</span><span>архив пуст</span><span>/tasks/done/</span></span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =========================  COURSE / PERSONAL CORP  ========================= -->
-  <section class="course">
+  <!-- ========================  §VI  COURSE  ======================== -->
+  <section class="course" aria-labelledby="course-head">
     <div class="course-head">
-      <span class="course-num">§ III · курс</span>
-      <h2 class="course-title">Personal Corp — прогресс</h2>
+      <span class="course-num">§ VI · курс</span>
+      <h2 class="course-title" id="course-head"><em>Personal Corp</em> — прогресс</h2>
     </div>
-    <p class="course-lede">Применение практик Серёжи Риса на реальном бизнесе: HQ-хаб, AGENTS.md, dashboard, делегирование субагентам.</p>
+    <p class="course-lede">
+      Применение практик Серёжи Риса на реальном бизнесе: HQ-хаб, AGENTS.md как источник правды, dashboard, делегирование субагентам.
+    </p>
 
     <div class="lesson" data-pct="100" style="--pct: 1;">
-      <a class="lesson-name" href="./course/lesson1.html" style="color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(216, 164, 63, 0.35); padding-bottom: 1px;">Урок 01 · Хаб ↗</a>
+      <a class="lesson-name" href="./course/lesson1.html">Урок 01 · Хаб ↗</a>
       <div class="bar"><div class="bar-fill"></div></div>
       <span class="lesson-pct">100%</span>
     </div>
@@ -1025,15 +1768,16 @@
     </div>
 
     <p class="course-note">
-      HQ собран, AGENTS.md структурирован, dashboard публикуется на GitHub&nbsp;Pages. Учебные материалы 1-го урока извлечены из транскрипта в <a href="./course/lesson1.html" style="color: var(--amber); border-bottom: 1px solid rgba(216, 164, 63, 0.35); text-decoration: none;">course/lesson1.html</a>. Остались: прогнать AGENTS.md через research-цикл и проставить абсолютные пути к реальным проектам.
+      HQ собран, AGENTS.md структурирован (11 секций, 30 проектов, 10 агентов OpenClaw), dashboard публикуется на GitHub Pages. Следующий урок — в <a href="./course/lesson2.html">course/lesson2.html</a> после его выхода.
     </p>
   </section>
 
-  <!-- =========================  FOOTER  ========================= -->
+  <!-- ========================  FOOTER  ======================== -->
   <footer>
     <span>© MMXXVI · ИнструментБург</span>
     <span>Правила: <a href="./AGENTS.md">AGENTS.md</a></span>
-    <span>Репозиторий: <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq</a></span>
+    <span>Репо: <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">instrumentburg-sudo / hq ↗</a></span>
+    <span>Build · <time datetime="2026-04-22">22·04·2026</time></span>
   </footer>
 
 </main>
