@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<title>Площадки · Штаб · ИнструментБург</title>
+<meta name="description" content="Направление «Площадки»: Ozon и Wildberries. В планах — сначала собираем базу знаний, потом запускаемся.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elev: #131313;
+    --bg-hover: #171717;
+    --border: #262626;
+    --border-strong: #333333;
+    --text: #ededed;
+    --text-dim: #8a8a8a;
+    --text-faint: #4a4a4a;
+
+    --accent: #65a30d;
+
+    --sans: "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+    --radius: 6px;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: var(--sans);
+    font-weight: 400; font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(101, 163, 13, 0.08), transparent 55%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 28px 32px 64px; }
+
+  header.head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 24px; padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand-mark { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+  .brand-mark a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  .brand-mark a:hover { color: var(--text); }
+  .brand-sep { color: var(--text-faint); font-weight: 400; font-family: var(--mono); font-size: 14px; }
+  .brand-here { color: var(--accent); }
+  .brand-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  nav.head-nav {
+    display: flex; gap: 20px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  nav.head-nav a {
+    color: var(--text-dim); padding: 4px 0;
+    transition: color 0.2s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  nav.head-nav a:hover { color: var(--text); outline: none; }
+  nav.head-nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .hero {
+    position: relative;
+    padding: 28px 28px 28px 36px;
+    background: linear-gradient(180deg, rgba(101, 163, 13, 0.06) 0%, rgba(101, 163, 13, 0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--accent);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .hero-title {
+    font-size: 34px; font-weight: 600; letter-spacing: -0.025em;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .hero-desc {
+    color: var(--text-dim); font-size: 15.5px;
+    max-width: 62ch; line-height: 1.55; margin-bottom: 18px;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 12px;
+    padding-top: 18px; border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 3px; }
+  .stat-v { font-size: 22px; color: var(--text); font-weight: 500; letter-spacing: -0.01em; }
+  .stat-v.dim { color: var(--text-faint); }
+  .stat-k { color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; font-size: 10.5px; }
+
+  section.blk { margin-bottom: 40px; }
+  .blk-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .blk-title {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .blk-sub { color: var(--text-dim); font-size: 13px; }
+
+  .plans { display: flex; flex-direction: column; gap: 6px; }
+  .plan {
+    display: flex; gap: 14px; align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .plan:last-child { border-bottom: none; }
+  .plan-icon {
+    font-family: var(--mono); font-size: 13px;
+    width: 14px; flex-shrink: 0; text-align: center;
+    color: var(--text-faint);
+  }
+  .plan-body { flex: 1; }
+  .plan-title { color: var(--text); font-size: 14.5px; font-weight: 500; }
+  .plan-note { color: var(--text-dim); font-size: 13px; margin-top: 2px; line-height: 1.45; }
+
+  .quote {
+    padding: 16px 20px; margin-bottom: 16px;
+    background: var(--bg-elev); border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text-dim); font-size: 14px; line-height: 1.55;
+    font-style: italic;
+  }
+  .quote-src {
+    display: block; margin-top: 8px;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-faint); letter-spacing: 0.04em;
+    text-transform: uppercase; font-style: normal;
+  }
+
+  footer.foot {
+    margin-top: 56px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 14px 28px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  footer.foot a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  footer.foot a:hover { color: var(--text); }
+
+  @media (max-width: 820px) {
+    .page { padding: 20px 18px 48px; }
+    header.head { padding-bottom: 16px; margin-bottom: 22px; gap: 12px; }
+    nav.head-nav {
+      width: 100%; gap: 14px; font-size: 10px; letter-spacing: 0.08em;
+      overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
+    }
+    nav.head-nav::-webkit-scrollbar { display: none; }
+    .hero { padding: 22px 20px 22px 26px; }
+    .hero-title { font-size: 28px; }
+    .hero-stats { gap: 24px; }
+    .stat-v { font-size: 19px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div class="brand">
+      <span class="brand-mark"><a href="../">штаб</a></span>
+      <span class="brand-sep">/</span>
+      <span class="brand-mark brand-here">площадки</span>
+      <span class="brand-eyebrow">направление в планах</span>
+    </div>
+    <nav class="head-nav" aria-label="направления">
+      <a href="../service/">сервис</a>
+      <a href="../marketplaces/" class="active">площадки</a>
+      <a href="../tenders/">тендера</a>
+      <a href="file:///home/iamsohappy/projects/Githab/hq-personal/">личное</a>
+      <a href="../">← штаб</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">направление в планах</div>
+    <h1 class="hero-title">Площадки</h1>
+    <p class="hero-desc">
+      Продажи инструмента через Ozon и Wildberries. Пока без активных проектов
+      и без базы знаний — сначала собираем системные заметки и контрольные
+      списки, потом запускаем первую карточку.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-v">0</span>
+        <span class="stat-k">проектов</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v">0</span>
+        <span class="stat-k">активных задач</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v dim">—</span>
+        <span class="stat-k">Ozon ·&nbsp;SKU не заведены</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v dim">—</span>
+        <span class="stat-k">Wildberries ·&nbsp;SKU не заведены</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">что появится здесь</span>
+      <span class="blk-sub">когда направление раскрутится</span>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <span class="plan-icon">○</span>
+        <div class="plan-body">
+          <div class="plan-title">База знаний по Ozon и Wildberries</div>
+          <div class="plan-note">
+            Контрольные списки заведения SKU, частые причины блокировок,
+            работа с карточками, требования к фото и описаниям.
+          </div>
+        </div>
+      </div>
+      <div class="plan">
+        <span class="plan-icon">○</span>
+        <div class="plan-body">
+          <div class="plan-title">Реестр проектов направления</div>
+          <div class="plan-note">
+            Пилотная карточка → полноценный каталог → синхронизация остатков
+            с LiveSklad. Роль <code>chaser</code> в OpenClaw — на отслеживание статусов заказов.
+          </div>
+        </div>
+      </div>
+      <div class="plan">
+        <span class="plan-icon">○</span>
+        <div class="plan-body">
+          <div class="plan-title">Метрики направления</div>
+          <div class="plan-note">
+            Выручка по площадкам, просмотры карточек, конверсия, комиссии,
+            скорость отгрузки. Когда будут первые цифры — появятся KPI.
+          </div>
+        </div>
+      </div>
+      <div class="plan">
+        <span class="plan-icon">○</span>
+        <div class="plan-body">
+          <div class="plan-title">Связка с сервисом</div>
+          <div class="plan-note">
+            Пост-продажное обслуживание инструмента, купленного на площадках,
+            по той же логике, что заказы с сайта — через общий модуль ответчика.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">почему пока placeholder</span>
+      <span class="blk-sub">из урока 2 · Personal Corp</span>
+    </div>
+    <div class="quote">
+      Не нужно строить систему для нерешённой задачи. Вначале — как получится,
+      в одной папке. Система строится только когда упёрся в реальное ограничение.
+      <span class="quote-src">— Серёжа Рис, «Масштабирование без оверинженеринга»</span>
+    </div>
+    <p style="color: var(--text-dim); font-size: 14px; line-height: 1.55;">
+      У направления «Площадки» пока нет боевой задачи, на которую стоит
+      накручивать инфраструктуру. Как только появится первая сделка или
+      готовность выставить SKU — эта страница наполнится содержимым
+      из реального опыта, а не предположений.
+    </p>
+  </section>
+
+  <footer class="foot">
+    <a href="../">← штаб</a>
+    <a href="../service/">сервис</a>
+    <a href="../tenders/">тендера</a>
+    <a href="../course/lesson2.html">курс · урок 2</a>
+    <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">репозиторий</a>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<title>Тендера · Штаб · ИнструментБург</title>
+<meta name="description" content="Направление «Тендера»: подряды и тендерные поставки. Россети Урал (Blagoystroystvo) и конструктор Tenders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elev: #131313;
+    --bg-hover: #171717;
+    --border: #262626;
+    --border-strong: #333333;
+    --text: #ededed;
+    --text-dim: #8a8a8a;
+    --text-faint: #4a4a4a;
+
+    --accent: #0284c7;
+
+    --sans: "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+    --radius: 6px;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: var(--sans);
+    font-weight: 400; font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(2, 132, 199, 0.09), transparent 55%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='11'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 28px 32px 64px; }
+
+  header.head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 24px; padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand-mark { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+  .brand-mark a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  .brand-mark a:hover { color: var(--text); }
+  .brand-sep { color: var(--text-faint); font-weight: 400; font-family: var(--mono); font-size: 14px; }
+  .brand-here { color: var(--accent); }
+  .brand-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  nav.head-nav {
+    display: flex; gap: 20px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  nav.head-nav a {
+    color: var(--text-dim); padding: 4px 0;
+    transition: color 0.2s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  nav.head-nav a:hover { color: var(--text); outline: none; }
+  nav.head-nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .hero {
+    position: relative;
+    padding: 28px 28px 28px 36px;
+    background: linear-gradient(180deg, rgba(2, 132, 199, 0.07) 0%, rgba(2, 132, 199, 0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--accent);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .hero-title {
+    font-size: 34px; font-weight: 600; letter-spacing: -0.025em;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .hero-desc {
+    color: var(--text-dim); font-size: 15.5px;
+    max-width: 64ch; line-height: 1.55; margin-bottom: 18px;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 12px;
+    padding-top: 18px; border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 3px; }
+  .stat-v { font-size: 22px; color: var(--text); font-weight: 500; letter-spacing: -0.01em; }
+  .stat-v.dim { color: var(--text-faint); }
+  .stat-k { color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; font-size: 10.5px; }
+
+  section.blk { margin-bottom: 48px; }
+  .blk-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .blk-title {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .blk-sub { color: var(--text-dim); font-size: 13px; }
+
+  .tasks { display: flex; flex-direction: column; }
+  .task {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .task:last-child { border-bottom: none; }
+  .task-row1 { display: flex; gap: 12px; align-items: baseline; margin-bottom: 3px; }
+  .task-icon {
+    font-family: var(--mono); font-size: 14px;
+    width: 14px; flex-shrink: 0; text-align: center;
+    color: var(--text-faint);
+  }
+  .task-icon.progress { color: var(--text); }
+  .task-title {
+    font-weight: 500; font-size: 15.5px; color: var(--text);
+    letter-spacing: -0.005em; line-height: 1.4;
+  }
+  .task-meta {
+    margin-left: 26px;
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--text-faint); letter-spacing: 0.02em;
+  }
+  .task-meta .proj { color: var(--text-dim); }
+  .task-meta .sep { margin: 0 7px; }
+  .task-meta .pri.progress { color: var(--accent); }
+
+  .ptable {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .ptable th {
+    text-align: left; font-weight: 400;
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 6px 12px 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ptable th.right { text-align: right; }
+  .ptable td {
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: baseline;
+  }
+  .ptable tr:last-child td { border-bottom: none; }
+  .ptable td.right { text-align: right; font-family: var(--mono); font-size: 11.5px; }
+  .ptable td.proj { font-weight: 500; color: var(--text); }
+  .ptable td.stack { color: var(--text-dim); font-size: 12.5px; }
+  .ptable td.pri {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.03em;
+  }
+  .ptable td.pri.p1 { color: var(--accent); font-weight: 500; }
+  .ptable td.status {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-dim); letter-spacing: 0.03em;
+  }
+  .ptable td.status.active { color: #65a30d; }
+
+  .note {
+    padding: 14px 18px; background: var(--bg-elev);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text-dim); font-size: 14px; line-height: 1.55;
+  }
+  .note b { color: var(--text); font-weight: 500; }
+
+  footer.foot {
+    margin-top: 56px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 14px 28px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  footer.foot a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  footer.foot a:hover { color: var(--text); }
+
+  @media (max-width: 820px) {
+    .page { padding: 20px 18px 48px; }
+    header.head { padding-bottom: 16px; margin-bottom: 22px; gap: 12px; }
+    nav.head-nav {
+      width: 100%; gap: 14px; font-size: 10px; letter-spacing: 0.08em;
+      overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
+    }
+    nav.head-nav::-webkit-scrollbar { display: none; }
+    .hero { padding: 22px 20px 22px 26px; }
+    .hero-title { font-size: 28px; }
+    .hero-stats { gap: 24px; }
+    .stat-v { font-size: 19px; }
+    .ptable td.stack, .ptable th.stack { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div class="brand">
+      <span class="brand-mark"><a href="../">штаб</a></span>
+      <span class="brand-sep">/</span>
+      <span class="brand-mark brand-here">тендера</span>
+      <span class="brand-eyebrow">подряды и поставки</span>
+    </div>
+    <nav class="head-nav" aria-label="направления">
+      <a href="../service/">сервис</a>
+      <a href="../marketplaces/">площадки</a>
+      <a href="../tenders/" class="active">тендера</a>
+      <a href="file:///home/iamsohappy/projects/Githab/hq-personal/">личное</a>
+      <a href="../">← штаб</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">направление</div>
+    <h1 class="hero-title">Тендера</h1>
+    <p class="hero-desc">
+      Подрядные работы и тендерные поставки. Сейчас главное —
+      обслуживание договора с <b style="color: var(--text)">ПАО Россети Урал</b>
+      (проект Blagoystroystvo, КС-2 / КС-3) и конструктор тендерных
+      заявок для будущих закупок.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-v">2</span>
+        <span class="stat-k">проекта</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v">1</span>
+        <span class="stat-k">активная задача</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v">Россети Урал</span>
+        <span class="stat-k">действующий подряд</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v dim">—</span>
+        <span class="stat-k">открытых заявок ·&nbsp;метрика в планах</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">текущие задачи направления</span>
+      <span class="blk-sub">1 активная</span>
+    </div>
+    <div class="tasks">
+      <article class="task">
+        <div class="task-row1">
+          <span class="task-icon progress" aria-label="в работе">●</span>
+          <span class="task-title">КС-3 за март — подрядчик Россети Урал</span>
+        </div>
+        <div class="task-meta">
+          <span class="proj">Blagoystroystvo</span>
+          <span class="sep">·</span><span class="pri progress">в работе</span>
+          <span class="sep">·</span>П1
+          <span class="sep">·</span>создана 22 апреля
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">проекты направления</span>
+      <span class="blk-sub">2 · действующий подряд + конструктор</span>
+    </div>
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th>проект</th>
+          <th class="stack">стек</th>
+          <th class="right">приоритет</th>
+          <th class="right">статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="proj">Blagoystroystvo</td>
+          <td class="stack">Next.js 16 · Convex · Tailwind v4 · OpenAI</td>
+          <td class="right pri p1">П1</td>
+          <td class="right status active">в работе</td>
+        </tr>
+        <tr>
+          <td class="proj">Tenders</td>
+          <td class="stack">JSON state files · DOCX · XLSX</td>
+          <td class="right pri">П2</td>
+          <td class="right status active">в работе</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">ключевая точка</span>
+      <span class="blk-sub">денежный контур отдельный</span>
+    </div>
+    <div class="note">
+      Тендера — <b>вторая юр-линия</b>: ИП Дедков как подрядчик ПАО Россети Урал.
+      Денежный поток и отчётность идут отдельно от основного сервиса
+      (Модульбанк / Сбер / Озон по сервису, отдельный контур по Россети).
+      При любых решениях по документам и отчётам — помнить о разделении.
+    </div>
+  </section>
+
+  <footer class="foot">
+    <a href="../">← штаб</a>
+    <a href="../service/">сервис</a>
+    <a href="../marketplaces/">площадки</a>
+    <a href="../AGENTS.md#blagoystroystvo">карточка Blagoystroystvo</a>
+    <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">репозиторий</a>
+  </footer>
+
+</div>
+</body>
+</html>
