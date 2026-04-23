@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<title>Сервис · Штаб · ИнструментБург</title>
+<meta name="description" content="Направление «Сервис»: ремонт и обвязочные проекты. Задачи, 17 проектов, связанные практики.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elev: #131313;
+    --bg-hover: #171717;
+    --border: #262626;
+    --border-strong: #333333;
+    --text: #ededed;
+    --text-dim: #8a8a8a;
+    --text-faint: #4a4a4a;
+
+    --service: #d97706;
+    --marketplaces: #65a30d;
+    --tenders: #0284c7;
+    --personal: #9333ea;
+    --accent: var(--service);
+
+    --sans: "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+    --radius: 6px;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(217, 119, 6, 0.08), transparent 55%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .page { max-width: 1200px; margin: 0 auto; padding: 28px 32px 64px; }
+
+  /* ── Header ─────────────────────────────────── */
+  header.head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 24px; padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand-mark { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+  .brand-mark a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  .brand-mark a:hover { color: var(--text); }
+  .brand-sep { color: var(--text-faint); font-weight: 400; font-family: var(--mono); font-size: 14px; }
+  .brand-here { color: var(--accent); }
+  .brand-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  nav.head-nav {
+    display: flex; gap: 20px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  nav.head-nav a {
+    color: var(--text-dim); padding: 4px 0;
+    transition: color 0.2s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  nav.head-nav a:hover { color: var(--text); outline: none; }
+  nav.head-nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ── Hero ───────────────────────────────────── */
+  .hero {
+    position: relative;
+    padding: 28px 28px 28px 36px;
+    background: linear-gradient(180deg, rgba(217, 119, 6, 0.06) 0%, rgba(217, 119, 6, 0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--accent);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .hero-title {
+    font-size: 34px; font-weight: 600; letter-spacing: -0.025em;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .hero-desc {
+    color: var(--text-dim); font-size: 15.5px;
+    max-width: 64ch; line-height: 1.55; margin-bottom: 18px;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 12px;
+    padding-top: 18px; border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 3px; }
+  .stat-v { font-size: 22px; color: var(--text); font-weight: 500; letter-spacing: -0.01em; }
+  .stat-v.dim { color: var(--text-faint); }
+  .stat-k { color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; font-size: 10.5px; }
+
+  /* ── Section ────────────────────────────────── */
+  section.blk { margin-bottom: 48px; }
+  .blk-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .blk-title {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .blk-sub { color: var(--text-dim); font-size: 13px; }
+
+  /* ── Tasks ──────────────────────────────────── */
+  .tasks { display: flex; flex-direction: column; }
+  .task {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .task:last-child { border-bottom: none; }
+  .task-row1 { display: flex; gap: 12px; align-items: baseline; margin-bottom: 3px; }
+  .task-icon {
+    font-family: var(--mono); font-size: 14px;
+    width: 14px; flex-shrink: 0; text-align: center;
+    color: var(--text-faint);
+  }
+  .task-icon.progress { color: var(--text); }
+  .task-icon.blocked { color: var(--accent); }
+  .task-title {
+    font-weight: 500; font-size: 15.5px; color: var(--text);
+    letter-spacing: -0.005em; line-height: 1.4;
+  }
+  .task-meta {
+    margin-left: 26px;
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--text-faint); letter-spacing: 0.02em;
+  }
+  .task-meta .proj { color: var(--text-dim); }
+  .task-meta .sep { margin: 0 7px; }
+  .task-meta .pri.blocked { color: var(--accent); }
+
+  /* ── Projects ───────────────────────────────── */
+  .group { margin-bottom: 28px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 10px; gap: 12px;
+  }
+  .group-name {
+    font-weight: 600; font-size: 15px; color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .group-count {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-faint); letter-spacing: 0.04em;
+  }
+  .ptable {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .ptable th {
+    text-align: left; font-weight: 400;
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 6px 12px 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ptable th.right { text-align: right; }
+  .ptable td {
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: baseline;
+  }
+  .ptable tr:last-child td { border-bottom: none; }
+  .ptable td.right { text-align: right; font-family: var(--mono); font-size: 11.5px; }
+  .ptable td.proj { font-weight: 500; color: var(--text); }
+  .ptable td.stack { color: var(--text-dim); font-size: 12.5px; }
+  .ptable td.pri {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.03em;
+  }
+  .ptable td.pri.p1 { color: var(--accent); font-weight: 500; }
+  .ptable td.status {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-dim); letter-spacing: 0.03em;
+  }
+  .ptable td.status.active { color: #65a30d; }
+  .ptable td.status.paused { color: var(--text-dim); }
+  .ptable td.status.stale { color: var(--text-faint); }
+
+  /* ── Footer ─────────────────────────────────── */
+  footer.foot {
+    margin-top: 56px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 14px 28px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  footer.foot a { color: var(--text-dim); transition: color 0.2s var(--ease); }
+  footer.foot a:hover { color: var(--text); }
+
+  /* ── Mobile ─────────────────────────────────── */
+  @media (max-width: 820px) {
+    .page { padding: 20px 18px 48px; }
+    header.head { padding-bottom: 16px; margin-bottom: 22px; gap: 12px; }
+    nav.head-nav {
+      width: 100%; gap: 14px; font-size: 10px; letter-spacing: 0.08em;
+      overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
+    }
+    nav.head-nav::-webkit-scrollbar { display: none; }
+    .hero { padding: 22px 20px 22px 26px; }
+    .hero-title { font-size: 28px; }
+    .hero-stats { gap: 24px; }
+    .stat-v { font-size: 19px; }
+    .ptable { font-size: 13px; }
+    .ptable th, .ptable td { padding-right: 8px; }
+    .ptable td.stack { display: none; }
+    .ptable th.stack { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div class="brand">
+      <span class="brand-mark"><a href="../">штаб</a></span>
+      <span class="brand-sep">/</span>
+      <span class="brand-mark brand-here">сервис</span>
+      <span class="brand-eyebrow">ремонт и обвязка</span>
+    </div>
+    <nav class="head-nav" aria-label="направления">
+      <a href="../service/" class="active">сервис</a>
+      <a href="../marketplaces/">площадки</a>
+      <a href="../tenders/">тендера</a>
+      <a href="file:///home/iamsohappy/projects/Githab/hq-personal/">личное</a>
+      <a href="../">← штаб</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">направление</div>
+    <h1 class="hero-title">Сервис</h1>
+    <p class="hero-desc">
+      Ремонт инструмента и всё, что его питает: сайт, реклама на Авито,
+      калькулятор, единый ответчик, панель заказов, LiveSklad, клиентские
+      проекты подобного профиля.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-v">17</span>
+        <span class="stat-k">проектов</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v">4</span>
+        <span class="stat-k">активных задачи</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v">2</span>
+        <span class="stat-k">заблокировано</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v dim">—</span>
+        <span class="stat-k">выручка ·&nbsp;метрика в планах</span>
+      </div>
+      <div class="stat">
+        <span class="stat-v dim">—</span>
+        <span class="stat-k">заказов в работе ·&nbsp;метрика в планах</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">текущие задачи направления</span>
+      <span class="blk-sub">4 активных</span>
+    </div>
+    <div class="tasks">
+
+      <article class="task">
+        <div class="task-row1">
+          <span class="task-icon" aria-label="в очереди">○</span>
+          <span class="task-title">Вернуть трафик категории «перфораторы»</span>
+        </div>
+        <div class="task-meta">
+          <span class="proj">apps/website</span>
+          <span class="sep">·</span>в очереди
+          <span class="sep">·</span><span class="pri">П1</span>
+          <span class="sep">·</span>создана 22 апреля
+        </div>
+      </article>
+
+      <article class="task">
+        <div class="task-row1">
+          <span class="task-icon blocked" aria-label="заблокировано">◐</span>
+          <span class="task-title">Объединить каналы ответчика — Авито, MAX, Telegram, сайт</span>
+        </div>
+        <div class="task-meta">
+          <span class="proj">instrumentburg-responder</span>
+          <span class="sep">·</span><span class="pri blocked">заблокировано</span>
+          <span class="sep">·</span>П1
+          <span class="sep">·</span>ждёт решения по схеме каналов
+        </div>
+      </article>
+
+      <article class="task">
+        <div class="task-row1">
+          <span class="task-icon blocked" aria-label="заблокировано">◐</span>
+          <span class="task-title">Перенести apps/avito-responder в общий модуль ответчика</span>
+        </div>
+        <div class="task-meta">
+          <span class="proj">apps/avito-responder</span>
+          <span class="sep">·</span><span class="pri blocked">заблокировано</span>
+          <span class="sep">·</span>П1
+          <span class="sep">·</span>после задачи выше
+        </div>
+      </article>
+
+      <article class="task">
+        <div class="task-row1">
+          <span class="task-icon" aria-label="в очереди">○</span>
+          <span class="task-title">Сверить автоматическое обновление панели в 18:00</span>
+        </div>
+        <div class="task-meta">
+          <span class="proj">apps/dashboard</span>
+          <span class="sep">·</span>в очереди
+          <span class="sep">·</span><span class="pri">П1</span>
+          <span class="sep">·</span>короткая задача
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-head">
+      <span class="blk-title">проекты направления</span>
+      <span class="blk-sub">17 · по группам</span>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <span class="group-name">Ядро</span>
+        <span class="group-count">3 проекта</span>
+      </div>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>проект</th>
+            <th class="stack">стек</th>
+            <th class="right">приоритет</th>
+            <th class="right">статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="proj">instrumentburg</td>
+            <td class="stack">Convex · Node.js · MD vault</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/website</td>
+            <td class="stack">ocStore 3 · OpenCart · Twig · PHP 8.3</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">instrumentburg-responder</td>
+            <td class="stack">Python · Anthropic SDK</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <span class="group-name">Операции</span>
+        <span class="group-count">9 проектов</span>
+      </div>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>проект</th>
+            <th class="stack">стек</th>
+            <th class="right">приоритет</th>
+            <th class="right">статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="proj">apps/avito-ads</td>
+            <td class="stack">Python · YAML · XML фид</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/avito-responder</td>
+            <td class="stack">Python · Anthropic API · systemd</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/calculator</td>
+            <td class="stack">Vite · TS · Convex · Chart.js</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/dashboard</td>
+            <td class="stack">HTML · ApexCharts · Python · cron</td>
+            <td class="right pri p1">П1</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/b2b-outreach</td>
+            <td class="stack">Python · CSV · DaData</td>
+            <td class="right pri">П2</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/max-miniapp</td>
+            <td class="stack">Vite · React 18 · FastAPI</td>
+            <td class="right pri">П2</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">AIzakaznaryad</td>
+            <td class="stack">Vite · vanilla JS · Supabase · jsPDF</td>
+            <td class="right pri">П2</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">Rentalnew</td>
+            <td class="stack">Next.js 14 · Supabase · shadcn/ui</td>
+            <td class="right pri">П2</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">apps/DMDGU</td>
+            <td class="stack">документы (DOCX · PDF · XLSX)</td>
+            <td class="right pri">П3</td>
+            <td class="right status stale">давно не касались</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <span class="group-name">База знаний</span>
+        <span class="group-count">2 проекта</span>
+      </div>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>проект</th>
+            <th class="stack">стек</th>
+            <th class="right">приоритет</th>
+            <th class="right">статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="proj">ib-digest</td>
+            <td class="stack">Python · HTML · OpenClaw cron</td>
+            <td class="right pri">П2</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">ib-vault</td>
+            <td class="stack">Markdown (Obsidian) · JSON схемы</td>
+            <td class="right pri">П2</td>
+            <td class="right status active">в работе</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <span class="group-name">Клиенты</span>
+        <span class="group-count">3 проекта</span>
+      </div>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>проект</th>
+            <th class="stack">стек</th>
+            <th class="right">приоритет</th>
+            <th class="right">статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="proj">tagil-instrument</td>
+            <td class="stack">Next.js 15 · Payload CMS 3 · Postgres</td>
+            <td class="right pri">П2</td>
+            <td class="right status active">в работе</td>
+          </tr>
+          <tr>
+            <td class="proj">TheJungle</td>
+            <td class="stack">FastAPI · React 18 · Vite · Docker</td>
+            <td class="right pri">П2</td>
+            <td class="right status paused">на паузе</td>
+          </tr>
+          <tr>
+            <td class="proj">Stroyka</td>
+            <td class="stack">документы (ИП Пихенек, СОШ Кушва)</td>
+            <td class="right pri">П3</td>
+            <td class="right status stale">давно не касались</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <a href="../">← штаб</a>
+    <a href="../AGENTS.md#6-проекты">все проекты · 30</a>
+    <a href="../course/lesson2.html">курс · урок 2</a>
+    <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">репозиторий</a>
+  </footer>
+
+</div>
+</body>
+</html>
