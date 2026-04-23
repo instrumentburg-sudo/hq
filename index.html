@@ -3,285 +3,583 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#1A1714">
-<title>Хаб — центр оркестрации</title>
-<meta name="description" content="Один человек, два контура, 30 проектов. Операционная панель задач.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<title>HQ — оркестрация · ИнструментБург</title>
+<meta name="description" content="Карта направлений, живые задачи, применённые практики курса Personal Corp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:      #1A1714;
-    --surface: #221F1B;
-    --ink:     #E8E3DB;
-    --ink-mid: #B0A99B;
-    --ink-lo:  #78725F;
-    --oxide:   #D06A3E;
-    --moss:    #6FC17A;
-    --amber:   #E8C56A;
-    --border:  rgba(185, 172, 150, 0.14);
-    --serif: "Instrument Serif", Georgia, serif;
-    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-  @supports (color: oklch(0 0 0)) {
-    :root {
-      --bg:      oklch(0.14 0.012 65);
-      --surface: oklch(0.18 0.012 65);
-      --ink:     oklch(0.93 0.012 80);
-      --ink-mid: oklch(0.72 0.020 80);
-      --ink-lo:  oklch(0.55 0.020 80);
-      --oxide:   oklch(0.66 0.18 30);
-      --moss:    oklch(0.74 0.17 145);
-      --amber:   oklch(0.80 0.15 82);
-      --border:  oklch(0.70 0.015 65 / 0.14);
-    }
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg:      #F1ECDE;
-      --surface: #E8E3D5;
-      --ink:     #141210;
-      --ink-mid: #3A332A;
-      --ink-lo:  #7B7468;
-      --oxide:   #B53A22;
-      --moss:    #4F6B35;
-      --amber:   #AE832F;
-      --border:  rgba(20, 18, 16, 0.14);
-    }
+    --bg: #0a0a0a;
+    --bg-elev: #131313;
+    --bg-hover: #171717;
+    --border: #262626;
+    --border-strong: #333333;
+    --text: #ededed;
+    --text-dim: #8a8a8a;
+    --text-faint: #4a4a4a;
+
+    --service: #d97706;
+    --marketplaces: #65a30d;
+    --tenders: #0284c7;
+    --personal: #9333ea;
+
+    --sans: "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+    --radius: 6px;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--bg); color: var(--ink); }
+  html, body { background: var(--bg); color: var(--text); }
   body {
     font-family: var(--sans);
     font-weight: 400;
+    font-size: 15px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-    padding: 2.5rem 1.25rem 3rem;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217, 119, 6, 0.06), transparent 50%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   }
-  .page { max-width: 760px; margin: 0 auto; }
 
-  .head {
+  a { color: inherit; text-decoration: none; }
+
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 64px;
+  }
+
+  /* ── Header ─────────────────────────────────────────── */
+  header.head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 1rem;
-    padding-bottom: 0.85rem;
+    gap: 24px;
+    padding: 4px 0 20px;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 1.25rem;
+    margin-bottom: 36px;
     flex-wrap: wrap;
   }
-  .head-title {
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .brand-mark {
     font-family: var(--sans);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brand-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  nav.head-nav {
+    display: flex;
+    gap: 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  nav.head-nav a {
+    color: var(--text-dim);
+    padding: 4px 0;
+    transition: color 0.2s var(--ease);
+  }
+  nav.head-nav a:hover,
+  nav.head-nav a:focus-visible {
+    color: var(--text);
+    outline: none;
+  }
+
+  /* ── Main two-column ────────────────────────────────── */
+  main.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .col-title {
+    font-family: var(--mono);
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: var(--text-faint);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
-  .head-title .sep {
-    color: var(--ink-lo);
-    font-weight: 400;
-    margin: 0 0.5rem;
+  .col-title .count {
+    color: var(--text-dim);
   }
-  .head-title .date {
-    color: var(--ink-mid);
-    font-weight: 400;
+
+  /* ── Direction cards ────────────────────────────────── */
+  .directions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-  .head-link {
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+  .dir {
+    display: block;
+    position: relative;
+    padding: 14px 18px 16px 24px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+    overflow: hidden;
   }
-  .head-link:hover,
-  .head-link:focus-visible {
-    color: var(--oxide);
-    border-bottom-color: var(--oxide);
+  .dir::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent, var(--text-faint));
+    transition: width 0.25s var(--ease);
+  }
+  .dir:hover,
+  .dir:focus-visible {
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
+    transform: translateX(2px);
     outline: none;
   }
+  .dir:hover::before,
+  .dir:focus-visible::before { width: 5px; }
 
-  .lede {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-    color: var(--ink-mid);
-    margin-bottom: 2.5rem;
-    line-height: 1.4;
-    max-width: 46ch;
-  }
+  .dir.service       { --accent: var(--service); }
+  .dir.marketplaces  { --accent: var(--marketplaces); }
+  .dir.tenders       { --accent: var(--tenders); }
+  .dir.personal      { --accent: var(--personal); }
 
-  .block { margin-bottom: 2.25rem; }
-  .block-title {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 0.78rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 0.85rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
+  .dir-head {
     display: flex;
-    align-items: baseline;
     justify-content: space-between;
-    gap: 0.5rem;
-  }
-  .block-title .count {
-    font-weight: 400;
-    color: var(--ink-lo);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-  }
-  .block.in-work  .block-title { color: var(--moss); }
-  .block.queue    .block-title { color: var(--oxide); }
-  .block.waiting  .block-title { color: var(--amber); }
-
-  .tasks { list-style: none; }
-  .task {
-    display: flex;
-    gap: 0.9rem;
-    padding: 0.55rem 0;
-    border-bottom: 1px solid var(--border);
     align-items: baseline;
+    gap: 12px;
+    margin-bottom: 2px;
   }
-  .task:last-child { border-bottom: none; }
-  .task-project {
+  .dir-name {
     font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .dir-ext {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .dir-counts {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .dir-counts .dot { color: var(--text-faint); margin: 0 6px; }
+  .dir-pri {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .dir-pri .arrow {
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .dir-pri.empty { color: var(--text-faint); font-style: italic; }
+
+  /* ── Live tasks ─────────────────────────────────────── */
+  .tasks {
+    display: flex;
+    flex-direction: column;
+  }
+  .task {
+    display: block;
+    padding: 14px 4px 14px 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.2s var(--ease);
+  }
+  .task:first-child { padding-top: 2px; }
+  .task:last-child { border-bottom: none; }
+  .task-row1 {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 3px;
+  }
+  .task-icon {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-faint);
+    width: 14px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .task-icon.progress { color: var(--text); }
+  .task-icon.blocked { color: #d97706; }
+  .task-icon.done { color: #65a30d; }
+  .task-title {
     font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--ink);
-    min-width: 13rem;
+    font-size: 15.5px;
+    color: var(--text);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+  .task-meta {
+    margin-left: 26px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+  }
+  .task-meta .dir-tag { font-weight: 500; }
+  .task-meta .dir-tag.service      { color: var(--service); }
+  .task-meta .dir-tag.marketplaces { color: var(--marketplaces); }
+  .task-meta .dir-tag.tenders      { color: var(--tenders); }
+  .task-meta .dir-tag.personal     { color: var(--personal); }
+  .task-meta .sep { color: var(--text-faint); margin: 0 7px; }
+  .task-meta .pri { color: var(--text-dim); }
+
+  /* ── Applied practices ──────────────────────────────── */
+  section.practices {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .practices-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .practices-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .practices-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .practices-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+  }
+  .practice {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s var(--ease);
+  }
+  .practice:hover { color: var(--text); }
+  .practice-icon {
+    font-family: var(--mono);
+    font-size: 13px;
+    width: 14px;
+    flex-shrink: 0;
+    text-align: center;
+    color: var(--text-faint);
+  }
+  .practice-icon.done { color: #65a30d; }
+  .practice-icon.progress { color: #d97706; }
+  .practice-title {
+    flex: 1;
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .practice-lesson {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
     flex-shrink: 0;
   }
-  .task-what {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.08rem;
-    color: var(--ink-mid);
-    line-height: 1.35;
-    flex: 1;
-  }
 
-  @media (max-width: 620px) {
-    body { padding: 1.75rem 1rem 2.5rem; }
-    .task {
-      flex-direction: column;
-      gap: 0.2rem;
-      padding: 0.65rem 0;
-    }
-    .task-project {
-      min-width: 0;
-      font-size: 0.82rem;
-      color: var(--ink-lo);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-    .task-what { font-size: 1.05rem; }
-  }
-
-  footer {
-    margin-top: 3rem;
-    padding-top: 1rem;
+  /* ── Footer ─────────────────────────────────────────── */
+  footer.foot {
+    margin-top: 56px;
+    padding-top: 20px;
     border-top: 1px solid var(--border);
     display: flex;
-    gap: 1.5rem 2rem;
     flex-wrap: wrap;
-    font-size: 0.88rem;
-    color: var(--ink-mid);
+    gap: 14px 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
   }
-  footer a {
-    color: var(--ink-mid);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+  footer.foot a {
+    color: var(--text-dim);
+    transition: color 0.2s var(--ease);
   }
-  footer a:hover,
-  footer a:focus-visible {
-    color: var(--oxide);
-    border-bottom-color: var(--oxide);
-    outline: none;
+  footer.foot a:hover { color: var(--text); }
+
+  /* ── Mobile ─────────────────────────────────────────── */
+  @media (max-width: 820px) {
+    .page { padding: 20px 18px 48px; }
+    header.head {
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      gap: 14px;
+    }
+    nav.head-nav {
+      width: 100%;
+      gap: 14px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    nav.head-nav::-webkit-scrollbar { display: none; }
+    main.grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .practices-list { grid-template-columns: 1fr; gap: 0; }
+    .dir { padding: 12px 14px 14px 20px; }
+    .dir-name { font-size: 16px; }
+    .task-title { font-size: 15px; }
+    footer.foot { margin-top: 36px; gap: 10px 20px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-      animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
     }
-  }
-  @media (forced-colors: active) {
-    .head-link, footer a { forced-color-adjust: none; }
   }
 </style>
 </head>
 <body>
-<main class="page">
+<div class="page">
 
   <header class="head">
-    <h1 class="head-title">Хаб<span class="sep">·</span><span class="date">22 апреля</span></h1>
-    <a class="head-link" href="./AGENTS.md">AGENTS.md</a>
+    <div class="brand">
+      <span class="brand-mark">hq</span>
+      <span class="brand-eyebrow">orchestration · 23 apr 2026</span>
+    </div>
+    <nav class="head-nav" aria-label="направления">
+      <a href="./service/">service</a>
+      <a href="./marketplaces/">marketplaces</a>
+      <a href="./tenders/">tenders</a>
+      <a href="file:///home/iamsohappy/projects/Githab/hq-personal/" title="локальный штаб">personal</a>
+      <a href="./course/lesson2.html">course</a>
+    </nav>
   </header>
 
-  <p class="lede">Один человек, два контура, 30 проектов.</p>
+  <main class="grid">
 
-  <section class="block in-work" aria-labelledby="b-now">
-    <h2 class="block-title" id="b-now">В работе <span class="count">— 2</span></h2>
-    <ul class="tasks">
-      <li class="task">
-        <span class="task-project">Blagoystroystvo</span>
-        <span class="task-what">КС-3 за март — подрядчик Россети Урал</span>
-      </li>
-      <li class="task">
-        <span class="task-project">hq</span>
-        <span class="task-what">пересобрать панель в минимализм</span>
-      </li>
-    </ul>
+    <!-- ── Directions ──────────────────────────────────── -->
+    <section class="directions" aria-labelledby="col-dir">
+      <h2 class="col-title" id="col-dir">
+        <span>направления</span>
+        <span class="count">4 · 21 проект</span>
+      </h2>
+
+      <a class="dir service" href="./service/">
+        <div class="dir-head">
+          <span class="dir-name">service</span>
+        </div>
+        <div class="dir-counts">17 проектов<span class="dot">·</span>4 активных задачи</div>
+        <div class="dir-pri">
+          <span class="arrow">→</span>
+          <span>разблокировать responder migration — канальные адаптеры</span>
+        </div>
+      </a>
+
+      <a class="dir marketplaces" href="./marketplaces/">
+        <div class="dir-head">
+          <span class="dir-name">marketplaces</span>
+          <span class="dir-ext">planned</span>
+        </div>
+        <div class="dir-counts">0 проектов<span class="dot">·</span>0 активных задач</div>
+        <div class="dir-pri empty">
+          <span class="arrow">→</span>
+          <span>собрать базу знаний по Ozon / WB</span>
+        </div>
+      </a>
+
+      <a class="dir tenders" href="./tenders/">
+        <div class="dir-head">
+          <span class="dir-name">tenders</span>
+        </div>
+        <div class="dir-counts">2 проекта<span class="dot">·</span>1 активная задача</div>
+        <div class="dir-pri">
+          <span class="arrow">→</span>
+          <span>КС-3 за март — Россети Урал (Blagoystroystvo)</span>
+        </div>
+      </a>
+
+      <a class="dir personal" href="file:///home/iamsohappy/projects/Githab/hq-personal/" title="локальный штаб, GitHub Pages недоступен">
+        <div class="dir-head">
+          <span class="dir-name">personal</span>
+          <span class="dir-ext">↗ local</span>
+        </div>
+        <div class="dir-counts">2 проекта<span class="dot">·</span>1 активная задача</div>
+        <div class="dir-pri">
+          <span class="arrow">→</span>
+          <span>ДЗ урока 2 — упаковать пайплайн через Writing Skills</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- ── Live tasks ──────────────────────────────────── -->
+    <section class="tasks-section" aria-labelledby="col-tasks">
+      <h2 class="col-title" id="col-tasks">
+        <span>live задачи</span>
+        <span class="count">top 5 по приоритету</span>
+      </h2>
+      <div class="tasks">
+
+        <article class="task">
+          <div class="task-row1">
+            <span class="task-icon progress" aria-label="in progress">●</span>
+            <span class="task-title">КС-3 за март — подрядчик Россети Урал</span>
+          </div>
+          <div class="task-meta">
+            <span class="dir-tag tenders">tenders</span>
+            <span class="sep">·</span>Blagoystroystvo<span class="sep">·</span>
+            <span class="pri">in progress · P1</span>
+          </div>
+        </article>
+
+        <article class="task">
+          <div class="task-row1">
+            <span class="task-icon" aria-label="pending">○</span>
+            <span class="task-title">Вернуть трафик категории «перфораторы»</span>
+          </div>
+          <div class="task-meta">
+            <span class="dir-tag service">service</span>
+            <span class="sep">·</span>apps/website<span class="sep">·</span>
+            <span class="pri">pending · P1</span>
+          </div>
+        </article>
+
+        <article class="task">
+          <div class="task-row1">
+            <span class="task-icon blocked" aria-label="blocked">◐</span>
+            <span class="task-title">Merge канальных адаптеров — Авито, MAX, Telegram, сайт</span>
+          </div>
+          <div class="task-meta">
+            <span class="dir-tag service">service</span>
+            <span class="sep">·</span>instrumentburg-responder<span class="sep">·</span>
+            <span class="pri">blocked · P1</span>
+          </div>
+        </article>
+
+        <article class="task">
+          <div class="task-row1">
+            <span class="task-icon blocked" aria-label="blocked">◐</span>
+            <span class="task-title">Миграция apps/avito-responder в единый responder</span>
+          </div>
+          <div class="task-meta">
+            <span class="dir-tag service">service</span>
+            <span class="sep">·</span>apps/avito-responder<span class="sep">·</span>
+            <span class="pri">blocked · P1</span>
+          </div>
+        </article>
+
+        <article class="task">
+          <div class="task-row1">
+            <span class="task-icon" aria-label="pending">○</span>
+            <span class="task-title">Сверить автоматическое обновление dashboard 18:00</span>
+          </div>
+          <div class="task-meta">
+            <span class="dir-tag service">service</span>
+            <span class="sep">·</span>apps/dashboard<span class="sep">·</span>
+            <span class="pri">pending · P1</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Applied practices ────────────────────────────── -->
+  <section class="practices" aria-labelledby="prac-title">
+    <div class="practices-head">
+      <h2 class="practices-title" id="prac-title">applied practices · из курса Personal Corp</h2>
+      <span class="practices-sub">что из уроков реально приземлилось в оркестрацию</span>
+    </div>
+    <div class="practices-list">
+
+      <a class="practice" href="./course/lesson1.html#task-centric-dashboard">
+        <span class="practice-icon done">✓</span>
+        <span class="practice-title">Задачно-центричный dashboard</span>
+        <span class="practice-lesson">lesson 1</span>
+      </a>
+
+      <a class="practice" href="./course/lesson2.html#two-hqs-human-gate">
+        <span class="practice-icon">○</span>
+        <span class="practice-title">Два штаба + Human Gate</span>
+        <span class="practice-lesson">lesson 2</span>
+      </a>
+
+      <a class="practice" href="./course/lesson2.html#writing-skills-pipeline">
+        <span class="practice-icon progress">◐</span>
+        <span class="practice-title">Writing Skills для упаковки пайплайнов</span>
+        <span class="practice-lesson">lesson 2</span>
+      </a>
+
+      <a class="practice" href="./course/lesson2.html#supervisor-agent-cron">
+        <span class="practice-icon">○</span>
+        <span class="practice-title">Надзиратель-агент по расписанию</span>
+        <span class="practice-lesson">lesson 2</span>
+      </a>
+
+      <a class="practice" href="./course/lesson2.html#evals-self-check">
+        <span class="practice-icon">○</span>
+        <span class="practice-title">Evals / самопроверка через чек-лист</span>
+        <span class="practice-lesson">lesson 2</span>
+      </a>
+
+      <a class="practice" href="./course/lesson2.html#claude-codex-split">
+        <span class="practice-icon progress">◐</span>
+        <span class="practice-title">Claude оркестратор + Codex исполнитель</span>
+        <span class="practice-lesson">lesson 2</span>
+      </a>
+
+    </div>
   </section>
 
-  <section class="block queue" aria-labelledby="b-queue">
-    <h2 class="block-title" id="b-queue">На очереди <span class="count">— 3</span></h2>
-    <ul class="tasks">
-      <li class="task">
-        <span class="task-project">apps/website</span>
-        <span class="task-what">вернуть трафик категории «перфораторы»</span>
-      </li>
-      <li class="task">
-        <span class="task-project">apps/dashboard</span>
-        <span class="task-what">сверить автоматическое обновление 18:00</span>
-      </li>
-      <li class="task">
-        <span class="task-project">Personal Corp</span>
-        <span class="task-what">упаковать один пайплайн через Writing Skills (ДЗ урока 02)</span>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block waiting" aria-labelledby="b-wait">
-    <h2 class="block-title" id="b-wait">Ждёт <span class="count">— 2</span></h2>
-    <ul class="tasks">
-      <li class="task">
-        <span class="task-project">instrumentburg-responder</span>
-        <span class="task-what">merge канальных адаптеров — Авито, MAX, Telegram, сайт</span>
-      </li>
-      <li class="task">
-        <span class="task-project">apps/avito-responder</span>
-        <span class="task-what">миграция в единый responder</span>
-      </li>
-    </ul>
-  </section>
-
-  <footer>
-    <a href="./AGENTS.md#6-проекты">все проекты (30)</a>
-    <a href="./AGENTS.md#11-openclaw-агенты">агенты (10)</a>
-    <a href="./course/lesson2.html">курс Personal Corp · 02</a>
+  <footer class="foot">
+    <a href="./AGENTS.md#6-проекты">все проекты · 30</a>
+    <a href="./AGENTS.md#11-openclaw-агенты">агенты · 10</a>
+    <a href="./course/lesson2.html">курс · lesson 2</a>
     <a href="https://github.com/instrumentburg-sudo/hq" target="_blank" rel="noopener">репозиторий</a>
   </footer>
 
-</main>
+</div>
 </body>
 </html>
