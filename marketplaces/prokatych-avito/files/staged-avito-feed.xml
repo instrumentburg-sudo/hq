@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ads formatVersion="3" target="Avito.ru">
+  <Ad>
+    <Id>prokatych-rent-vibroplate-001</Id>
+    <ListingFee>Package</ListingFee>
+    <AdStatus>Auto_7</AdStatus>
+    <ManagerName>Прокатыч</ManagerName>
+    <Title>Аренда виброплиты Нижний Тагил Прокатыч</Title>
+    <Category>Предложение услуг</Category>
+    <ServiceType>Оборудование, производство</ServiceType>
+    <ServiceSubtype>Аренда оборудования</ServiceSubtype>
+    <ServiceSubspecies>Строительное оборудование</ServiceSubspecies>
+    <Deposit>Нужен</Deposit>
+    <Rental>Посуточная</Rental>
+    <LongTermRental>Есть</LongTermRental>
+    <Delivery>Есть</Delivery>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <WorkDays>пн|вт|ср|чт|пт</WorkDays>
+    <WorkTimeFrom>09:00</WorkTimeFrom>
+    <WorkTimeTo>18:00</WorkTimeTo>
+    <Address>Россия, Свердловская область, Нижний Тагил, Черноисточинское шоссе, 66Б</Address>
+    <Price>3200</Price>
+    <ContactPhone>+73432264443</ContactPhone>
+    <ContactMethod>По телефону и в сообщениях</ContactMethod>
+    <InternetCalls>Да</InternetCalls>
+    <Description><![CDATA[<b>Аренда виброплиты в Нижнем Тагиле - от 2 250₽/сут. 5 единиц от 47 до 179 кг: Сплитстоун, Vektor. Прокатыч подберёт плиту под плитку, щебень, парковку или фундамент.</b><br/>
+<br/><br/>
+<b>Сплитстоун VPG-50B (47 кг) - 2 250₽/сут</b><br/>
+Двигатель Lifan 154F, 2.6 л.с. Тротуарная плитка, песок, грунт. Глубина уплотнения 20 см. Залог 3 000₽.<br/>
+<br/><br/>
+<b>Сплитстоун VS-244 (85-90 кг) - 2 250₽/сут</b><br/>
+Двигатель Honda GX160, 4.8 л.с. Щебень, отсев, подъезды. Бак для воды 10 л. Глубина уплотнения 20 см. Залог 5 000₽. 2 штуки в наличии.<br/>
+<br/><br/>
+<b>Vektor VPG-70B с баком (70 кг) - 3 150₽/сут</b><br/>
+4.8 кВт, 6.5 л.с. Бак для воды, складная ручка, колёса. Залог 6 000₽.<br/>
+<br/><br/>
+<b>Vektor VPG-160А (179 кг) - 3 200₽/сут</b><br/>
+Honda GX270, 9 л.с. Гидравлический реверс, глубина уплотнения до 50 см. Парковки, фундаменты, дороги. Залог 8 000₽.<br/>
+<br/><br/>
+<b>Для чего берут:</b><br/>
+- Укладка плитки на даче - VPG-50B на 1-2 дня<br/>
+- Трамбовка щебня под парковку - VS-244<br/>
+- Подготовка основания под фундамент - VPG-160А с реверсом<br/>
+<br/><br/>
+<b>Условия:</b><br/>
+- От 1 суток, от 3 дней скидка 10%<br/>
+- Выходные за 1 день: берёте в пятницу, возвращаете в понедельник<br/>
+- Залог наличными, возвращаем при сдаче техники<br/>
+- Оплата: наличные, карта, QR-код, безнал с НДС<br/>
+- Инструктаж при выдаче<br/>
+<br/><br/>
+Доставка по Нижнему Тагилу. Если не уверены в весе виброплиты - напишите задачу, подберём модель.<br/>
+<br/><br/>
+Прокатыч работает с частными клиентами, бригадами, организациями и бюджетниками: счёт, договор, УПД, безнал.<br/>
+<br/><br/>
+📍 Черноисточинское шоссе, 66Б, Нижний Тагил (ГГМ, район Кувалды)<br/>
+⏰ Пн-Пт 9:00-18:00<br/>
+📞 +7 (343) 226-44-43<br/>
+<br/><br/>
+Аренда виброплиты, прокат виброплиты, виброплита в аренду Нижний Тагил, трамбовка грунта, укладка тротуарной плитки<br/>]]></Description>
+    <PriceList>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Виброплита Сплитстоун VPG-50B 47кг</ServiceTitle>
+        <ServicePrice>2250</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Виброплита с баком Vektor VPG-70B 70кг</ServiceTitle>
+        <ServicePrice>3150</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Виброплита Сплитстоун VS-244 90кг</ServiceTitle>
+        <ServicePrice>2250</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Виброплита Vektor VPG-160А 179кг реверс</ServiceTitle>
+        <ServicePrice>3200</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+    </PriceList>
+    <Images>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/01-offer.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/02-models.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/03-photo-1.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/04-conditions.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/05-how-to-rent.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/06-photo-2.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/07-location.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-12-vibroplate-rent/08-contacts.jpg?v=1777226159"/>
+    </Images>
+  </Ad>
+  <Ad>
+    <Id>prokatych-rent-generator-001</Id>
+    <ListingFee>Package</ListingFee>
+    <AdStatus>Auto_7</AdStatus>
+    <ManagerName>Прокатыч</ManagerName>
+    <Title>Аренда генератора Нижний Тагил Прокатыч</Title>
+    <Category>Предложение услуг</Category>
+    <ServiceType>Оборудование, производство</ServiceType>
+    <ServiceSubtype>Аренда оборудования</ServiceSubtype>
+    <ServiceSubspecies>Строительное оборудование</ServiceSubspecies>
+    <Deposit>Нужен</Deposit>
+    <Rental>Посуточная</Rental>
+    <LongTermRental>Есть</LongTermRental>
+    <Delivery>Есть</Delivery>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <WorkDays>пн|вт|ср|чт|пт</WorkDays>
+    <WorkTimeFrom>09:00</WorkTimeFrom>
+    <WorkTimeTo>18:00</WorkTimeTo>
+    <Address>Россия, Свердловская область, Нижний Тагил, Черноисточинское шоссе, 66Б</Address>
+    <Price>2000</Price>
+    <ContactPhone>+73432264443</ContactPhone>
+    <ContactMethod>По телефону и в сообщениях</ContactMethod>
+    <InternetCalls>Да</InternetCalls>
+    <Description><![CDATA[<b>Аренда бензинового генератора в Нижнем Тагиле - от 1 000₽/сут. 2 модели: 2.5 и 5.5 кВт. Прокатыч подберёт генератор под стройку, дачу, насос, болгарку или сварку.</b><br/>
+<br/><br/>
+<b>Кратон GG-2800 (2.5 кВт) - 1 000₽/сут</b><br/>
+45 кг, бак 15 л, ручной стартер. Освещение стройки, дренажный насос, болгарка, дрель. Залог 3 000₽.<br/>
+<br/><br/>
+<b>Aurora AGE 6500 D (5.5 кВт) - 2 000₽/сут</b><br/>
+85 кг, бак 25 л, электростартер + ручной. 2 розетки 220В + выход 12В. Сварочный аппарат, перфоратор, бетономешалка. Залог 2 000₽.<br/>
+<br/><br/>
+<b>Какой генератор нужен:</b><br/>
+- Болгарка + дрель + свет = Кратон 2.5 кВт хватит<br/>
+- Сварочный аппарат или бетономешалка = нужен Aurora 5.5 кВт<br/>
+- Не уверены? Напишите, что будете подключать - подберём<br/>
+<br/><br/>
+<b>Для чего берут:</b><br/>
+- Стройка без электричества - подключить инструмент и освещение<br/>
+- Дача, загородный дом - насос, холодильник, свет<br/>
+- Выездные работы - сварка, резка на объекте<br/>
+<br/><br/>
+<b>Условия:</b><br/>
+- От 1 суток, от 3 дней скидка 10%<br/>
+- Выходные за 1 день: берёте в пятницу, возвращаете в понедельник<br/>
+- Залог наличными, возвращаем при сдаче техники<br/>
+- Оплата: наличные, карта, QR-код, безнал с НДС<br/>
+- Инструктаж при выдаче<br/>
+<br/><br/>
+Доставка по Нижнему Тагилу. При выдаче покажем запуск, подключение нагрузки и базовую безопасность.<br/>
+<br/><br/>
+Прокатыч работает с частными клиентами, бригадами, организациями и бюджетниками: счёт, договор, УПД, безнал.<br/>
+<br/><br/>
+📍 Черноисточинское шоссе, 66Б, Нижний Тагил (ГГМ, район Кувалды)<br/>
+⏰ Пн-Пт 9:00-18:00<br/>
+📞 +7 (343) 226-44-43<br/>
+<br/><br/>
+Аренда генератора, прокат генератора, генератор в аренду Нижний Тагил, бензогенератор, электростанция аренда<br/>]]></Description>
+    <PriceList>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Генератор Кратон GG-2800 2.5 кВт</ServiceTitle>
+        <ServicePrice>1000</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+      <Service>
+        <ServiceName>Своя услуга</ServiceName>
+        <ServiceTitle>Генератор Aurora AGE 6500 D 5.5 кВт</ServiceTitle>
+        <ServicePrice>2000</ServicePrice>
+        <ServicePriceType>за день</ServicePriceType>
+      </Service>
+    </PriceList>
+    <Images>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/01-offer.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/02-models.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/03-photo-1.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/04-conditions.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/05-how-to-rent.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/06-photo-2.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/07-location.jpg?v=1777226159"/>
+      <Image url="https://instrumentburg.ru/avito-slides/prokatych-13-generator-rent/08-contacts.jpg?v=1777226159"/>
+    </Images>
+  </Ad>
+</Ads>

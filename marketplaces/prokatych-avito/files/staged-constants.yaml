@@ -1,0 +1,25 @@
+address: Россия, Свердловская область, Нижний Тагил, Черноисточинское шоссе, 66Б
+phone: '+73432264443'
+contact_method: По телефону и в сообщениях
+images_base_url: https://instrumentburg.ru/avito-slides
+category: Предложение услуг
+type_fields:
+  rental:
+    ServiceType: Оборудование, производство
+    ServiceSubtype: Аренда оборудования
+    ServiceSubspecies: Строительное оборудование
+    Deposit: Нужен
+    Rental: Посуточная
+    LongTermRental: Есть
+    Delivery: Есть
+    WorkExperience: 10 лет и больше
+    WorkWithLegalEntities: Да
+    WorkDays: пн|вт|ср|чт|пт
+    WorkTimeFrom: 09:00
+    WorkTimeTo: '18:00'
+listing_fee: Package
+ad_status: Auto_7
+internet_calls: Да
+manager_name: Прокатыч
+slides_dir: /home/iamsohappy/projects/instrumentburg/apps/avito-ads/imports/prokatych/staged-slides
+products_dir: /home/iamsohappy/projects/instrumentburg/media/products
