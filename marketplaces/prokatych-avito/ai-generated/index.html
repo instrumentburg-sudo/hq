@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Прокатыч · AI-слайды с кириллицей</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;650;750;850&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #111513;
+      --color-surface: #f4f1e8;
+      --color-text: #f9f5ea;
+      --color-muted: #b9c0b4;
+      --color-card-text: #151916;
+      --color-accent: #ffca12;
+      --color-green: #0b7a57;
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 36px;
+      --radius-1: 8px;
+      --shadow-1: 0 22px 70px rgba(0, 0, 0, .34);
+      --duration-1: 180ms;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(115deg, rgba(255, 202, 18, .12), transparent 34%),
+        radial-gradient(circle at 82% 0%, rgba(11, 122, 87, .28), transparent 35%),
+        var(--color-bg);
+      color: var(--color-text);
+      font-family: "Manrope", sans-serif;
+      letter-spacing: 0;
+    }
+
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: var(--space-4) 0;
+    }
+
+    header {
+      display: grid;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 4px;
+      border-radius: var(--radius-1);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.02;
+      font-weight: 850;
+    }
+
+    p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+      margin-top: var(--space-1);
+    }
+
+    .chip {
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: var(--radius-1);
+      padding: 7px 10px;
+      color: var(--color-text);
+      background: rgba(255, 255, 255, .06);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .slide {
+      overflow: hidden;
+      border-radius: var(--radius-1);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-1);
+    }
+
+    .slide img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .caption {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+      padding: var(--space-2);
+      color: var(--color-card-text);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .caption span:last-child {
+      color: var(--color-green);
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .slide {
+        transition: transform var(--duration-1) ease, box-shadow var(--duration-1) ease;
+      }
+
+      .slide:hover {
+        transform: translateY(-2px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="../">← к основному превью Прокатыча</a>
+      <h1>Прокатыч · AI-слайды с кириллицей</h1>
+      <p>Проба полностью AI-сгенерированных слайдов для объявления с виброплитами. Текст встроен прямо в изображение, без ручной верстки поверх.</p>
+      <div class="meta" aria-label="Параметры пробы">
+        <span class="chip">4:3</span>
+        <span class="chip">полностью AI</span>
+        <span class="chip">кириллица внутри картинки</span>
+        <span class="chip">проба, не боевой фид</span>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="AI-слайды">
+      <figure class="slide">
+        <img src="img/01-vibroplate-offer-ai-cyrillic.png" alt="AI-слайд: виброплиты в прокат от 1450 рублей в сутки">
+        <figcaption class="caption">
+          <span>01 · Обложка объявления</span>
+          <span>виброплиты</span>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="img/02-rental-conditions-ai-cyrillic.png" alt="AI-слайд: условия аренды Прокатыч">
+        <figcaption class="caption">
+          <span>02 · Условия аренды</span>
+          <span>инфо-слайд</span>
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
