@@ -261,6 +261,70 @@
   .task-meta .sep { color: var(--text-faint); margin: 0 7px; }
   .task-meta .pri { color: var(--text-dim); }
 
+  /* ── Автоматизации ─────────────────────────────────── */
+  section.automations {
+    border-top: 1px solid var(--border);
+    padding-top: 26px;
+    margin-bottom: 46px;
+  }
+  .automations-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .automations-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .automations-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .automation {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.24fr) minmax(0, 1fr) max-content;
+    gap: 22px;
+    align-items: start;
+    padding: 17px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .automation-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+  }
+  .automation-name {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.005em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .automation-desc {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 72ch;
+  }
+  .automation-state {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #65a30d;
+    white-space: nowrap;
+  }
+
   /* ── Применённые практики ───────────────────────────── */
   section.practices {
     border-top: 1px solid var(--border);
@@ -367,6 +431,15 @@
       margin-bottom: 32px;
     }
     .practices-list { grid-template-columns: 1fr; gap: 0; }
+    .automation {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 14px 0 16px;
+    }
+    .automation-state {
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
     .dir { padding: 12px 14px 14px 20px; }
     .dir-name { font-size: 16px; }
     .task-title { font-size: 15px; }
@@ -387,12 +460,13 @@
   <header class="head">
     <div class="brand">
       <span class="brand-mark">штаб</span>
-      <span class="brand-eyebrow">управление · 26 апреля 2026</span>
+      <span class="brand-eyebrow">управление · 4 мая 2026</span>
     </div>
     <nav class="head-nav" aria-label="направления">
       <a href="./service/">сервис</a>
       <a href="./marketplaces/">площадки</a>
       <a href="./tenders/">тендера</a>
+      <a href="#automations">автоматизации</a>
       <a href="file:///home/iamsohappy/projects/Githab/hq-personal/" title="приватный штаб, локально">личное</a>
       <a href="./course/lesson2.html">курс</a>
     </nav>
@@ -562,6 +636,26 @@
     </section>
   </main>
 
+  <!-- ── Автоматизации ───────────────────────────────── -->
+  <section class="automations" id="automations" aria-labelledby="auto-title">
+    <div class="automations-head">
+      <h2 class="automations-title" id="auto-title">автоматизации</h2>
+      <span class="automations-sub">что теперь работает само</span>
+    </div>
+
+    <article class="automation">
+      <div class="automation-time">
+        каждый день<br>
+        10:00 ЕКБ
+      </div>
+      <div>
+        <span class="automation-name">ежедневная сводка задач в Telegram</span>
+        <p class="automation-desc">Hermes читает задачи HQ, собирает короткую сводку простым языком и отправляет её Антону в личку. Проверочное сообщение прошло, формат укорочен и очищен от служебного текста.</p>
+      </div>
+      <div class="automation-state">● работает</div>
+    </article>
+  </section>
+
   <!-- ── Применённые практики ─────────────────────────── -->
   <section class="practices" aria-labelledby="prac-title">
     <div class="practices-head">
@@ -595,7 +689,7 @@
       </a>
 
       <a class="practice" href="./course/lesson2.html#supervisor-agent-cron">
-        <span class="practice-icon">○</span>
+        <span class="practice-icon done">✓</span>
         <span class="practice-title">Агент-надзиратель по расписанию</span>
         <span class="practice-lesson">урок 2</span>
       </a>
