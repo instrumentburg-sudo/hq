@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 03 · От штаба к рабочей среде · Personal Corp</title>
+<meta name="description" content="Выжимок третьего урока Серёжи Риса из курса Personal Corp: чистка штаба ретро, парсинг сырых данных в контекст, CRM на md-карточках, Codex Automation как cron и Meeting Copilot для живых созвонов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal:     #1a1a1a;
+    --charcoal-2:   #242220;
+    --charcoal-3:   #2d2a27;
+    --paper:        #EBE6DC;
+    --paper-dim:    rgba(235, 230, 220, 0.72);
+    --paper-mute:   rgba(235, 230, 220, 0.52);
+    --paper-ghost:  rgba(235, 230, 220, 0.12);
+    --paper-edge:   rgba(235, 230, 220, 0.18);
+    --oxide:        #E05A32;
+    --oxide-soft:   rgba(224, 90, 50, 0.16);
+    --brass:        #D09840;
+    --moss:         #7A9A52;
+    --display: "Oswald", "Impact", "Arial Narrow", sans-serif;
+    --body:    "Roboto Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--charcoal); }
+  body {
+    background: var(--charcoal);
+    color: var(--paper);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.55;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(224, 90, 50, 0.08) 0%, transparent 38%),
+      radial-gradient(circle at 88% 92%, rgba(208, 152, 64, 0.06) 0%, transparent 44%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--oxide); color: var(--charcoal); }
+
+  a { color: inherit; }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.1rem, 3.5vw, 2.5rem) 5rem;
+  }
+
+  /* ================= MASTHEAD ================= */
+
+  .masthead { position: relative; padding-top: 1rem; }
+
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--paper-edge);
+  }
+  .rail .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--paper);
+  }
+  .rail .live::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--oxide);
+    box-shadow: 0 0 0 0 var(--oxide);
+    animation: pulse 2.6s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(224, 90, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0); }
+  }
+  .rail .sep { color: var(--paper-ghost); }
+
+  .lesson-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin: 2.25rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .lesson-tag::before {
+    content: "";
+    display: inline-block;
+    width: 2.4rem;
+    height: 2px;
+    background: var(--oxide);
+  }
+
+  h1.hero {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(3.4rem, 9.5vw, 8.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    max-width: 18ch;
+  }
+  h1.hero em {
+    font-style: normal;
+    color: var(--oxide);
+    font-weight: 500;
+  }
+  h1.hero .ampersand {
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--paper-dim);
+    font-size: 0.75em;
+    padding: 0 0.15em;
+  }
+
+  .summary {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--paper-edge);
+  }
+  .summary p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--paper-dim);
+    max-width: 58ch;
+  }
+  .summary-meta {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 0.25rem;
+    line-height: 1.8;
+  }
+  .summary-meta b { color: var(--paper); font-weight: 500; }
+  @media (max-width: 680px) {
+    .summary { grid-template-columns: 1fr; gap: 1.25rem; }
+    .summary-meta { text-align: left; }
+  }
+
+  /* ================= SECTION HEAD ================= */
+
+  section.block { margin-top: clamp(3rem, 5vw, 4.5rem); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-num {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .section-kicker {
+    margin-left: auto;
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.92rem;
+    color: var(--paper-mute);
+    max-width: 32ch;
+    text-align: right;
+  }
+  @media (max-width: 720px) {
+    .section-kicker { margin-left: 0; text-align: left; }
+  }
+
+  /* ================= TERMS ================= */
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--paper-edge);
+    border: 1px solid var(--paper-edge);
+  }
+  @media (max-width: 760px) { .terms-grid { grid-template-columns: 1fr; } }
+
+  .term {
+    background: var(--charcoal-2);
+    padding: 1.4rem 1.5rem 1.35rem;
+    position: relative;
+    transition: background 0.25s ease;
+  }
+  .term:hover { background: var(--charcoal-3); }
+  .term-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    padding-right: 2.25rem;
+  }
+  .term-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.4rem;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--paper-mute);
+  }
+  .term-def {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.96rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= METHODS ================= */
+
+  .methods-list { display: grid; gap: 0; }
+  .method {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0.25rem 1.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    align-items: start;
+    transition: background 0.2s ease;
+  }
+  .method:hover { background: rgba(235, 230, 220, 0.025); }
+  .method:first-child { border-top: 1px solid var(--paper-edge); }
+  .method-num {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 0.9;
+    color: var(--oxide);
+    letter-spacing: -0.02em;
+  }
+  .method-body h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 1.85vw, 1.5rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    line-height: 1.15;
+  }
+  .method-body p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    max-width: 70ch;
+  }
+  @media (max-width: 620px) {
+    .method { grid-template-columns: 1fr; gap: 0.4rem; }
+    .method-num { font-size: 1.75rem; }
+  }
+
+  /* ================= TOOLS ================= */
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .tool {
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--paper-edge);
+    background: var(--charcoal-2);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .tool:hover { border-color: var(--oxide); transform: translateY(-2px); }
+  .tool-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .tool-mark {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--oxide);
+  }
+  .tool-role {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= GOALS & HOMEWORK ================= */
+
+  .objectives {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  @media (max-width: 860px) { .objectives { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .objectives h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .objectives h3 .tally {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--paper-mute);
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+
+  .checklist { list-style: none; display: grid; gap: 0.75rem; }
+  .check {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--paper-ghost);
+  }
+  .check:last-child { border-bottom: none; }
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem; height: 1.4rem;
+    border: 1.5px solid var(--paper-edge);
+    font-family: var(--display);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--paper);
+    margin-top: 0.15rem;
+  }
+  .check.done .mark { background: var(--moss); border-color: var(--moss); color: var(--charcoal); }
+  .check.partial .mark { background: var(--brass); border-color: var(--brass); color: var(--charcoal); }
+  .check.todo .mark { background: transparent; border-color: var(--paper-edge); color: var(--paper-mute); }
+  .check.done .mark::before { content: "✓"; }
+  .check.partial .mark::before { content: "◐"; }
+  .check.todo .mark::before { content: "○"; }
+
+  .check-body .label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
+  }
+  .check-body .how {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+  .check.todo .check-body .label { color: var(--paper-dim); }
+
+  /* ================= QUOTES ================= */
+
+  .quotes-wrap {
+    padding: clamp(2rem, 4vw, 3rem) 0 0;
+    border-top: 1px solid var(--paper-edge);
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+  }
+  .quotes-label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .quotes-label::before {
+    content: "";
+    width: 2rem; height: 1px; background: var(--oxide);
+  }
+
+  .quotes {
+    display: grid;
+    gap: 1.4rem;
+  }
+  blockquote {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    line-height: 1.35;
+    color: var(--paper);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--oxide);
+    max-width: 72ch;
+  }
+  blockquote::before { content: "«"; color: var(--oxide); margin-right: 0.08em; }
+  blockquote::after  { content: "»"; color: var(--oxide); margin-left: 0.08em; }
+
+  /* ================= CTA / FOOTER ================= */
+
+  .cta-row {
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+    padding: clamp(1.75rem, 3vw, 2.4rem);
+    background: var(--charcoal-2);
+    border: 1px solid var(--paper-edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .cta-row::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--oxide-soft), transparent 45%);
+    pointer-events: none;
+  }
+  .cta-text {
+    position: relative;
+  }
+  .cta-text .eyebrow {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.76rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 0.4rem;
+  }
+  .cta-text h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+  .cta-text p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--paper-dim);
+    max-width: 52ch;
+  }
+  .cta-btn {
+    position: relative;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    background: var(--oxide);
+    padding: 1.1rem 1.6rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid var(--oxide);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .cta-btn:hover { background: var(--paper); border-color: var(--paper); transform: translateX(4px); }
+  .cta-btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-btn:hover .arrow { transform: translateX(4px); }
+
+  footer.pagefoot {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--paper-edge);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  footer.pagefoot > :nth-child(2) { text-align: center; }
+  footer.pagefoot > :nth-child(3) { text-align: right; }
+  footer.pagefoot a {
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  footer.pagefoot a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+  @media (max-width: 680px) {
+    footer.pagefoot { grid-template-columns: 1fr; }
+    footer.pagefoot > * { text-align: left !important; }
+  }
+
+  /* ================= ENTRY ANIMATIONS ================= */
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .masthead    { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block.b1 { animation-delay: 0.1s; }
+  section.block.b2 { animation-delay: 0.2s; }
+  section.block.b3 { animation-delay: 0.3s; }
+  section.block.b4 { animation-delay: 0.4s; }
+  .quotes-wrap { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.5s both; }
+  .cta-row     { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.6s both; }
+  footer.pagefoot { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.7s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- ============== MASTHEAD ============== -->
+  <header class="masthead">
+    <div class="rail">
+      <span class="live">Сессия открыта</span>
+      <span>Personal Corp <span class="sep">·</span> Серёжа Рис <span class="sep">·</span> ~70 минут (часть 1)</span>
+      <span>4·V·MMXXVI</span>
+    </div>
+
+    <div class="lesson-tag">Урок 03 — лайв + шаблоны</div>
+
+    <h1 class="hero">
+      От штаба
+      к <em>рабочей среде</em>
+    </h1>
+
+    <div class="summary">
+      <p>
+        Третий лайв-разбор: парсим сырые данные в <em style="color:var(--oxide); font-style:normal;">полезный контекст</em>, заводим CRM на md-карточках, ставим cron через Codex Automation и собираем Meeting Copilot для живых созвонов.
+      </p>
+      <div class="summary-meta">
+        № выпуска<br><b>III · 04·05·26</b><br>
+        формат<br><b>live + демо</b>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== I · TERMS ============== -->
+  <section class="block b1">
+    <div class="section-head">
+      <span class="section-num">§ I.</span>
+      <h2 class="section-title">Термины</h2>
+      <span class="section-kicker">Слова, которыми Серёжа собирает урок про данные, шаблоны и cron.</span>
+    </div>
+    <div class="terms-grid">
+      <article class="term"><span class="term-num">01</span><h3 class="term-name">Парсинг данных в контекст</h3><p class="term-def">Сырые данные — транскрипт, почта, чаты — сами по себе не контекст. Контекстом они становятся, когда из них вынесены полезные действия — методы, инструменты, ДЗ — и подписаны разметкой.</p></article>
+      <article class="term"><span class="term-num">02</span><h3 class="term-name">Codex Automation</h3><p class="term-def">Кнопка «автоматизация» в кодексе, под капотом — обычный cron. Триггер по времени или событию запускает агента — без ручной настройки расписания на сервере.</p></article>
+      <article class="term"><span class="term-num">03</span><h3 class="term-name">CRM на md-карточках</h3><p class="term-def">Четыре связанных шаблона в репо штаба: Account, Contact, Opportunity, Meeting. Каждая карточка — markdown-файл с фронтматтером и якорями для агента.</p></article>
+      <article class="term"><span class="term-num">04</span><h3 class="term-name">Meeting Copilot</h3><p class="term-def">Локальный HTML-дашборд на один созвон: вкладки профиля, вопросов, topic map (D3-граф), homework, glossary. Обновляется из дельт транскрипта в реальном времени.</p></article>
+      <article class="term"><span class="term-num">05</span><h3 class="term-name">Suffix-diff транскрипта</h3><p class="term-def">`state/diff.py` принимает полный транскрипт от Granola, сравнивает с baseline и отдаёт только хвост. Делает обновления Copilot копеечными по токенам.</p></article>
+      <article class="term"><span class="term-num">06</span><h3 class="term-name">Цикл принятия решений агента</h3><p class="term-def">Просьба показать, как агент думал — диаграммой шагов и тремя гипотезами как улучшить. Снимает магию с генеративной системы и даёт ручки управления.</p></article>
+      <article class="term"><span class="term-num">07</span><h3 class="term-name">GitHub Connector в ChatGPT</h3><p class="term-def">Коннектор в чат-ботах, который подсасывает репо штаба как контекст. Заменяет отдельный OpenClaw-агент и экономит токены подписки на длинных сессиях.</p></article>
+      <article class="term"><span class="term-num">08</span><h3 class="term-name">Weekly skills</h3><p class="term-def">Два скилла Серёжи — `weekly` (планирование) и `weekly retro`. Проставляют недельные лейблы в GitHub Projects и проводят ретро по закрытым задачам.</p></article>
+      <article class="term"><span class="term-num">09</span><h3 class="term-name">Качество контекста ≠ размер</h3><p class="term-def">Миллион токенов — не решение, а булочка. Чище данные и явная разметка важнее объёма; добавлять качество, а не количество.</p></article>
+      <article class="term"><span class="term-num">10</span><h3 class="term-name">Пресеты Copilot</h3><p class="term-def">Три набора вкладок — `mentoring` (Profile, Questions, Topic Map, Homework, Glossary), `sales` (+ Risks, Scorecard), `discovery` (минимум). Выбираются перед CREATE.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== II · METHODS ============== -->
+  <section class="block b2">
+    <div class="section-head">
+      <span class="section-num">§ II.</span>
+      <h2 class="section-title">Методы</h2>
+      <span class="section-kicker">Принципы, с которых Серёжа начинает день третьей недели.</span>
+    </div>
+    <div class="methods-list">
+      <article class="method"><div class="method-num">01</div><div class="method-body"><h3>Чистить штаб через ретро</h3><p>Раз в неделю спрашивать у агента: какие папки и скилы я реально не использую? Серёжа за одно ретро выкинул три папки и два скила — «отлично, удаляем нафик». Чем меньше у тебя сложного, тем лучше — главное, чтобы понимал.</p></div></article>
+      <article class="method"><div class="method-num">02</div><div class="method-body"><h3>Спрашивать цикл принятия решений</h3><p>Когда агент придумывает или пропускает файлы — попросить диаграмму: что прочитал, что выбрал, что проигнорировал. Потом — три гипотезы как улучшить. Это снимает магию с генеративной системы и даёт точку приложения управления.</p></div></article>
+      <article class="method"><div class="method-num">03</div><div class="method-body"><h3>Качество контента, а не размер контекста</h3><p>Не наращивать миллион токенов под задачу — добавлять уточнения и внешние увязки. «Не факт даже, что там впереди такой нужен большой». Чистые данные на входе важнее объёма.</p></div></article>
+      <article class="method"><div class="method-num">04</div><div class="method-body"><h3>Не хранить код в PRD</h3><p>Слой стратегии (тексты, требования) и слой кода живут раздельно — иначе агент перерабатывает гигантский файл за каждый запрос. У Артёма это сразу свернуло проект, как только он разделил.</p></div></article>
+      <article class="method"><div class="method-num">05</div><div class="method-body"><h3>Парсить сырые данные перед агентом</h3><p>Транскрипт, почту, чаты сначала пропустить через разметку — методы, инструменты, действия — только потом скармливать агенту в карточки. Иначе он выдумывает: прочитал один из пяти и пропустил, потому что «было лень».</p></div></article>
+      <article class="method"><div class="method-num">06</div><div class="method-body"><h3>Codex Automation вместо ручного cron</h3><p>Кнопка автоматизации в кодексе ставит триггер по времени или событию — без отдельной настройки cron на сервере. Самый простой способ дать агенту регулярную работу: парсинг почты, weekly retro, надзиратель.</p></div></article>
+      <article class="method"><div class="method-num">07</div><div class="method-body"><h3>Live-копилот через diff транскрипта</h3><p>Granola выгружает полный транскрипт — `state/diff.py` режет его до дельты, cheaper-сабагент обновляет вкладки JS-приложения. Родительский контекст не раздувается, токены экономятся.</p></div></article>
+      <article class="method"><div class="method-num">08</div><div class="method-body"><h3>CRM как четыре связанные карточки</h3><p>Account / Contact / Opportunity / Meeting — каждая со своим фронтматтером, scorecard и questions backlog. Сделка идёт стадиями `idea → verbal_yes → negotiation → confirmed → delivered`. Карточки ссылаются друг на друга через [[slug]].</p></div></article>
+      <article class="method"><div class="method-num">09</div><div class="method-body"><h3>Codex и Claude Code — два разных напарника</h3><p>Claude — «классный, умный напарник», понимает с полуслова, держит креатив и тексты. Codex — «исправительный трудяга», доводит длинные задачи и не бросает. Длинные автономные запуски — на Codex со скиллом `just do it`.</p></div></article>
+    </div>
+  </section>
+
+  <!-- ============== III · TOOLS ============== -->
+  <section class="block b3">
+    <div class="section-head">
+      <span class="section-num">§ III.</span>
+      <h2 class="section-title">Инструменты</h2>
+      <span class="section-kicker">Стек Серёжи для парсинга, CRM и живых созвонов.</span>
+    </div>
+    <div class="tools-grid">
+      <article class="tool"><div class="tool-name">Codex Automation <span class="tool-mark">01</span></div><p class="tool-role">Кнопка cron внутри кодекса: триггер времени или события запускает агента. Настройка живёт в самом приложении, а не в /etc/crontab.</p></article>
+      <article class="tool"><div class="tool-name">Granola <span class="tool-mark">02</span></div><p class="tool-role">Источник транскриптов созвонов с локальным API. Серёжа дёргает текущий транскрипт во время созвона — на нём строится Meeting Copilot и КП на лету.</p></article>
+      <article class="tool"><div class="tool-name">Super Powers <span class="tool-mark">03</span></div><p class="tool-role">Плагин со скиллами для Codex и Claude Code. `brainstorming` показывает три варианта дизайна локально через HTML-сервер; обновляется автоматически, если ставить через плагин-механику.</p></article>
+      <article class="tool"><div class="tool-name">ChatGPT GitHub Connector <span class="tool-mark">04</span></div><p class="tool-role">Коннектор подсасывает репо штаба как контекст в чат-боте. Заменяет отдельный OpenClaw-агент: «расскажи статус по клиенту» работает прямо из приложения.</p></article>
+      <article class="tool"><div class="tool-name">GitHub Projects + weekly skills <span class="tool-mark">05</span></div><p class="tool-role">Единый дашборд задач из всех репо с фильтром по неделям. Скилы `weekly` и `weekly retro` ставят лейблы и помогают проводить ретроспективу.</p></article>
+      <article class="tool"><div class="tool-name">Meeting Copilot <span class="tool-mark">06</span></div><p class="tool-role">Промпт-шаблон для генерации live HTML-приложения на одну сессию. Три режима: CREATE (профиль + пресет), UPDATE (дельта транскрипта), CLOSE (`sN.js` + meeting record).</p></article>
+      <article class="tool"><div class="tool-name">CRM Templates <span class="tool-mark">07</span></div><p class="tool-role">Файл `crm-card-templates.html` с четырьмя md-шаблонами: Account, Contact, Opportunity, Meeting. Копируешь в свою CRM-папку и наполняешь по структуре.</p></article>
+      <article class="tool"><div class="tool-name">Cursor / Obsidian <span class="tool-mark">08</span></div><p class="tool-role">Просмотрщики markdown-файлов штаба. Cursor неожиданно стал круто рендерить, Obsidian — культовая программа, ничего учить не надо. Оба необязательны, но удобно.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== IV · GOALS & HOMEWORK ============== -->
+  <section class="block b4">
+    <div class="section-head">
+      <span class="section-num">§ IV.</span>
+      <h2 class="section-title">Цели & домашка</h2>
+      <span class="section-kicker">Слева — что должно остаться в голове. Справа — живой статус ДЗ в твоём HQ.</span>
+    </div>
+    <div class="objectives">
+
+      <div class="col goals-col">
+        <h3>Цели урока<span class="tally">5 пунктов</span></h3>
+        <ul class="checklist">
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Ретро штаба</div><div class="how">Удалить минимум одну неиспользуемую папку или скилл, зафиксировать причину.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Парсинг данных в контекст</div><div class="how">Один источник — транскрипт, почту или Telegram — разметить в действия, методы, инструменты.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Первая Codex Automation</div><div class="how">Триггер по времени или событию — надзиратель раз в день или weekly retro по пятницам.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM на md-карточках</div><div class="how">Четыре шаблона в `10_Accounts/`, `20_People/`, `30_Opportunities/`, плюс одна реальная карточка.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot на живом созвоне</div><div class="how">Один реальный созвон — пройти CREATE / UPDATE / CLOSE.</div></div></li>
+        </ul>
+      </div>
+
+      <div class="col homework-col">
+        <h3>Домашнее задание<span class="tally">0 из 5 закрыто</span></h3>
+        <ul class="checklist">
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Ретро штаба + чистка</div><div class="how">Спросить агента, какие папки и скилы я реально не использую. Удалить минимум одно. Зафиксировать причину в `practices/`.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM-папка по шаблонам</div><div class="how">Скопировать `crm-card-templates.html` в штаб, создать `10_Accounts/`, `20_People/{slug}/`, `30_Opportunities/`. Завести 1 контакт + 1 встречу.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot — пилот</div><div class="how">Скопировать `meeting-copilot-prompt.md` в штаб. На следующем созвоне запустить CREATE с пресетом, UPDATE по дельтам, CLOSE с `sN.js` и meeting record.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Первая Codex Automation</div><div class="how">Кнопка автоматизации в кодексе — триггер по времени. Например, weekly retro по пятницам или надзиратель раз в день.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">ChatGPT → GitHub Connector</div><div class="how">В коннекторах ChatGPT включить GitHub, подключить репо штаба, проверить запросом «статус по клиенту X».</div></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== QUOTES ============== -->
+  <aside class="quotes-wrap">
+    <div class="quotes-label">Из уст Серёжи</div>
+    <div class="quotes">
+      <blockquote>Удаляем это всё нафик.</blockquote>
+      <blockquote>Нужно работать над качеством вот этого контента.</blockquote>
+      <blockquote>Не факт даже, что там впереди такой нужен большой.</blockquote>
+      <blockquote>Не нужно теперь делать cron, который раньше делали.</blockquote>
+      <blockquote>Контекст — это то, что агент прочитал.</blockquote>
+    </div>
+  </aside>
+
+  <!-- ============== CTA ============== -->
+  <div class="cta-row">
+    <div class="cta-text">
+      <div class="eyebrow">Следующий шаг</div>
+      <h2>Открыть HQ-дашборд</h2>
+      <p>Реестр активных проектов и задач. После урока 03 — отметить ретро штаба и завести первую CRM-карточку.</p>
+    </div>
+    <a class="cta-btn" href="https://instrumentburg-sudo.github.io/hq/">
+      HQ / Центр управления
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Personal Corp · урок 03</span>
+    <span>Серёжа Рис <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech</a></span>
+    <span>Собрано 4·V·MMXXVI</span>
+  </footer>
+
+</main>
+</body>
+</html>
