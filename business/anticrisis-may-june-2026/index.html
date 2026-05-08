@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#f3efe6" />
+  <title>Антикризисная карта ИнструментБурга — май–июнь 2026</title>
+  <meta name="description" content="Рабочая антикризисная карта ИнструментБурга: cash-flow, дебиторка, сервис, ФОТ, B2B, тендеры, маркетплейсы и действия на 14 дней." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f8f4eb;
+      --paper-2: #efe7d8;
+      --ink: #1c211b;
+      --muted: #666c60;
+      --faint: #8f968b;
+      --line: #ded3bf;
+      --line-strong: #c8b894;
+      --green: #244b39;
+      --green-2: #315d47;
+      --amber: #b7791f;
+      --amber-2: #f4d08a;
+      --red: #9f2c2c;
+      --blue: #27476a;
+      --white: #fffdf7;
+      --shadow: 0 18px 60px rgba(43, 38, 28, .11);
+      --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --serif: "IBM Plex Serif", Georgia, serif;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% -10%, rgba(183,121,31,.18), transparent 34rem),
+        radial-gradient(circle at 90% 0%, rgba(36,75,57,.16), transparent 32rem),
+        linear-gradient(180deg, var(--paper), #fbf8f1 42%, var(--paper));
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); text-decoration-thickness: .08em; text-underline-offset: .18em; }
+    .progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 20; background: linear-gradient(90deg, var(--amber), var(--green)); transform-origin: 0 50%; transform: scaleX(0); }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--paper) 82%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    }
+    .topbar-inner { max-width: 1240px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand strong { font-size: 16px; letter-spacing: -.02em; }
+    .brand span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--line-strong); color: var(--ink); background: color-mix(in srgb, var(--white) 72%, transparent);
+      border-radius: 999px; padding: 8px 13px; font-size: 13px; font-weight: 650; text-decoration: none;
+      box-shadow: 0 8px 24px rgba(43,38,28,.05);
+    }
+    .btn.primary { background: var(--green); color: #fffaf0; border-color: var(--green); }
+    .hero { max-width: 1240px; margin: 0 auto; padding: clamp(44px, 7vw, 92px) 28px 38px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: clamp(28px, 5vw, 68px); align-items: end; }
+    .eyebrow { color: var(--amber); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: 13px; margin-bottom: 16px; }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      margin: 0 0 24px;
+      max-width: 900px;
+    }
+    .lead { max-width: 780px; font-size: clamp(20px, 2.1vw, 28px); line-height: 1.42; color: #34392f; margin: 0; }
+    .hero-card {
+      background: var(--green); color: #fff8e8; border-radius: 28px; padding: 26px;
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .hero-card:before { content:""; position:absolute; width:210px; height:210px; border:1px solid rgba(255,255,255,.18); border-radius:50%; right:-80px; top:-80px; }
+    .hero-card h2 { font-family: var(--serif); font-size: 27px; line-height: 1.1; margin: 0 0 14px; color:#fff8e8; }
+    .hero-card p { margin: 0 0 18px; color: #e8dcc8; font-size: 16px; line-height:1.55; }
+    .hero-card dl { display:grid; grid-template-columns:1fr; gap: 12px; margin: 0; }
+    .hero-card div { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.17); }
+    .hero-card dt { color:#d6c7a9; font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+    .hero-card dd { margin: 3px 0 0; font-weight:700; font-size:18px; }
+    .quick { max-width:1240px; margin: 0 auto; padding: 0 28px 32px; display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+    .quick-card { background: color-mix(in srgb, var(--white) 74%, transparent); border:1px solid var(--line); border-radius: 20px; padding: 18px; min-height: 138px; box-shadow: 0 10px 36px rgba(43,38,28,.05); }
+    .quick-card span { color: var(--amber); font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .quick-card strong { display:block; margin-top: 8px; font-family: var(--serif); font-size: 23px; line-height: 1.12; letter-spacing: -.03em; }
+    .quick-card p { margin: 9px 0 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+    .layout { max-width:1240px; margin: 0 auto; padding: 22px 28px 80px; display:grid; grid-template-columns: 270px minmax(0, 1fr); gap: 48px; align-items:start; }
+    aside { position: sticky; top: 78px; max-height: calc(100vh - 96px); overflow:auto; padding-right: 10px; }
+    aside .aside-title { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+    .toc { display:flex; flex-direction:column; gap: 4px; }
+    .toc a { display:block; color: var(--muted); text-decoration:none; font-size: 13px; line-height:1.25; padding: 7px 9px; border-radius: 10px; border-left: 2px solid transparent; }
+    .toc a:hover, .toc a.active { color: var(--ink); background: rgba(255,255,255,.52); border-left-color: var(--amber); }
+    article { min-width:0; background: color-mix(in srgb, var(--white) 62%, transparent); border: 1px solid var(--line); border-radius: 32px; padding: clamp(26px, 5vw, 62px); box-shadow: var(--shadow); }
+    article > section { padding-top: 4px; }
+    article h2 {
+      font-family: var(--serif); font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spacing: -.045em;
+      margin: 64px 0 20px; color: var(--green);
+      padding-bottom: 13px; border-bottom: 2px solid var(--line);
+    }
+    article section:first-child h2 { margin-top: 0; }
+    article h3 { font-size: 22px; line-height: 1.25; margin: 34px 0 12px; color: #2c3329; letter-spacing: -.02em; }
+    article p { margin: 0 0 18px; max-width: 850px; }
+    article ul, article ol { margin: 0 0 22px 1.35em; padding: 0; max-width: 850px; }
+    article li { margin: 8px 0; padding-left: 4px; }
+    article strong { font-weight: 750; color: #10150f; }
+    article blockquote { margin: 28px 0; max-width: 900px; border: 0; background: var(--green); color: #fff8e8; border-radius: 24px; padding: 26px 28px; box-shadow: 0 16px 45px rgba(36,75,57,.18); }
+    article blockquote p { margin:0; color:inherit; font-family: var(--serif); font-size: clamp(23px, 3vw, 34px); line-height: 1.24; letter-spacing: -.03em; }
+    article blockquote strong { color: inherit; }
+    article table { display:block; overflow-x:auto; border-collapse: separate; border-spacing:0; width:100%; margin: 24px 0 30px; font-size: 15px; line-height:1.45; border:1px solid var(--line); border-radius: 16px; background:#fffaf1; }
+    article thead, article tbody { display: table; width:100%; border-collapse: collapse; }
+    article th { position: sticky; top: 0; background: var(--green); color:#fff8e8; text-align:left; padding: 12px 14px; font-size: 13px; line-height:1.25; vertical-align:top; }
+    article td { padding: 12px 14px; border-top:1px solid var(--line); vertical-align:top; min-width: 140px; }
+    article tr:nth-child(even) td { background: rgba(49,93,71,.045); }
+    article code { font-family: "IBM Plex Sans", sans-serif; background:#efe6d6; border:1px solid #dfcfb3; padding: 2px 6px; border-radius: 8px; font-size:.92em; }
+    article pre { overflow:auto; padding:18px; background:#1d241c; color:#f7f0df; border-radius:18px; font-size:14px; line-height:1.5; }
+    article hr { border:0; border-top: 1px solid var(--line); margin: 42px 0; }
+    .callout { margin: 30px 0; padding: 22px 24px; border-radius: 22px; border:1px solid var(--line-strong); background:#fff7e4; max-width: 900px; }
+    .footer { max-width:1240px; margin: 0 auto; padding: 0 28px 42px; color: var(--muted); font-size: 14px; }
+    .footer a { color: var(--green); }
+    @media (max-width: 980px) {
+      .hero-grid, .layout { grid-template-columns:1fr; }
+      aside { position: relative; top:auto; max-height:none; padding: 0; }
+      .toc { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quick { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 17px; line-height: 1.68; }
+      .topbar-inner { padding: 12px 16px; align-items:flex-start; }
+      .actions .btn:not(.primary) { display:none; }
+      .hero { padding: 36px 16px 24px; }
+      .hero-grid { gap: 24px; }
+      .quick { padding:0 16px 18px; grid-template-columns:1fr; }
+      .layout { padding: 14px 16px 54px; gap: 24px; }
+      article { padding: 24px 18px; border-radius: 24px; }
+      article h2 { margin-top: 46px; }
+      article table { font-size: 14px; margin-left: -2px; margin-right: -2px; width: calc(100% + 4px); }
+      .toc { grid-template-columns:1fr; }
+    }
+    @media print { .topbar, aside, .progress, .actions { display:none !important; } .layout { display:block; } article { box-shadow:none; border:0; padding:0; } body { background:white; } }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><strong>ИнструментБург · штаб</strong><span>антикризисная карта</span></div>
+      <div class="actions">
+        <a class="btn" href="#one-wig-на-майиюнь">One WIG</a>
+        <a class="btn" href="#10-конкретных-действий-на-ближайшие-14-дней">14 дней</a>
+        <button class="btn primary" onclick="window.print()">Печать / PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Рабочий документ · 08.05.2026</div>
+        <h1>Антикризисная карта май–июнь 2026</h1>
+        <p class="lead">Читабельная версия для принятия решений: где деньги, кто должен, кто отвечает, что стопаем и какие шаги делаем в ближайшие 14 дней.</p>
+      </div>
+      <aside class="hero-card" aria-label="Главный фокус">
+        <h2>Фокус лыжника</h2>
+        <p>Смотреть не на деревья, а на проход между ними: cash-flow, дебиторка, ФОТ, сервисный поток, B2B-документы и контроль активов.</p>
+        <dl>
+          <div><dt>горизонт</dt><dd>8 недель денег</dd></div>
+          <div><dt>режим</dt><dd>штаб вместо героизма</dd></div>
+          <div><dt>главный запрет</dt><dd>переменка до прихода денег</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="quick" aria-label="Ключевые тезисы">
+    <div class="quick-card"><span>01</span><strong>Cash-flow прежде роста</strong><p>Сначала деньги на 8 недель, потом новые расширения.</p></div>
+    <div class="quick-card"><span>02</span><strong>Дебиторка — фронт продаж</strong><p>Долг клиента = незавершённая продажа, а не бухгалтерская строка.</p></div>
+    <div class="quick-card"><span>03</span><strong>Сервис до оплаты</strong><p>У каждого заказа владелец, статус, следующий шаг и дедлайн.</p></div>
+    <div class="quick-card"><span>04</span><strong>Контроль активов</strong><p>Юрий/Данил: доступы, счета, юрлица, IP — без эмоций, через факты.</p></div>
+  </section>
+
+  <div class="layout">
+    <aside>
+      <div class="aside-title">Навигация</div>
+      <nav class="toc" id="toc"></nav>
+    </aside>
+    <article id="content">
+      <section id="0-короткий-вывод" class="level2">
+<h2>0. Короткий вывод</h2>
+<p>ИнструментБург сейчас давит не одна проблема, а связка:</p>
+<ol type="1">
+<li><strong>Деньги:</strong> кассовые разрывы, постоплаты B2B, налоги,
+высокий ФОТ, сезонность.</li>
+<li><strong>Операционка:</strong> сервис и тендеры завязаны на людях,
+статусы и ответственность часто размыты.</li>
+<li><strong>Контроль:</strong> часть важных направлений и активов
+зависит от Юрия/Данила, юрлиц, доступов, кабинетов и старых
+договорённостей.</li>
+<li><strong>Рост:</strong> идей много, но текущая машина не всегда
+переваривает даже существующий поток.</li>
+<li><strong>Психологическая нагрузка:</strong> Антон держит слишком
+много контуров в голове одновременно.</li>
+</ol>
+<p>Главный антикризисный принцип на май–июнь:</p>
+<blockquote class="big-principle">
+<p><strong>Не расширяться хаотично. Сначала вернуть контроль над
+cash-flow, сервисным потоком, B2B-дебиторкой, ФОТ и критичными
+доступами.</strong></p>
+</blockquote>
+<p>Фокус лыжника для Антона сейчас — не «где страшно», а <strong>куда
+можно проехать между деревьями</strong>:</p>
+<ul>
+<li>деньги на 8 недель;</li>
+<li>оплаченные заказы, а не просто выполненные;</li>
+<li>сервисные заказы с владельцем;</li>
+<li>B2B-клиенты с понятной оплатой;</li>
+<li>ФОТ, привязанный к деньгам/марже;</li>
+<li>юридический контроль над направлениями.</li>
+</ul>
+<hr />
+</section>
+<section id="1-карта-бизнеса-по-фактическому-контексту" class="level2">
+<h2>1. Карта бизнеса по фактическому контексту</h2>
+<section id="11-базовые-направления" class="level3">
+<h3>1.1. Базовые направления</h3>
+<p>В базе ИнструментБурга фигурируют 7 направлений:</p>
+<ol type="1">
+<li>Прокат инструмента.</li>
+<li>Ремонт инструмента.</li>
+<li>Ремонт и обслуживание ДГУ.</li>
+<li>Маркетплейсы WB/Ozon.</li>
+<li>Тендерный отдел.</li>
+<li>Стройка.</li>
+<li>Благоустройство территорий.</li>
+</ol>
+<p>По фактической устойчивости они не равны.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Направление</th>
+<th>Роль сейчас</th>
+<th>Антикризисный вывод</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Сервис / ремонт</td>
+<td>Ядро бизнеса и главный источник устойчивой прибыли</td>
+<td>Защищать, упорядочивать, ускорять оборот до денег</td>
+</tr>
+<tr class="even">
+<td>Прокат</td>
+<td>Важен как витрина, подменный фонд и сезонный поток, но сам по себе
+слабее сервиса</td>
+<td>Не делать главным драйвером, использовать как усилитель
+B2B/подписки</td>
+</tr>
+<tr class="odd">
+<td>ДГУ / тяжёлое обслуживание</td>
+<td>Есть реальные клиенты и выезды, но сильный риск по
+людям/документам</td>
+<td>Брать только то, что закрывается документами и оплатой</td>
+</tr>
+<tr class="even">
+<td>B2B / Россети / крупные клиенты</td>
+<td>Самый правдоподобный рычаг роста после сервиса</td>
+<td>Развивать, но жёстко контролировать дебиторку и документы</td>
+</tr>
+<tr class="odd">
+<td>Тендеры</td>
+<td>Работают, но перегружены, много ручного исполнения</td>
+<td>Ввести лимит новых обязательств и карту текущих контрактов</td>
+</tr>
+<tr class="even">
+<td>Маркетплейсы</td>
+<td>Потенциал, автоматизация, товар/кабинеты, но риск контроля</td>
+<td>Сначала инвентаризация юрлиц, денег, кабинетов, IP</td>
+</tr>
+<tr class="odd">
+<td>Стройка/благоустройство</td>
+<td>Смежные/партнёрские направления</td>
+<td>Не допускать, чтобы забирали cash/внимание из ядра без прозрачного
+P&amp;L</td>
+</tr>
+<tr class="even">
+<td>Прокатыч / Нижний Тагил</td>
+<td>Потенциальный эксперимент: помещение выбрано, экономика
+возможна</td>
+<td>Запускать только как ограниченный эксперимент со стоп-лоссом, не
+ценой кассового удушения ядра</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+</section>
+<section id="2-финансовая-картина-что-видно-из-файлов" class="level2">
+<h2>2. Финансовая картина: что видно из файлов</h2>
+<section id="21-сервисная-финмодель-2025январь-2026" class="level3">
+<h3>2.1. Сервисная финмодель 2025–январь 2026</h3>
+<p>По эталонной финмодели сервиса:</p>
+<ul>
+<li>средняя выручка в нормальные месяцы сентябрь–декабрь 2025:
+<strong>~1 486 000 ₽/мес</strong>;</li>
+<li>среднее сальдо в нормальные месяцы: <strong>~346 000
+₽/мес</strong>;</li>
+<li>январь 2026: <strong>520 206 ₽ выручки</strong> и <strong>−338 927 ₽
+сальдо</strong>;</li>
+<li>скорректированная точка безубыточности сервиса: <strong>~981 000
+₽/мес выручки</strong>;</li>
+<li>для цели <strong>1 млн ₽ чистой прибыли/мес</strong> нужна выручка
+примерно <strong>2,45–2,5 млн ₽/мес</strong>.</li>
+</ul>
+<p>Главный вывод: <strong>ядро бизнеса живое, но текущая конфигурация не
+даёт 1 млн чистыми без перестройки пропускной способности и
+маржи.</strong></p>
+</section>
+<section id="22-более-широкий-налогово-финансовый-слой-2025--q1-2026"
+class="level3">
+<h3>2.2. Более широкий налогово-финансовый слой 2025 + Q1 2026</h3>
+<p>Из налоговой/дашбордной модели:</p>
+<ul>
+<li>выручка 2025: <strong>~22,48 млн ₽/год</strong>, или <strong>~1,87
+млн ₽/мес</strong>;</li>
+<li>расходы 2025: <strong>~20,47 млн ₽/год</strong>, или <strong>~1,71
+млн ₽/мес</strong>;</li>
+<li>чистая прибыль 2025: <strong>~2,01 млн ₽/год</strong>, или
+<strong>~168 тыс. ₽/мес</strong>;</li>
+<li>чистая маржа: <strong>~8,9%</strong>;</li>
+<li>расчётная точка безубыточности по расширенной модели: <strong>~1,58
+млн ₽/мес</strong>.</li>
+</ul>
+<p>Важно: цифры отличаются от сервисной финмодели из-за методологии —
+где-то считается только сервис/LiveSklad, где-то банки + LS + налоги.
+Это не ошибка, а сигнал: <strong>единого источника управленческой правды
+пока нет.</strong></p>
+<p>Антикризисное решение: на май–июнь вести не «идеальный P&amp;L», а
+<strong>кассовую карту на 8 недель</strong>, где видны реальные
+поступления, платежи, зарплаты, налоги и дебиторка.</p>
+</section>
+<section id="23-апрельмай-2026-текущий-стресс" class="level3">
+<h3>2.3. Апрель–май 2026: текущий стресс</h3>
+<p>По дашборду и заметкам:</p>
+<ul>
+<li>апрель 2026: выручка <strong>~830 975 ₽</strong>, расходы <strong>~1
+068 887 ₽</strong>, прибыль <strong>−237 912 ₽</strong>;</li>
+<li>май 2026 на 07.05: выручка <strong>~284 590 ₽</strong>, расходы
+<strong>~814 927 ₽</strong>, прибыль <strong>−530 337 ₽</strong> — месяц
+неполный, но давление уже видно;</li>
+<li>ФОТ за апрель начислен <strong>~645 798 ₽</strong>, к выплате после
+авансов <strong>~450 798 ₽</strong>;</li>
+<li>ожидаемая оплата Россетей/Челябинских ЭС: <strong>~600 000
+₽</strong>;</li>
+<li>если эта дебиторка реально приходит, апрельский P&amp;L вместо
+минуса может стать плюсовым примерно <strong>+362 088 ₽</strong> по
+мосту.</li>
+</ul>
+<p>Вывод: проблема не только в прибыльности, а в <strong>сдвиге денег во
+времени</strong>:</p>
+<blockquote>
+<p>Работы/начисления/согласования уже есть, а живые деньги приходят
+позже. ФОТ и расходы требуют денег раньше, чем B2B оплачивает.</p>
+</blockquote>
+<hr />
+</section>
+</section>
+<section id="3-главная-финансовая-угроза-на-майиюнь" class="level2">
+<h2>3. Главная финансовая угроза на май–июнь</h2>
+<section id="угроза" class="level3">
+<h3>Угроза</h3>
+<p>Бизнес может выглядеть «рабочим» по заказам и актам, но задыхаться по
+cash-flow:</p>
+<ul>
+<li>B2B платит позже;</li>
+<li>переменная зарплата начисляется раньше прихода денег;</li>
+<li>запчасти/логистика/ФОТ платятся сразу;</li>
+<li>налоги и НДС требуют календарной дисциплины;</li>
+<li>в сервисе часть денег зависает в статусах «ждёт согласования», «ждёт
+оплаты», «ждёт запчасти»;</li>
+<li>Антон закрывает разрывы личной нервной системой.</li>
+</ul>
+</section>
+<section id="антикризисное-правило" class="level3">
+<h3>Антикризисное правило</h3>
+<p><strong>Нельзя платить переменную часть по юрлицам/постоплате до
+фактического прихода денег.</strong></p>
+<p>Формула:</p>
+<blockquote>
+<p>Начислено ≠ согласовано ≠ оплачено ≠ можно распределять.</p>
+</blockquote>
+<p>Для май–июнь нужен отдельный статус по каждому крупному
+B2B-заказу:</p>
+<ol type="1">
+<li>Работа выполнена.</li>
+<li>Документы подписаны.</li>
+<li>Счёт/УПД выставлен.</li>
+<li>Клиент подтвердил оплату.</li>
+<li>Деньги пришли.</li>
+<li>Только после этого — переменная часть/премии.</li>
+</ol>
+<hr />
+</section>
+</section>
+<section id="4-боевой-cash-flow-контур-на-8-недель" class="level2">
+<h2>4. Боевой cash-flow контур на 8 недель</h2>
+<section id="41-что-создать-немедленно" class="level3">
+<h3>4.1. Что создать немедленно</h3>
+<p>Одна таблица «Деньги май–июнь».</p>
+<p>Минимальные вкладки:</p>
+<ol type="1">
+<li><strong>Кассовый календарь по дням</strong> — остаток утром,
+приходы, платежи, остаток вечером.</li>
+<li><strong>Дебиторка</strong> — кто должен, сумма, документ, дата
+обещания, ответственный, следующий контакт.</li>
+<li><strong>Кредиторка/обязательства</strong> — кому должны, сумма,
+крайняя дата, можно ли двигать.</li>
+<li><strong>ФОТ</strong> — фикс, переменная, уже выплачено, к выплате,
+источник денег.</li>
+<li><strong>Налоги</strong> — НДС/УСН/взносы/ЕНС, даты, суммы,
+статус.</li>
+<li><strong>Крупные B2B-заказы</strong> — Россети, Деловые Линии, СООД,
+Монетка, Форвард, УРПСО и др.</li>
+</ol>
+</section>
+<section id="42-красные-флаги" class="level3">
+<h3>4.2. Красные флаги</h3>
+<p>Каждый день смотреть 5 цифр:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Метрика</th>
+<th style="text-align: right;">Красный уровень</th>
+<th>Что делать</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Остаток денег на 7 дней вперёд</td>
+<td style="text-align: right;">&lt; 100–150К ₽</td>
+<td>стоп необязательных платежей, сбор дебиторки</td>
+</tr>
+<tr class="even">
+<td>Дебиторка &gt; 14 дней</td>
+<td style="text-align: right;">любая крупная</td>
+<td>персональный дожим, письма, ЭДО, акт сверки</td>
+</tr>
+<tr class="odd">
+<td>ФОТ к выплате без источника</td>
+<td style="text-align: right;">&gt; 0</td>
+<td>разбить на фикс/переменную, переменную после прихода денег</td>
+</tr>
+<tr class="even">
+<td>Заказы без владельца</td>
+<td style="text-align: right;">&gt; 0</td>
+<td>назначить владельца или не считать заказ принятым</td>
+</tr>
+<tr class="odd">
+<td>Крупный заказ без подписанных документов</td>
+<td style="text-align: right;">&gt; 0</td>
+<td>приоритет выше новых продаж</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="43-владелец-контура" class="level3">
+<h3>4.3. Владелец контура</h3>
+<p>Антон не должен держать это в голове. Нужен владелец таблицы:</p>
+<ul>
+<li>Антон — принимает решения;</li>
+<li>Юлия — финансы, B2B, дебиторка, платежи;</li>
+<li>ответственный по сервису — статусы заказов и документы;</li>
+<li>ответственный по тендерам — обязательства/сроки/контракты.</li>
+</ul>
+<p>Если владельца нет — Антон снова становится «сервером всей компании»,
+и давление не снизится.</p>
+<hr />
+</section>
+</section>
+<section id="5-дебиторка-отдельный-фронт-войны" class="level2">
+<h2>5. Дебиторка: отдельный фронт войны</h2>
+<section id="51-главный-принцип" class="level3">
+<h3>5.1. Главный принцип</h3>
+<p>Дебиторка — это не бухгалтерская строка. Это <strong>незавершённая
+продажа</strong>.</p>
+<p>Каждый долг должен иметь:</p>
+<ul>
+<li>сумму;</li>
+<li>клиента;</li>
+<li>основание: счёт/акт/УПД/договор;</li>
+<li>кто с клиента берёт деньги;</li>
+<li>что клиент обещал;</li>
+<li>дату следующего касания;</li>
+<li>план Б, если не платит.</li>
+</ul>
+</section>
+<section id="52-текущие-приоритеты-по-контексту" class="level3">
+<h3>5.2. Текущие приоритеты по контексту</h3>
+<ol type="1">
+<li><p><strong>Россети / Челябэнерго / Челябинские ЭС</strong><br />
+Ожидаемая крупная оплата около <strong>600К ₽</strong> — это сейчас не
+просто клиент, а кассовый мост под ФОТ.</p></li>
+<li><p><strong>B2B-плательщики Q1</strong><br />
+В топе поступлений были: Деловые Линии, СООД, Россети Урал,
+Элемент-Трейд, Конструктор, УСС, ЕЭСК и др. Их нужно вести как портфель,
+а не как разовые заявки.</p></li>
+<li><p><strong>Документные проблемы</strong><br />
+Монетка/ДГУ уже показала: если документы не подписаны на выезде, работа
+может быть фактически сделана, но деньги заблокированы.</p></li>
+</ol>
+</section>
+<section id="53-правило-b2b-на-сезон" class="level3">
+<h3>5.3. Правило B2B на сезон</h3>
+<p>Для новых или проблемных юрлиц:</p>
+<ul>
+<li>диагностика/выезд — предоплата или короткая отсрочка;</li>
+<li>работы — смета до старта;</li>
+<li>документы — подписываются сразу;</li>
+<li>отсрочка — только если есть лимит доверия и владелец дебиторки;</li>
+<li>переменная зарплата — после оплаты клиентом.</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="6-сервис-не-чинить-всё-а-вернуть-движение-до-денег"
+class="level2">
+<h2>6. Сервис: не чинить всё, а вернуть движение до денег</h2>
+<section id="61-что-болит" class="level3">
+<h3>6.1. Что болит</h3>
+<p>Из майского разбора сервиса:</p>
+<ul>
+<li>ответственность размыта;</li>
+<li>заявки живут в почте/Avito/головах, а не в едином журнале;</li>
+<li>непонятно, кто ведёт заказ до оплаты;</li>
+<li>мастера жалуются на согласования и зависшие объекты;</li>
+<li>запчасти могут заказывать без сверки со складом;</li>
+<li>спорные ремонты превращаются в ручные конфликты для Антона;</li>
+<li>направление забирает управленческую энергию и иногда выглядит
+убыточным.</li>
+</ul>
+<p>Из февральской проблемы просрочек:</p>
+<ul>
+<li>было <strong>155 просроченных заказов</strong>;</li>
+<li>около <strong>230К ₽ зависших денег</strong> только по заказам с
+менеджером;</li>
+<li>основные застревания: «на согласовании», «ожидание запчастей»,
+старые заказы без менеджера.</li>
+</ul>
+</section>
+<section id="62-антикризисное-правило-сервиса" class="level3">
+<h3>6.2. Антикризисное правило сервиса</h3>
+<blockquote>
+<p>Заявка без владельца, статуса и следующего шага не считается принятой
+в работу.</p>
+</blockquote>
+<p>Минимальные поля журнала:</p>
+<ul>
+<li>дата входа;</li>
+<li>источник: звонок / Avito / почта / юрлицо;</li>
+<li>клиент;</li>
+<li>оборудование;</li>
+<li>владелец заказа;</li>
+<li>статус;</li>
+<li>сумма/смета;</li>
+<li>следующий шаг;</li>
+<li>дедлайн следующего шага;</li>
+<li>кто блокирует;</li>
+<li>финал: оплачено / отказ / гарантия / списано.</li>
+</ul>
+</section>
+<section id="63-главные-статусы" class="level3">
+<h3>6.3. Главные статусы</h3>
+<ul>
+<li>новая;</li>
+<li>ждёт диагностики;</li>
+<li>диагностика сделана;</li>
+<li>ждёт согласования;</li>
+<li>согласование просрочено;</li>
+<li>ждёт запчасти;</li>
+<li>в ремонте;</li>
+<li>готово;</li>
+<li>ждёт оплаты/выдачи;</li>
+<li>спор/отказ;</li>
+<li>закрыто.</li>
+</ul>
+</section>
+<section id="64-цель-на-май" class="level3">
+<h3>6.4. Цель на май</h3>
+<p>Не «идеальный сервис», а:</p>
+<ol type="1">
+<li>У каждого нового заказа есть владелец.</li>
+<li>Заказы «ждёт согласования» старше 3–5 рабочих дней получают
+действие.</li>
+<li>Заказы «ждёт оплаты/выдачи» обрабатываются как деньги, а не как
+склад.</li>
+<li>Склад проверяется до заказа запчастей.</li>
+<li>Антон видит не жалобы, а список блокеров и ответственных.</li>
+</ol>
+<hr />
+</section>
+</section>
+<section id="7-фот-и-люди-не-резать-тупо-а-привязать-к-деньгам"
+class="level2">
+<h2>7. ФОТ и люди: не резать тупо, а привязать к деньгам</h2>
+<section id="71-фактический-фот" class="level3">
+<h3>7.1. Фактический ФОТ</h3>
+<p>Апрельский ФОТ:</p>
+<ul>
+<li>начислено: <strong>~645,8К ₽</strong>;</li>
+<li>к выплате: <strong>~450,8К ₽</strong>;</li>
+<li>внутри есть разовые выплаты, премии и остатки;</li>
+<li>нормализованный ориентир для break-even в дашборде оставлен
+<strong>~519К ₽</strong>.</li>
+</ul>
+<p>Команда сервиса включает:</p>
+<ul>
+<li>Антон — владелец;</li>
+<li>Юлия — финансы/B2B/заместитель;</li>
+<li>приёмщики: Игорь, Александр;</li>
+<li>мастера: Легков, Скалдин, Букин, Пастухов как
+приходящий/ненадёжный;</li>
+<li>кладовщик: Коновалов;</li>
+<li>сервис-менеджер: Андрей удалённо.</li>
+</ul>
+</section>
+<section id="72-главная-мысль" class="level3">
+<h3>7.2. Главная мысль</h3>
+<p>ФОТ нельзя просто «сократить» — можно убить тех, кто держит выручку.
+Но и платить фикс/премии без связи с деньгами нельзя.</p>
+<p>Антикризисная модель:</p>
+<ol type="1">
+<li><strong>Фикс</strong> — за присутствие, дисциплину, базовую
+роль.</li>
+<li><strong>Переменная часть</strong> — за закрытые и оплаченные
+деньги.</li>
+<li><strong>Премии</strong> — только за результат, а не за героизм.</li>
+<li><strong>B2B-постоплата</strong> — переменка после поступления
+денег.</li>
+<li><strong>Разовые премии</strong> — только если понятен источник
+cash.</li>
+</ol>
+</section>
+<section id="73-что-проверить-по-каждому-человеку" class="level3">
+<h3>7.3. Что проверить по каждому человеку</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Человек/роль</th>
+<th>Что проверить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Приёмщики</td>
+<td>сколько заказов доведено до оплаты, сколько зависло, кто владелец
+статусов</td>
+</tr>
+<tr class="even">
+<td>Мастера</td>
+<td>выручка/маржа по закрытым ремонтам, возвраты, скорость,
+переделки</td>
+</tr>
+<tr class="odd">
+<td>Кладовщик</td>
+<td>снижает ли простои/ошибки или создаёт хаос по запчастям</td>
+</tr>
+<tr class="even">
+<td>Сервис-менеджер</td>
+<td>даёт ли маржу/снабжение/ускорение или только дополнительную
+коммуникацию</td>
+</tr>
+<tr class="odd">
+<td>Юлия</td>
+<td>нужно ли формально закрепить роль финансового диспетчера
+cash-flow</td>
+</tr>
+<tr class="even">
+<td>Данил</td>
+<td>сколько контрактов реально закрывает, сколько рисков/просрочек, где
+нужна разгрузка</td>
+</tr>
+<tr class="odd">
+<td>Юрий</td>
+<td>какие активы/кабинеты/товар/деньги контролирует, что оцифровано</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="74-запрет-на-опасную-оптимизацию" class="level3">
+<h3>7.4. Запрет на опасную оптимизацию</h3>
+<p>Не делать:</p>
+<ul>
+<li>резать людей без понимания, кто приносит деньги;</li>
+<li>заменять управленческую работу штрафами;</li>
+<li>платить премии при отрицательном cash-flow просто «потому что
+обещали»;</li>
+<li>оформлять сомнительные схемы без бухгалтера/юриста;</li>
+<li>держать серые зоны как долгосрочную норму.</li>
+</ul>
+<p>Делать:</p>
+<ul>
+<li>считать вклад по ролям;</li>
+<li>переводить бонусы на маржу/оплату;</li>
+<li>фиксировать правила письменно;</li>
+<li>спорные изменения в оплате — только законно и аккуратно.</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="8-продажи-и-маркетинг-усиливать-то-что-доводит-до-денег"
+class="level2">
+<h2>8. Продажи и маркетинг: усиливать то, что доводит до денег</h2>
+<section id="81-что-уже-работает" class="level3">
+<h3>8.1. Что уже работает</h3>
+<ul>
+<li><strong>Авито</strong> — главный канал, оценочный ROMI около
+<strong>6,7x</strong>.</li>
+<li><strong>2ГИС</strong> — заметный спрос, особенно в сезон.</li>
+<li><strong>Директ</strong> — свежие данные показывают заявки, но группы
+нужно чистить: некоторые тратят без лидов.</li>
+<li><strong>B2B-база</strong> — уже собраны 780 объединённых лидов, 244
+горячих, 50 обогащённых через DaData.</li>
+<li><strong>Постоянные B2B-клиенты</strong> — Россети, Деловые Линии,
+Элемент-Трейд, ЕЭСК и др.</li>
+</ul>
+</section>
+<section id="82-главная-ошибка-которой-надо-избежать" class="level3">
+<h3>8.2. Главная ошибка, которой надо избежать</h3>
+<p>Не мерить сбыт активностью:</p>
+<ul>
+<li>звонки;</li>
+<li>КП;</li>
+<li>встречи;</li>
+<li>реклама;</li>
+<li>тендерные подачи.</li>
+</ul>
+<p>Мерить нужно деньгами:</p>
+<ul>
+<li>сколько оплачено;</li>
+<li>сколько должно прийти;</li>
+<li>где документный блокер;</li>
+<li>где маржа;</li>
+<li>где повторяемый клиент.</li>
+</ul>
+</section>
+<section id="83-что-делать-в-мае" class="level3">
+<h3>8.3. Что делать в мае</h3>
+<ol type="1">
+<li><strong>Авито не выключать</strong>, но смотреть, какие объявления
+дают обращения/деньги.</li>
+<li><strong>Директ чистить еженедельно</strong>: группы с расходом без
+заявок — пауза/перепаковка.</li>
+<li><strong>B2B-outreach не массовый</strong>, а снайперский: 20
+компаний → 10 касаний → 4 диалога → 1 контракт.</li>
+<li><strong>Россети-подобные клиенты</strong> — приоритет выше случайных
+мелких задач, если документы и оплата управляемы.</li>
+<li><strong>Оффер для B2B</strong>: договор обслуживания / приоритетный
+ремонт / подменный фонд / диагностика парка.</li>
+</ol>
+<hr />
+</section>
+</section>
+<section id="9-b2b-и-дгу-рост-есть-но-только-через-документы"
+class="level2">
+<h2>9. B2B и ДГУ: рост есть, но только через документы</h2>
+<p>ДГУ и тяжёлое обслуживание выглядят перспективно, потому что:</p>
+<ul>
+<li>есть реальные выезды;</li>
+<li>есть регулярные клиенты;</li>
+<li>есть понятные нормы ТО;</li>
+<li>есть высокая ценность для B2B;</li>
+<li>есть возможность продавать запчасти/расходники с маржой.</li>
+</ul>
+<p>Но риск высокий:</p>
+<ul>
+<li>ошибка в документе = клиент блокирует оплату;</li>
+<li>неподписанный акт = работы как будто не было;</li>
+<li>неверные запчасти = повторный выезд, двойной ФОТ;</li>
+<li>два мастера вместо одного без причины = съеденная маржа.</li>
+</ul>
+<p>Правило:</p>
+<blockquote>
+<p>Для ДГУ и выездов работа не считается закрытой без подписанного
+заказ-наряда, акта, фотофиксации и понятного статуса оплаты.</p>
+</blockquote>
+<p>Минимальный чек-лист на выезде:</p>
+<ul>
+<li>фото до;</li>
+<li>шильдик;</li>
+<li>работы;</li>
+<li>старые/новые детали;</li>
+<li>фото после;</li>
+<li>моточасы;</li>
+<li>подписанный заказ-наряд;</li>
+<li>подписанный акт;</li>
+<li>отправка документов в чат/заказ.</li>
+</ul>
+<hr />
+</section>
+<section
+id="10-тендеры-и-данил-не-наращивать-обязательства-без-контроля"
+class="level2">
+<h2>10. Тендеры и Данил: не наращивать обязательства без контроля</h2>
+<section id="101-что-видно-по-контексту" class="level3">
+<h3>10.1. Что видно по контексту</h3>
+<p>По Данилу зафиксировано:</p>
+<ul>
+<li>около <strong>20 контрактов</strong> на одном лице;</li>
+<li>оплачены, по его словам, только около <strong>4</strong>;</li>
+<li>минимум <strong>8 контрактов</strong> с просрочкой;</li>
+<li>около <strong>4 контрактов</strong> требуют замены товара;</li>
+<li>есть сильное выгорание и ощущение «мальчика на побегушках»;</li>
+<li>одновременно сотрудники продолжают считать новые заявки.</li>
+</ul>
+<p>Позже Антон уточнил важное: чужие выигранные тендеры
+Антона/Юры/других направлений <strong>не падают операционно на
+Данила</strong>. Но перегруз по его собственному backlog всё равно
+остаётся критичным.</p>
+</section>
+<section id="102-правило-тендерного-контура" class="level3">
+<h3>10.2. Правило тендерного контура</h3>
+<blockquote>
+<p>Новые подачи нельзя вести в прежнем темпе, пока не виден backlog
+исполнения.</p>
+</blockquote>
+<p>Нужна таблица активных контрактов:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Контракт</th>
+<th style="text-align: right;">Сумма</th>
+<th>Оплачен?</th>
+<th>Дедлайн</th>
+<th>Просрочка</th>
+<th>Что горит</th>
+<th>Кто отвечает</th>
+<th>Что нужно для закрытия</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</section>
+<section id="103-временное-ограничение" class="level3">
+<h3>10.3. Временное ограничение</h3>
+<p>На 2 недели:</p>
+<ul>
+<li>новые расчёты — только сверхвыгодные/реально исполнимые;</li>
+<li>сначала 20 текущих контрактов;</li>
+<li>отдельный список 8 просрочек;</li>
+<li>отдельный список 4 замен товара;</li>
+<li>определить, что можно снять с Данила: звонки, документы, закупки,
+логистика, комплектация.</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="11-юрий--маркетплейсы--ip-риск-контроля-не-только-денег"
+class="level2">
+<h2>11. Юрий / маркетплейсы / IP: риск контроля, не только денег</h2>
+<p>По Юрию риск другой:</p>
+<ul>
+<li>магазины WB/Ozon могут быть оформлены на юрлица
+партнёров/руководителей;</li>
+<li>счета и выплаты могут идти не на компанию Антона;</li>
+<li>товар, карточки, контент, аналитика, поставщики и доступы могут быть
+вне прямого контроля;</li>
+<li>продукт по оцифровке маркетплейсов создан на
+деньгах/знаниях/процессах ИнструментБурга, но может начать
+восприниматься как личный актив Юрия.</li>
+</ul>
+<p>Антикризисный смысл:</p>
+<blockquote>
+<p>Даже если направление приносит деньги, оно опасно, если юридический и
+технический контроль не у компании.</p>
+</blockquote>
+<p>На май — не конфликт, а инвентаризация:</p>
+<ol type="1">
+<li>Найти старый партнёрский договор.</li>
+<li>Составить карту юрлиц/счетов/кабинетов WB/Ozon.</li>
+<li>Проверить админ-доступы, телефоны, почты, 2FA.</li>
+<li>Описать товарные остатки и чьи деньги вложены.</li>
+<li>Описать продукт/IP: код, домен, репозиторий, данные, деньги, планы
+продажи.</li>
+<li>Подготовить взрослый разговор 1:1.</li>
+</ol>
+<hr />
+</section>
+<section id="12-прокатыч--нижний-тагил-и-новые-расширения"
+class="level2">
+<h2>12. Прокатыч / Нижний Тагил и новые расширения</h2>
+<p>По Нижнему Тагилу уже зафиксировано:</p>
+<ul>
+<li>проект «Прокатыч»;</li>
+<li>помещение выбрано: <strong>100 м² на ГГМ, где Кувалда</strong>;</li>
+<li>аренда <strong>40К ₽/мес + коммуналка 6К ₽/мес</strong>;</li>
+<li>полная нагрузка <strong>~46К ₽/мес</strong>;</li>
+<li>стратегия: сначала ремонт как якорь, потом прокат через 2–3
+месяца;</li>
+<li>100К чистыми возможно при выручке примерно <strong>360–450К
+₽/мес</strong>.</li>
+</ul>
+<p>Антикризисное решение:</p>
+<ul>
+<li>не отменять как идею;</li>
+<li>не кормить за счёт кассового удушения ядра;</li>
+<li>запускать только с лимитом потерь и отдельным P&amp;L;</li>
+<li>стоп-лосс: если к 3 месяцу нет понятной выручки/динамики —
+заморозка/закрытие.</li>
+</ul>
+<p>Вторая точка на Уралмаше, дроны и хаотичные новые направления —
+<strong>не приоритет май–июнь</strong>.</p>
+<hr />
+</section>
+<section id="13-автоматизация-сильный-актив-но-не-замена-управлению"
+class="level2">
+<h2>13. Автоматизация: сильный актив, но не замена управлению</h2>
+<p>У Антона уже много реальных цифровых активов:</p>
+<ul>
+<li>финансовый/маркетинговый дашборд;</li>
+<li>LiveSklad + Модульбанк + Avito + Direct + Metrika;</li>
+<li>калькулятор сервиса;</li>
+<li>модуль Россетей;</li>
+<li>marketplace watcher WB/Ozon;</li>
+<li>синхронизация marketplace-фактов с калькулятором;</li>
+<li>DGU field service в мастерском интерфейсе;</li>
+<li>автоматизация КП/тендерных документов;</li>
+<li>closing-docs MVP;</li>
+<li>каталог KingQueen: 226 товаров и заготовки под Авито.</li>
+</ul>
+<p>Это сильная база. Но ключевой риск:</p>
+<blockquote>
+<p>Автоматизация не спасает, если у заказа нет владельца, у денег нет
+даты прихода, а у человека нет ответственности.</p>
+</blockquote>
+<p>На май–июнь автоматизацию использовать как контрольный слой:</p>
+<ul>
+<li>дашборд → видеть деньги;</li>
+<li>журнал сервиса → видеть блокеры;</li>
+<li>marketplace watcher → не терять закупки;</li>
+<li>closing-docs → ускорять закрывающие;</li>
+<li>калькулятор → стандартизировать сметы;</li>
+<li>не строить новые сложные штуки, если старые процессы не
+исполняются.</li>
+</ul>
+<hr />
+</section>
+<section id="14-one-wig-на-майиюнь" class="level2">
+<h2>14. One WIG на май–июнь</h2>
+<p>Если сделать только одно, что сделает май–июнь успешными:</p>
+<blockquote>
+<p><strong>Вернуть управляемый положительный cash-flow: каждую неделю
+видеть деньги на 8 недель вперёд, собрать ключевую дебиторку, не платить
+переменную часть раньше поступления денег и убрать сервисные/тендерные
+заказы без владельца.</strong></p>
+</blockquote>
+<p>Это важнее, чем:</p>
+<ul>
+<li>новая точка;</li>
+<li>новые направления;</li>
+<li>красивые стратегии;</li>
+<li>расширение ассортимента;</li>
+<li>ещё одна автоматизация;</li>
+<li>спор «кто виноват».</li>
+</ul>
+<hr />
+</section>
+<section id="15-10-конкретных-действий-на-ближайшие-14-дней"
+class="level2">
+<h2>15. 10 конкретных действий на ближайшие 14 дней</h2>
+<section id="день-12-деньги" class="level3">
+<h3>День 1–2: деньги</h3>
+<ol type="1">
+<li>Создать таблицу cash-flow на 8 недель: остаток, приходы, платежи,
+ФОТ, налоги.</li>
+<li>Отдельно вынести дебиторку: Россети/Челябэнерго, Деловые Линии,
+СООД, Монетка, Форвард, текущие B2B.</li>
+<li>Разделить ФОТ: фикс / переменная / разовые премии / выплаты после
+прихода денег.</li>
+</ol>
+</section>
+<section id="день-34-сервис" class="level3">
+<h3>День 3–4: сервис</h3>
+<ol start="4" type="1">
+<li>Ввести правило: каждый новый сервисный заказ имеет владельца,
+статус, следующий шаг и дедлайн.</li>
+<li>Выгрузить/собрать заказы в статусах «ждёт согласования», «ждёт
+оплаты/выдачи», «ждёт запчасти» — это список денег и блокеров.</li>
+</ol>
+</section>
+<section id="день-56-b2b-и-документы" class="level3">
+<h3>День 5–6: B2B и документы</h3>
+<ol start="6" type="1">
+<li>По Россетям/Челябэнерго: получить точную дату оплаты, список
+недостающих документов и ответственного за дожим.</li>
+<li>По ДГУ/выездам: закрепить чек-лист закрытия — без подписанных
+документов работа не закрыта.</li>
+</ol>
+</section>
+<section id="день-79-тендеры" class="level3">
+<h3>День 7–9: тендеры</h3>
+<ol start="8" type="1">
+<li>С Данилом сделать таблицу 20 контрактов: оплачено/не оплачено,
+просрочка, замена товара, риск штрафа, кто может помочь.</li>
+<li>На 2 недели ограничить новые подачи, кроме реально исполнимых и
+маржинальных.</li>
+</ol>
+</section>
+<section id="день-1014-контроль-активов-и-партнёрские-риски"
+class="level3">
+<h3>День 10–14: контроль активов и партнёрские риски</h3>
+<ol start="10" type="1">
+<li>Найти старый партнёрский договор и начать карту
+юрлиц/счетов/доступов по Юрию/Данилу.</li>
+</ol>
+<hr />
+</section>
+</section>
+<section id="16-еженедельный-ритм-управления" class="level2">
+<h2>16. Еженедельный ритм управления</h2>
+<section id="понедельник--деньги" class="level3">
+<h3>Понедельник — деньги</h3>
+<p>15 минут:</p>
+<ul>
+<li>сколько денег есть;</li>
+<li>что придёт на неделе;</li>
+<li>что нужно заплатить;</li>
+<li>где кассовый разрыв;</li>
+<li>кто дожимает дебиторку.</li>
+</ul>
+</section>
+<section id="среда--операционка" class="level3">
+<h3>Среда — операционка</h3>
+<p>15 минут:</p>
+<ul>
+<li>сервисные заказы без движения;</li>
+<li>B2B-документы;</li>
+<li>тендерные дедлайны;</li>
+<li>что блокирует мастеров/склад/приёмку.</li>
+</ul>
+</section>
+<section id="пятница--решения" class="level3">
+<h3>Пятница — решения</h3>
+<p>20 минут:</p>
+<ul>
+<li>что закрыто деньгами;</li>
+<li>кому платим переменную часть;</li>
+<li>что стопаем;</li>
+<li>что переносим;</li>
+<li>какие 1–2 действия на следующую неделю.</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="17-stop-doing-list-на-майиюнь" class="level2">
+<h2>17. Stop Doing List на май–июнь</h2>
+<p>Прямо остановить или поставить на паузу:</p>
+<ol type="1">
+<li>Платить переменную часть по B2B до поступления денег.</li>
+<li>Брать новые тендерные обязательства без карты текущих
+контрактов.</li>
+<li>Запускать новые направления без отдельного P&amp;L и
+стоп-лосса.</li>
+<li>Решать сервисные конфликты через Антона вручную вместо владельца
+заказа.</li>
+<li>Заказывать запчасти без проверки склада.</li>
+<li>Держать заявки только в почте/Avito/чате.</li>
+<li>Обсуждать партнёрские риски на эмоциях до сбора фактов.</li>
+<li>Оценивать сотрудников по занятости вместо результата/денег.</li>
+<li>Делать ещё одну автоматизацию вместо назначения ответственного.</li>
+<li>Считать «согласовано» равным «деньги пришли».</li>
+</ol>
+<hr />
+</section>
+<section id="18-что-нужно-добрать-для-точности" class="level2">
+<h2>18. Что нужно добрать для точности</h2>
+<p>Чтобы карта стала не стратегической, а управленчески точной, нужны
+данные:</p>
+<ol type="1">
+<li>Реальный остаток денег на счетах/кассах на сегодня.</li>
+<li>Полный список дебиторки с датами ожидаемой оплаты.</li>
+<li>Полный список платежей май–июнь.</li>
+<li>Точный статус оплаты Россетей/Челябэнерго.</li>
+<li>Список сервисных заказов в статусах «ждёт согласования», «ждёт
+оплаты», «ждёт запчасти».</li>
+<li>Таблица 20 контрактов Данила.</li>
+<li>Карта юрлиц/счетов/доступов Юрия/Данила.</li>
+<li>Текущий P&amp;L по маркетплейсам и тендерам за 6–12 месяцев.</li>
+<li>Фактический P&amp;L Прокатыча/Тагила до запуска или в первые 3
+месяца.</li>
+<li>Решение бухгалтера/юриста по безопасной модели ФОТ/переменной
+части/договоров.</li>
+</ol>
+<hr />
+</section>
+<section id="19-самое-важное-для-психологического-давления"
+class="level2">
+<h2>19. Самое важное для психологического давления</h2>
+<p>Антон, давление не снизится, если просто «стараться больше». Оно
+снизится, когда часть тревоги станет таблицами, владельцами и
+решениями.</p>
+<p>Тебе сейчас не нужно быть героем, который держит всё. Нужен режим
+штаба:</p>
+<ul>
+<li>один список денег;</li>
+<li>один список долгов клиентов;</li>
+<li>один список горящих заказов;</li>
+<li>один список людей и ответственности;</li>
+<li>один маленький шаг по партнёрским рискам каждый день.</li>
+</ul>
+<p>Твоя задача как владельца — не тушить каждый пожар лично, а поставить
+систему, где видно:</p>
+<ul>
+<li>где деньги;</li>
+<li>кто должен;</li>
+<li>кто отвечает;</li>
+<li>что будет сделано завтра;</li>
+<li>что мы больше не делаем.</li>
+</ul>
+<hr />
+</section>
+<section id="20-источники-которые-использовались" class="level2">
+<h2>20. Источники, которые использовались</h2>
+<p>Рабочие файлы topic-business:</p>
+<ul>
+<li><code>research/service-direction-context-2026-04-19.md</code></li>
+<li><code>research/finmodel-salary-best-practices-2026.md</code></li>
+<li><code>work/service-crisis-2026-05-01.md</code></li>
+<li><code>work/yuriy-danil-risk-audit-2026-04-28.md</code></li>
+<li><code>work/partner-conversation-prep-2026-04-28.md</code></li>
+<li><code>work/daily-partner-risk-plan-2026-04-28.md</code></li>
+<li><code>work/partner-risk-daily-log.md</code></li>
+<li><code>memory/2026-03-10.md</code></li>
+<li><code>memory/2026-03-15-strategy-board.md</code></li>
+<li><code>memory/2026-04-19.md</code></li>
+<li><code>memory/2026-04-26.md</code></li>
+<li><code>memory/2026-04-28.md</code></li>
+<li><code>memory/2026-05-01.md</code></li>
+<li><code>memory/2026-05-05.md</code></li>
+</ul>
+<p>Проект ИнструментБург:</p>
+<ul>
+<li><code>/home/iamsohappy/projects/instrumentburg/00-meta/company.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/финмодель-сервис-2026.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/безубыточность-маркетинг.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/команда-сервис.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/зарплаты-2026-04.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/сервисный-менеджер-роль.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/проблема-просроченные-заказы.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/рост-александра-руководитель.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/ключевые-клиенты.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/россети-урал.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/россети-работы.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/процесс-то-дгу.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/knowledge/процесс-закрытие-выезда-дгу.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/dashboard/STATUS.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/dashboard/data.js</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/dashboard/insights.js</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/dashboard/direct-insights.js</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/dashboard/finmodel-data.js</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/b2b-outreach/README.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/calculator/scripts/nds-q1-2026/output/Черновой_расчёт_НДС_Q1_2026.md</code></li>
+<li><code>/home/iamsohappy/projects/instrumentburg/apps/calculator/scripts/nds-q1-2026/output/Черновой_расчёт_УСН_аванс_Q1_2026.md</code></li>
+</ul>
+<p>Связанные проекты:</p>
+<ul>
+<li><code>/home/iamsohappy/projects/tagil-instrument/PROJECT_BRIEF.md</code></li>
+<li><code>/home/iamsohappy/projects/tagil-instrument/docs/project-overview.md</code></li>
+<li><code>/home/iamsohappy/projects/Tenders/...</code> — свежие
+КП/Россети/Форвард/УРПСО/closing-docs контекст</li>
+</ul>
+</section>
+
+    </article>
+  </div>
+
+  <footer class="footer">
+    <p>Собрано из рабочей памяти, файлов topic-business, базы ИнструментБурга, дашборда и тендерных артефактов. Страница закрыта от индексации через <code>noindex</code>, но доступна по прямой ссылке GitHub Pages.</p>
+  </footer>
+
+  <script>
+    const progress = document.getElementById('progress');
+    const content = document.getElementById('content');
+    const toc = document.getElementById('toc');
+    const headings = [...content.querySelectorAll('h2')];
+    headings.forEach((h, index) => {
+      if (!h.id) h.id = 'section-' + index;
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.replace(/^\d+\.\s*/, '');
+      toc.appendChild(a);
+    });
+    const links = [...toc.querySelectorAll('a')];
+    const onScroll = () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progress.style.transform = `scaleX(${height ? scrollTop / height : 0})`;
+      let active = 0;
+      headings.forEach((h, i) => { if (h.getBoundingClientRect().top < 120) active = i; });
+      links.forEach((a, i) => a.classList.toggle('active', i === active));
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
