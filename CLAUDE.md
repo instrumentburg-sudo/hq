@@ -70,3 +70,34 @@
 - github_project_number: 1
 - github_project_title: Антон — Всё
 - tasks_file: /home/iamsohappy/projects/Githab/hq/AGENTS.md
+
+## Утренняя сводка
+
+- script_source: /home/iamsohappy/projects/Githab/hq/scripts/hq-task-summary-context.py
+- script_cron_link: /home/iamsohappy/.hermes/scripts/hq-task-summary-context.py
+- cron_name: daily-hq-task-summary-ekb-1000
+- delivery: Telegram Антону
+- sources:
+  - GitHub Project «Антон — Всё»
+  - /home/iamsohappy/projects/Githab/hq/tasks
+  - /home/iamsohappy/projects/Githab/crm
+  - /home/iamsohappy/projects/Githab/hq/docs/retro
+  - /home/iamsohappy/projects/Githab/hq/docs/planning
+- style: по-русски, коротко, предпринимательский контекст, минимум англицизмов
+
+## Недельный цикл
+
+### Разбор недели
+- path: /home/iamsohappy/projects/Githab/hq/docs/retro/WNN.md
+- goal: факт недели, зависшие хвосты, решения Антона, что агент может сделать сам
+- write_authorization: draft-only-until-anton-confirms
+
+### План недели
+- path: /home/iamsohappy/projects/Githab/hq/docs/planning/WNN-outcomes.md
+- goal: 3–7 проверяемых результатов недели
+- source_order:
+  - последний разбор недели
+  - GitHub Project «Антон — Всё»
+  - свежая приоритизация в hq/priorities
+  - CRM-шаги с датами
+- write_authorization: ask-each-time
