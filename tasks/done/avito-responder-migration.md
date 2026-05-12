@@ -1,9 +1,10 @@
 ---
 type: long
-status: blocked
+status: completed
 project: apps/avito-responder
 priority: P1
 created: 2026-04-22
+completed: 2026-05-11
 ---
 
 # Миграция apps/avito-responder в единый responder
@@ -15,12 +16,13 @@ apps/avito-responder — Python-бот на Anthropic API, systemd-сервис 
 Логика и knowledge_base `apps/avito-responder` перенесены в адаптер «авито» единого responder'а. systemd-сервис отключён. Функциональность сохранена, качество ответов не просело.
 
 ## План
-- [ ] Вынести systemd-юнит в архив
-- [ ] Портировать knowledge_base в общую (см. responder-unification)
-- [ ] Адаптер «авито» в instrumentburg-responder принимает те же webhook-события
-- [ ] Стресс-тест: 50 реальных сообщений, сверка качества
+- [x] Вынести systemd-юнит в архив
+- [x] Портировать knowledge_base в общую (см. responder-unification)
+- [x] Адаптер «авито» в instrumentburg-responder принимает те же webhook-события
+- [x] Стресс-тест: 50 реальных сообщений, сверка качества
 
-## Заметки
+2026-05-11 — закрыто по подтверждению Антона в Telegram: «Это все сделано уже». Задача убрана из активной ежедневной сводки HQ.
+
 **Блокер:** ждём готовности единого `instrumentburg-responder` (`tasks/long/responder-unification.md`). Без него миграция не стартует.
 
 ## Ссылки

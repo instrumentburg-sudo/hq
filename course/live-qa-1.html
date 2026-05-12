@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лайв-Q&A потока 1 · между уроками 2 и 3 · Personal Corp</title>
+<meta name="description" content="Выжимок промежуточного лайв-Q&A Серёжи Риса (между уроками 2 и 3): масштабирование системы без оверинженеринга, скиллы и MCP, AGENTS.md на двух этажах, GitHub Projects, evals, надзиратель и Telethon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal:     #1a1a1a;
+    --charcoal-2:   #242220;
+    --charcoal-3:   #2d2a27;
+    --paper:        #EBE6DC;
+    --paper-dim:    rgba(235, 230, 220, 0.72);
+    --paper-mute:   rgba(235, 230, 220, 0.52);
+    --paper-ghost:  rgba(235, 230, 220, 0.12);
+    --paper-edge:   rgba(235, 230, 220, 0.18);
+    --oxide:        #E05A32;
+    --oxide-soft:   rgba(224, 90, 50, 0.16);
+    --brass:        #D09840;
+    --moss:         #7A9A52;
+    --display: "Oswald", "Impact", "Arial Narrow", sans-serif;
+    --body:    "Roboto Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--charcoal); }
+  body {
+    background: var(--charcoal);
+    color: var(--paper);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.55;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(224, 90, 50, 0.08) 0%, transparent 38%),
+      radial-gradient(circle at 88% 92%, rgba(208, 152, 64, 0.06) 0%, transparent 44%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--oxide); color: var(--charcoal); }
+
+  a { color: inherit; }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.1rem, 3.5vw, 2.5rem) 5rem;
+  }
+
+  /* ================= MASTHEAD ================= */
+
+  .masthead { position: relative; padding-top: 1rem; }
+
+  .rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--paper-edge);
+  }
+  .rail .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--paper);
+  }
+  .rail .live::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--oxide);
+    box-shadow: 0 0 0 0 var(--oxide);
+    animation: pulse 2.6s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(224, 90, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(224, 90, 50, 0); }
+  }
+  .rail .sep { color: var(--paper-ghost); }
+
+  .lesson-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin: 2.25rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .lesson-tag::before {
+    content: "";
+    display: inline-block;
+    width: 2.4rem;
+    height: 2px;
+    background: var(--oxide);
+  }
+
+  h1.hero {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(3.4rem, 9.5vw, 8.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    max-width: 18ch;
+  }
+  h1.hero em {
+    font-style: normal;
+    color: var(--oxide);
+    font-weight: 500;
+  }
+  h1.hero .ampersand {
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--paper-dim);
+    font-size: 0.75em;
+    padding: 0 0.15em;
+  }
+
+  .summary {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--paper-edge);
+  }
+  .summary p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--paper-dim);
+    max-width: 58ch;
+  }
+  .summary-meta {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 0.25rem;
+    line-height: 1.8;
+  }
+  .summary-meta b { color: var(--paper); font-weight: 500; }
+  @media (max-width: 680px) {
+    .summary { grid-template-columns: 1fr; gap: 1.25rem; }
+    .summary-meta { text-align: left; }
+  }
+
+  /* ================= SECTION HEAD ================= */
+
+  section.block { margin-top: clamp(3rem, 5vw, 4.5rem); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-num {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .section-kicker {
+    margin-left: auto;
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.92rem;
+    color: var(--paper-mute);
+    max-width: 32ch;
+    text-align: right;
+  }
+  @media (max-width: 720px) {
+    .section-kicker { margin-left: 0; text-align: left; }
+  }
+
+  /* ================= TERMS ================= */
+
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--paper-edge);
+    border: 1px solid var(--paper-edge);
+  }
+  @media (max-width: 760px) { .terms-grid { grid-template-columns: 1fr; } }
+
+  .term {
+    background: var(--charcoal-2);
+    padding: 1.4rem 1.5rem 1.35rem;
+    position: relative;
+    transition: background 0.25s ease;
+  }
+  .term:hover { background: var(--charcoal-3); }
+  .term-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    padding-right: 2.25rem;
+  }
+  .term-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.4rem;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--paper-mute);
+  }
+  .term-def {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.96rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= METHODS ================= */
+
+  .methods-list { display: grid; gap: 0; }
+  .method {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0.25rem 1.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    align-items: start;
+    transition: background 0.2s ease;
+  }
+  .method:hover { background: rgba(235, 230, 220, 0.025); }
+  .method:first-child { border-top: 1px solid var(--paper-edge); }
+  .method-num {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 0.9;
+    color: var(--oxide);
+    letter-spacing: -0.02em;
+  }
+  .method-body h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 1.85vw, 1.5rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.45rem;
+    line-height: 1.15;
+  }
+  .method-body p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    max-width: 70ch;
+  }
+  @media (max-width: 620px) {
+    .method { grid-template-columns: 1fr; gap: 0.4rem; }
+    .method-num { font-size: 1.75rem; }
+  }
+
+  /* ================= TOOLS ================= */
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .tool {
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--paper-edge);
+    background: var(--charcoal-2);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .tool:hover { border-color: var(--oxide); transform: translateY(-2px); }
+  .tool-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .tool-mark {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--oxide);
+  }
+  .tool-role {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+
+  /* ================= GOALS & HOMEWORK ================= */
+
+  .objectives {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  @media (max-width: 860px) { .objectives { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .objectives h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-edge);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .objectives h3 .tally {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--paper-mute);
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+
+  .checklist { list-style: none; display: grid; gap: 0.75rem; }
+  .check {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--paper-ghost);
+  }
+  .check:last-child { border-bottom: none; }
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem; height: 1.4rem;
+    border: 1.5px solid var(--paper-edge);
+    font-family: var(--display);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--paper);
+    margin-top: 0.15rem;
+  }
+  .check.done .mark { background: var(--moss); border-color: var(--moss); color: var(--charcoal); }
+  .check.partial .mark { background: var(--brass); border-color: var(--brass); color: var(--charcoal); }
+  .check.todo .mark { background: transparent; border-color: var(--paper-edge); color: var(--paper-mute); }
+  .check.done .mark::before { content: "✓"; }
+  .check.partial .mark::before { content: "◐"; }
+  .check.todo .mark::before { content: "○"; }
+
+  .check-body .label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
+  }
+  .check-body .how {
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+  .check.todo .check-body .label { color: var(--paper-dim); }
+
+  /* ================= QUOTES ================= */
+
+  .quotes-wrap {
+    padding: clamp(2rem, 4vw, 3rem) 0 0;
+    border-top: 1px solid var(--paper-edge);
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+  }
+  .quotes-label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .quotes-label::before {
+    content: "";
+    width: 2rem; height: 1px; background: var(--oxide);
+  }
+
+  .quotes {
+    display: grid;
+    gap: 1.4rem;
+  }
+  blockquote {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    line-height: 1.35;
+    color: var(--paper);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--oxide);
+    max-width: 72ch;
+  }
+  blockquote::before { content: "«"; color: var(--oxide); margin-right: 0.08em; }
+  blockquote::after  { content: "»"; color: var(--oxide); margin-left: 0.08em; }
+
+  /* ================= CTA / FOOTER ================= */
+
+  .cta-row {
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+    padding: clamp(1.75rem, 3vw, 2.4rem);
+    background: var(--charcoal-2);
+    border: 1px solid var(--paper-edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .cta-row::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--oxide-soft), transparent 45%);
+    pointer-events: none;
+  }
+  .cta-text {
+    position: relative;
+  }
+  .cta-text .eyebrow {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.76rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 0.4rem;
+  }
+  .cta-text h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+  .cta-text p {
+    font-family: var(--body);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--paper-dim);
+    max-width: 52ch;
+  }
+  .cta-btn {
+    position: relative;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    background: var(--oxide);
+    padding: 1.1rem 1.6rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid var(--oxide);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .cta-btn:hover { background: var(--paper); border-color: var(--paper); transform: translateX(4px); }
+  .cta-btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-btn:hover .arrow { transform: translateX(4px); }
+
+  footer.pagefoot {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--paper-edge);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  footer.pagefoot > :nth-child(2) { text-align: center; }
+  footer.pagefoot > :nth-child(3) { text-align: right; }
+  footer.pagefoot a {
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-edge);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  footer.pagefoot a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+  @media (max-width: 680px) {
+    footer.pagefoot { grid-template-columns: 1fr; }
+    footer.pagefoot > * { text-align: left !important; }
+  }
+
+  /* ================= ENTRY ANIMATIONS ================= */
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .masthead    { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block{ animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+  section.block.b1 { animation-delay: 0.1s; }
+  section.block.b2 { animation-delay: 0.2s; }
+  section.block.b3 { animation-delay: 0.3s; }
+  section.block.b4 { animation-delay: 0.4s; }
+  .quotes-wrap { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.5s both; }
+  .cta-row     { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.6s both; }
+  footer.pagefoot { animation: rise 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) 0.7s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- ============== MASTHEAD ============== -->
+  <header class="masthead">
+    <div class="rail">
+      <span class="live">Сессия открыта</span>
+      <span>Personal Corp <span class="sep">·</span> Серёжа Рис <span class="sep">·</span> ~48 минут</span>
+      <span>12·V·MMXXVI</span>
+    </div>
+
+    <div class="lesson-tag">Лайв-Q&A потока 1 · между уроками 2 и 3</div>
+
+    <h1 class="hero">
+      Когда один проект
+      превращается в <em>пять</em>
+    </h1>
+
+    <div class="summary">
+      <p>
+        Промежуточный лайв между уроками 2 и 3: как <em style="color:var(--oxide); font-style:normal;">не строить систему для нерешённой задачи</em>, когда один проект превращается в пять — генерация каруселей через imagegen в Codex, агент Hermes, AGENTS.md на уровне проекта против корня штаба, GitHub Projects, evals, status.md против файла плана, надзиратель по расписанию и Telethon против ботов.
+      </p>
+      <div class="summary-meta">
+        № выпуска<br><b>III · 12·05·26</b><br>
+        формат<br><b>live Q&amp;A</b>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== I · TERMS ============== -->
+  <section class="block b1">
+    <div class="section-head">
+      <span class="section-num">§ I.</span>
+      <h2 class="section-title">Термины</h2>
+      <span class="section-kicker">Слова, которыми Серёжа режет вопрос «как масштабироваться» на слои.</span>
+    </div>
+    <div class="terms-grid">
+      <article class="term"><span class="term-num">01</span><h3 class="term-name">Масштабирование системы</h3><p class="term-def">Когда один проект превращается в пять — сначала делаешь как получится, в одном месте; систему строишь только когда реально упёрся в ограничение, что всё не влезает и неудобно.</p></article>
+      <article class="term"><span class="term-num">02</span><h3 class="term-name">Общий слой против слоя проекта</h3><p class="term-def">Переиспользуемый инструмент (генерация картинок, парсинг) сперва живёт внутри одного проекта. Понял, что решение универсальное — выносишь в отдельный сервис, скилл или MCP.</p></article>
+      <article class="term"><span class="term-num">03</span><h3 class="term-name">Скилл — упакованная экспертиза</h3><p class="term-def">Один раз сделал что-то с агентом, понравился результат — прямо в чате говоришь «сделай скилл», и он пакует рецепт на основе того, что было реализовано в задаче.</p></article>
+      <article class="term"><span class="term-num">04</span><h3 class="term-name">MCP-сервер над папкой</h3><p class="term-def">Когда агент в папке-проекте начинает теряться на повторяющемся запросе — поднимаешь MCP, описываешь самые частые запросы, и они становятся отдельными инструментами агента.</p></article>
+      <article class="term"><span class="term-num">05</span><h3 class="term-name">Hermes</h3><p class="term-def">Агент-продукт (выросший из OpenClaw): практически на каждое удачное действие сам создаёт скилл и в следующий раз вызывает уже его. Автоматизация ручного паттерна «давай сделаем из этого скилл».</p></article>
+      <article class="term"><span class="term-num">06</span><h3 class="term-name">AGENTS.md на двух этажах</h3><p class="term-def">В корне штаба-оркестратора — глобальные принципы и список проектов; в папке проекта — домен-специфичные правила (код, деньги, договорённости, публикация). Один-два проекта — можно всё вместе.</p></article>
+      <article class="term"><span class="term-num">07</span><h3 class="term-name">Штаб-оркестратор</h3><p class="term-def">Главная папка-координатор: списки проектов, карта, ссылки наружу. Сам задачи не делает — может быть и зонтиком над сетью под-проектов (эфиры, программы, микро-продукты).</p></article>
+      <article class="term"><span class="term-num">08</span><h3 class="term-name">Evals / самопроверка</h3><p class="term-def">Критерии оценки задачи, по которым агент сам ставит оценку результату — например, 10-балльная шкала и чек-лист (штампы, запрещённые слова). Меньше шести — начать заново или поправить скилл.</p></article>
+      <article class="term"><span class="term-num">09</span><h3 class="term-name">status.md против файла плана</h3><p class="term-def">Два файла для восстановления контекста: план действий — что агент должен сделать (конкретные задачи); status.md — что агент делает прямо сейчас, чтобы после обрыва продолжить с того же места.</p></article>
+      <article class="term"><span class="term-num">10</span><h3 class="term-name">Надзиратель-агент</h3><p class="term-def">Отдельная функция агента по расписанию: читает правила и карточки, проверяет, что они не устарели, и синхронизирует источники — например, базу Telegram-сообщений с CRM. Правила сами не чистятся.</p></article>
+      <article class="term"><span class="term-num">11</span><h3 class="term-name">Связующее звено</h3><p class="term-def">Когда ты вручную таскаешь результат от агента А к агенту Б между сессиями. Сигнал формализовать действия (получаю X → отдаю Б) и заменить себя headless-вызовом или лупом.</p></article>
+      <article class="term"><span class="term-num">12</span><h3 class="term-name">Аккаунт разработчика Telegram</h3><p class="term-def">Регистрация на my.telegram.org (Apps) до любой автоматизации через Telethon. Без неё Telegram считает аккаунт ботом и может удалить — у знакомой Серёжи так снесли рабочий аккаунт.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== II · METHODS ============== -->
+  <section class="block b2">
+    <div class="section-head">
+      <span class="section-num">§ II.</span>
+      <h2 class="section-title">Методы</h2>
+      <span class="section-kicker">Принципы, с которых Серёжа начинает любой ответ на лайве.</span>
+    </div>
+    <div class="methods-list">
+      <article class="method"><div class="method-num">01</div><div class="method-body"><h3>Не строить систему для нерешённой задачи</h3><p>Сначала — как получится, в одном месте. Систему строишь, когда реально упёрся в ограничение. Иначе — прокрастинация под видом инженерии: талантливый друг Серёжи восемь месяцев собирает контент-завод вместо первого выпуска. Главное — чтобы был выхлоп и прикладное применение.</p></div></article>
+      <article class="method"><div class="method-num">02</div><div class="method-body"><h3>Сначала в проекте, потом — в общий слой</h3><p>Любой переиспользуемый инструмент (генерация каруселей, парсинг) сначала делаешь внутри конкретного проекта, учишься с ним работать с агентом. Только когда понял, что решение универсальное — выносишь в отдельный сервис, скилл или MCP-сервер.</p></div></article>
+      <article class="method"><div class="method-num">03</div><div class="method-body"><h3>Не паниковать на дублировании, пока комфортно</h3><p>Заметил дублирование информации — не обязательно сразу что-то перепридумывать: агенты в этом плане удобны, и с ними можно работать. Перестраивать стоит, только когда правда мешает, а не профилактически.</p></div></article>
+      <article class="method"><div class="method-num">04</div><div class="method-body"><h3>Общие принципы в AGENTS.md скорее не работают</h3><p>Записать «большая инженерия — ошибка» или «не ленись» в корень штаба — слабый рычаг: модель и так знает, что задачи нужно делать хорошо. Работают нишевые скиллы — «хочешь сделать X, вот тебе чёткие инструкции, как делать X правильно».</p></div></article>
+      <article class="method"><div class="method-num">05</div><div class="method-body"><h3>Самопроверка через критерии оценки</h3><p>Без критериев ты каждый раз сам их придумываешь и раздражаешься от результата, который не нравится. Задаёшь чек-лист (штампы, запрещённые слова, 10-балльная шкала), агент сам вычитывает и ставит оценку — так у Серёжи сделано со статьями на сайте. Меньше шести — заново или поправь скилл.</p></div></article>
+      <article class="method"><div class="method-num">06</div><div class="method-body"><h3>Этап оценки в цикле агента — простое самоулучшение</h3><p>Отдельный агент в цикле, который, поймав свою ошибку, апдейтит скилл «так больше не делай». Простая, но эффективная методика — закладывать в агента этап проверки и оценки, а не строить сразу полноценный эволюционный слой.</p></div></article>
+      <article class="method"><div class="method-num">07</div><div class="method-body"><h3>status.md, чтобы пережить обрыв сессии</h3><p>Просишь агента писать в status.md, что он делает прямо сейчас в этом цикле. Если что-то прервалось — даёшь агенту продолжить с того же места и можешь сам (или попросить его) проверить работу. Плюс — ветвить удачный контекст, как ветки в чате GPT.</p></div></article>
+      <article class="method"><div class="method-num">08</div><div class="method-body"><h3>Как можно меньше спускаться в исполнение</h3><p>Метафора офиса: директор может присесть за стол к сотруднику и начать тыкать в экран — это переход со слоя стратегии на слой исполнения. Целевая точка — оставаться наверху, в исполнение залазить как можно реже.</p></div></article>
+      <article class="method"><div class="method-num">09</div><div class="method-body"><h3>Минимум документов в проекте — файл правил</h3><p>Для агента достаточно нескольких файлов с правилами; для готового проекта — запустить анализ и собрать правила, чтобы агент не тратил токены, разбираясь каждый раз. Делить на модульные правила (тексты, БД, публикация) — только когда проект разросся, не с самого начала.</p></div></article>
+    </div>
+  </section>
+
+  <!-- ============== III · TOOLS ============== -->
+  <section class="block b3">
+    <div class="section-head">
+      <span class="section-num">§ III.</span>
+      <h2 class="section-title">Инструменты</h2>
+      <span class="section-kicker">Стек, который всплыл в ответах: от imagegen в Codex до Telethon.</span>
+    </div>
+    <div class="tools-grid">
+      <article class="tool"><div class="tool-name">GPT-5 <span class="tool-mark">01</span></div><p class="tool-role">Новая модель ChatGPT: участник Владимир закинул референс проекта по ключевым атрибутам и попросил разогнать до портфолио — она собрала кейс для брендинг-агентства за вечер.</p></article>
+      <article class="tool"><div class="tool-name">imagegen в Codex <span class="tool-mark">02</span></div><p class="tool-role">Скилл в Codex, позволяющий прямо из Codex вызывать генерацию изображений (вышедший GPT-Image / nano-banana 2). Под пайплайн каруселей и баннеров — Серёжа обещал показать позже.</p></article>
+      <article class="tool"><div class="tool-name">Hermes / OpenClaw <span class="tool-mark">03</span></div><p class="tool-role">Агент-продукт: на каждое удачное действие сам создаёт скилл и дальше вызывает его. Hermes вырос из OpenClaw; разбор — ближе ко второму месяцу курса.</p></article>
+      <article class="tool"><div class="tool-name">GitHub Projects <span class="tool-mark">04</span></div><p class="tool-role">Бесплатный реестр задач и роадмапа, которым рулит агент через интерфейс. Копируешь ссылку на задачу, открываешь агента (Cursor / Claude Code) — «что по этой задаче» подтягивает контекст, пути, даты, эпики.</p></article>
+      <article class="tool"><div class="tool-name">Claude Code <span class="tool-mark">05</span></div><p class="tool-role">Почти всегда оркестратор: пишет общий план. Простую задачу планом отдаёт в Codex; сложную просит Codex отревьюить; уверенную в успехе — просит Claude вызвать Codex headless, тот пишет результат, Claude проверяет.</p></article>
+      <article class="tool"><div class="tool-name">Codex <span class="tool-mark">06</span></div><p class="tool-role">Исполнитель для систем с множеством связей: бэкенд, аналитика, БД, поиск информации. С креативными текстами справляется плохо — туда лучше Claude. Запускается headless из других агентов.</p></article>
+      <article class="tool"><div class="tool-name">Superpowers <span class="tool-mark">07</span></div><p class="tool-role">Набор мета-скиллов про работу с агентом, не про домен. Ключевые — Writing Skills (TDD-создание скиллов: сначала роняет задачу, чинит, спрашивает фидбэк, потом пакует) и Systematic Debugging (распутывает узлы и зависимости).</p></article>
+      <article class="tool"><div class="tool-name">Telethon · my.telegram.org <span class="tool-mark">08</span></div><p class="tool-role">Telethon — программное управление Telegram-аккаунтом. До любой автоматизации обязательна регистрация аккаунта разработчика на my.telegram.org (Apps), иначе Telegram считает ботом и удаляет аккаунт. Отдельный урок будет позже.</p></article>
+      <article class="tool"><div class="tool-name">MCP-серверы (Telegram, браузер/DevTools) <span class="tool-mark">09</span></div><p class="tool-role">Обёртки над сервисами: Telegram через Telethon, Chrome DevTools для браузера, платные решения / Exa для скрапа. Серёжа обещал отдельный урок: как сделать свой MCP и что есть.</p></article>
+    </div>
+  </section>
+
+  <!-- ============== IV · GOALS & HOMEWORK ============== -->
+  <section class="block b4">
+    <div class="section-head">
+      <span class="section-num">§ IV.</span>
+      <h2 class="section-title">Цели & домашка</h2>
+      <span class="section-kicker">Слева — что должно остаться в голове. Справа — живой статус практики в твоём HQ.</span>
+    </div>
+    <div class="objectives">
+
+      <div class="col goals-col">
+        <h3>Цели урока<span class="tally">5 пунктов</span></h3>
+        <ul class="checklist">
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Принцип масштабирования</div><div class="how">Сначала всё в одном месте — систему строить, когда реально упёрся в ограничение.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">AGENTS.md на двух этажах</div><div class="how">Глобальное — в корне штаба, домен-специфика — в папке проекта.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">GitHub Projects как реестр задач</div><div class="how">Задачи и эпики в GitHub Projects, агент берёт контекст по ссылке.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Самопроверка + status.md</div><div class="how">Критерии оценки + файл status.md, чтобы пережить обрыв сессии.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Убрать себя из связующего звена</div><div class="how">Формализовать «получаю X → отдаю Б», один шаг — headless-вызовом.</div></div></li>
+        </ul>
+      </div>
+
+      <div class="col homework-col">
+        <h3>Домашнее задание<span class="tally">0 из 5 закрыто</span></h3>
+        <ul class="checklist">
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Рассказать потоку про свой прогресс</div><div class="how">В чат курса — показать скрин дашборда, какой-то задачи или того, что собрал. «Это нормально, рассказывайте».</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Writing Skills на своей задаче</div><div class="how">Взять застрявшую задачу (например, нестабильный DevTools MCP), пройти через Writing Skills: TDD-цикл — падение, фикс, фидбэк, упаковка в скилл.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Формализовать роль связующего звена</div><div class="how">Записать голосом или текстом: получаю X от агента А → отдаю агенту Б. Один кусок заменить headless-вызовом; продублировать вопрос в чат, чтобы вернуться.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Зарегистрировать my.telegram.org</div><div class="how">До любых экспериментов с Telethon — раздел Apps на my.telegram.org, иначе риск бана рабочего аккаунта. Подробный гайд будет на отдельном уроке.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Попробовать paperclip</div><div class="how">Запустить референсный фреймворк оркестрации, чтобы понять механику. Иметь в виду: токены утекают лавиной — «не на танке за цветами»; для боевого использования есть проще решения.</div></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== QUOTES ============== -->
+  <aside class="quotes-wrap">
+    <div class="quotes-label">Из уст Серёжи</div>
+    <div class="quotes">
+      <blockquote>Не нужно строить систему для нерешённой задачи.</blockquote>
+      <blockquote>Скилл — это упакованная экспертиза.</blockquote>
+      <blockquote>Очень важно, чтобы всегда выхлоп был и было какое-то прикладное применение.</blockquote>
+      <blockquote>В идеале как можно меньше сюда залазить — как можно меньше вылазим в слой исполнения.</blockquote>
+      <blockquote>Не всегда вот нужно тебе на танке за цветами ехать.</blockquote>
+    </div>
+  </aside>
+
+  <!-- ============== CTA ============== -->
+  <div class="cta-row">
+    <div class="cta-text">
+      <div class="eyebrow">Следующий шаг</div>
+      <h2>Открыть HQ-дашборд</h2>
+      <p>Реестр активных проектов и задач. После лайв-Q&A — отметить прогресс и спланировать один шаг по масштабированию системы.</p>
+    </div>
+    <a class="cta-btn" href="https://instrumentburg-sudo.github.io/hq/">
+      HQ / Центр управления
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Personal Corp · лайв-Q&A потока 1</span>
+    <span>Серёжа Рис <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech</a></span>
+    <span>Собрано 12·V·MMXXVI</span>
+  </footer>
+
+</main>
+</body>
+</html>

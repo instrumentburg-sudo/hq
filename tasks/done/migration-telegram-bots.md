@@ -1,10 +1,11 @@
 ---
 type: long
-status: in_progress
+status: completed
 project: instrumentburg
 priority: P2
 created: 2026-04-25
 deadline: 2026-05-09
+completed: 2026-05-11
 ---
 
 # Миграция видимых Telegram-ботов в скрытые исполнители
@@ -24,20 +25,21 @@ deadline: 2026-05-09
 Критерий готовности: 1–2 дня наблюдения без потери задач из старых групп; в `TELEGRAM_BOT_MIGRATION.md` зафиксирован финальный режим каждого из пяти ботов.
 
 ## План
-- [ ] Шаг 1 — Антон подтверждает по каждому из 5 ботов: оставлять видимым, отключать, отложить
-- [ ] Шаг 2 — Бэкап `openclaw.json` (`groupPolicy`, `groupAllowFrom`, allowlists)
-- [ ] Шаг 3 — Отключить групповые триггеры для подтверждённых ролей (обратимая правка конфигурации)
-- [ ] Шаг 4 — `openclaw config validate`, рестарт gateway
-- [ ] Шаг 5 — Проверить вызовы исполнителей через `sessions_spawn` от `topic-system` и topic-агентов
-- [ ] Шаг 6 — 1–2 дня наблюдения: не теряются ли задачи из старых групп; cron `mailer` исходящий не сломан
-- [ ] Шаг 7 — Финальная фиксация в `TELEGRAM_BOT_MIGRATION.md` и в OpenClaw `STATE.md`
+- [x] Шаг 1 — Антон подтверждает по каждому из 5 ботов: оставлять видимым, отключать, отложить
+- [x] Шаг 2 — Бэкап `openclaw.json` (`groupPolicy`, `groupAllowFrom`, allowlists)
+- [x] Шаг 3 — Отключить групповые триггеры для подтверждённых ролей (обратимая правка конфигурации)
+- [x] Шаг 4 — `openclaw config validate`, рестарт gateway
+- [x] Шаг 5 — Проверить вызовы исполнителей через `sessions_spawn` от `topic-system` и topic-агентов
+- [x] Шаг 6 — 1–2 дня наблюдения: не теряются ли задачи из старых групп; cron `mailer` исходящий не сломан
+- [x] Шаг 7 — Финальная фиксация в `TELEGRAM_BOT_MIGRATION.md` и в OpenClaw `STATE.md`
 
 ## Делегирование
 - Шаги 1, 6 — ручное решение Антона (Human Gate на отключение видимого интерфейса)
 - Шаги 2–5 — `topic-system` в `~/.openclaw/workspace-topic-system/`
 - Шаг 7 — `topic-system` обновляет MIGRATION.md и OpenClaw STATE.md
 
-## Заметки
+2026-05-11 — закрыто по подтверждению Антона в Telegram: «Это все сделано уже». Задача убрана из активной ежедневной сводки HQ.
+
 Не трогать в рамках задачи:
 - `master`, `dispatcher`, `nutritionist` — остаются видимыми
 - Главный вход `@ClawdIamsohappy_bot` — остаётся

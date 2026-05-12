@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Урок 03 · От штаба к рабочей среде · Personal Corp</title>
-<meta name="description" content="Выжимок третьего урока Серёжи Риса из курса Personal Corp: чистка штаба ретро, парсинг сырых данных в контекст, CRM на md-карточках, Codex Automation как cron и Meeting Copilot для живых созвонов.">
+<meta name="description" content="Выжимок третьего урока Серёжи Риса из курса Personal Corp: ретро штаба, три уровня парсинга данных в контекст, CRM на md-карточках, Codex Automation как cron и Meeting Copilot на живом созвоне.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -601,11 +601,11 @@
   <header class="masthead">
     <div class="rail">
       <span class="live">Сессия открыта</span>
-      <span>Personal Corp <span class="sep">·</span> Серёжа Рис <span class="sep">·</span> ~70 минут (часть 1)</span>
-      <span>4·V·MMXXVI</span>
+      <span>Personal Corp <span class="sep">·</span> Серёжа Рис <span class="sep">·</span> ~2 ч 50 мин</span>
+      <span>12·V·MMXXVI</span>
     </div>
 
-    <div class="lesson-tag">Урок 03 — лайв + шаблоны</div>
+    <div class="lesson-tag">Урок 03 — лайв + демо</div>
 
     <h1 class="hero">
       От штаба
@@ -614,10 +614,10 @@
 
     <div class="summary">
       <p>
-        Третий лайв-разбор: парсим сырые данные в <em style="color:var(--oxide); font-style:normal;">полезный контекст</em>, заводим CRM на md-карточках, ставим cron через Codex Automation и собираем Meeting Copilot для живых созвонов.
+        Первый еженедельный лайв потока: чистка штаба через ретро, парсинг сырых данных в <em style="color:var(--oxide); font-style:normal;">полезный контекст</em>, CRM на md-карточках рядом со штабом, Codex Automation вместо ручного cron и живой Meeting Copilot на созвоне.
       </p>
       <div class="summary-meta">
-        № выпуска<br><b>III · 04·05·26</b><br>
+        № выпуска<br><b>III · 12·05·26</b><br>
         формат<br><b>live + демо</b>
       </div>
     </div>
@@ -628,19 +628,19 @@
     <div class="section-head">
       <span class="section-num">§ I.</span>
       <h2 class="section-title">Термины</h2>
-      <span class="section-kicker">Слова, которыми Серёжа собирает урок про данные, шаблоны и cron.</span>
+      <span class="section-kicker">Слова, которыми Серёжа собирает урок про данные, CRM и автоматизации.</span>
     </div>
     <div class="terms-grid">
-      <article class="term"><span class="term-num">01</span><h3 class="term-name">Парсинг данных в контекст</h3><p class="term-def">Сырые данные — транскрипт, почта, чаты — сами по себе не контекст. Контекстом они становятся, когда из них вынесены полезные действия — методы, инструменты, ДЗ — и подписаны разметкой.</p></article>
-      <article class="term"><span class="term-num">02</span><h3 class="term-name">Codex Automation</h3><p class="term-def">Кнопка «автоматизация» в кодексе, под капотом — обычный cron. Триггер по времени или событию запускает агента — без ручной настройки расписания на сервере.</p></article>
-      <article class="term"><span class="term-num">03</span><h3 class="term-name">CRM на md-карточках</h3><p class="term-def">Четыре связанных шаблона в репо штаба: Account, Contact, Opportunity, Meeting. Каждая карточка — markdown-файл с фронтматтером и якорями для агента.</p></article>
-      <article class="term"><span class="term-num">04</span><h3 class="term-name">Meeting Copilot</h3><p class="term-def">Локальный HTML-дашборд на один созвон: вкладки профиля, вопросов, topic map (D3-граф), homework, glossary. Обновляется из дельт транскрипта в реальном времени.</p></article>
-      <article class="term"><span class="term-num">05</span><h3 class="term-name">Suffix-diff транскрипта</h3><p class="term-def">`state/diff.py` принимает полный транскрипт от Granola, сравнивает с baseline и отдаёт только хвост. Делает обновления Copilot копеечными по токенам.</p></article>
-      <article class="term"><span class="term-num">06</span><h3 class="term-name">Цикл принятия решений агента</h3><p class="term-def">Просьба показать, как агент думал — диаграммой шагов и тремя гипотезами как улучшить. Снимает магию с генеративной системы и даёт ручки управления.</p></article>
-      <article class="term"><span class="term-num">07</span><h3 class="term-name">GitHub Connector в ChatGPT</h3><p class="term-def">Коннектор в чат-ботах, который подсасывает репо штаба как контекст. Заменяет отдельный OpenClaw-агент и экономит токены подписки на длинных сессиях.</p></article>
-      <article class="term"><span class="term-num">08</span><h3 class="term-name">Weekly skills</h3><p class="term-def">Два скилла Серёжи — `weekly` (планирование) и `weekly retro`. Проставляют недельные лейблы в GitHub Projects и проводят ретро по закрытым задачам.</p></article>
-      <article class="term"><span class="term-num">09</span><h3 class="term-name">Качество контекста ≠ размер</h3><p class="term-def">Миллион токенов — не решение, а булочка. Чище данные и явная разметка важнее объёма; добавлять качество, а не количество.</p></article>
-      <article class="term"><span class="term-num">10</span><h3 class="term-name">Пресеты Copilot</h3><p class="term-def">Три набора вкладок — `mentoring` (Profile, Questions, Topic Map, Homework, Glossary), `sales` (+ Risks, Scorecard), `discovery` (минимум). Выбираются перед CREATE.</p></article>
+      <article class="term"><span class="term-num">01</span><h3 class="term-name">Контекст ≠ данные</h3><p class="term-def">Сырые данные — транскрипт, почта, чаты — сами по себе не контекст. Контекстом они становятся, когда из них вынесены полезные действия (методы, инструменты, ДЗ) и подписаны разметкой. «Контекст — это то, что агент прочитал».</p></article>
+      <article class="term"><span class="term-num">02</span><h3 class="term-name">Парсинг данных в контекст</h3><p class="term-def">Подготовка сырья перед агентом: транскрипт/почту/чаты сначала прогнать через разметку и привести к нужному формату (карточка CRM, файл уроков), и только потом скармливать агенту в папку.</p></article>
+      <article class="term"><span class="term-num">03</span><h3 class="term-name">CRM на md-карточках</h3><p class="term-def">Папка рядом со штабом со своим файлом правил: `people` (контакты), `accounts`/организации, `deals` (сделки/возможности), `meetings`. Каждая карточка — markdown-файл с фронтматтером по обязательным полям.</p></article>
+      <article class="term"><span class="term-num">04</span><h3 class="term-name">Карточка контакта</h3><p class="term-def">Профиль человека: канал связи (у Серёжи — Telegram), последнее касание, следующий шаг, статус «горячий/холодный» и блок «что вызывает доверие у этого человека / что ослабляет мою позицию» — чтобы не держать всё в голове.</p></article>
+      <article class="term"><span class="term-num">05</span><h3 class="term-name">Этапы сделки</h3><p class="term-def">Карточка `deal` идёт стадиями: идея → согласился голосом или текстом (verbal yes) → переговоры → подтверждена → закрыта-сделана / закрыта-не сделана.</p></article>
+      <article class="term"><span class="term-num">06</span><h3 class="term-name">Дельта-фреймворк работы с данными</h3><p class="term-def">Не обновлять карточки сразу — копить изменения в отдельный delta-файл, а раз в несколько дней или раз в неделю сделать review и применить накопленное. Хорошо работает на масштабе.</p></article>
+      <article class="term"><span class="term-num">07</span><h3 class="term-name">Codex Automation</h3><p class="term-def">Кнопка «автоматизация» в кодексе — под капотом обычный cron. Триггер по времени или событию запускает агента; настройка живёт в структурном файле, который можно отдать Claude Code или пересобрать.</p></article>
+      <article class="term"><span class="term-num">08</span><h3 class="term-name">Цикл принятия решений агента</h3><p class="term-def">Когда агент придумывает или пропускает файлы — попросить показать диаграммой, что прочитал, что выбрал, что проигнорировал, а потом три гипотезы как улучшить. Снимает магию с генеративной системы.</p></article>
+      <article class="term"><span class="term-num">09</span><h3 class="term-name">Meeting Copilot</h3><p class="term-def">Скилл, который во время созвона подтягивает CRM-карточку контакта и summary прошлых встреч, генерирует список вопросов и подсказки «что говорить»; в конце созвона обогащает карточки.</p></article>
+      <article class="term"><span class="term-num">10</span><h3 class="term-name">Telethon / my.telegram.org</h3><p class="term-def">Самый «низкий» уровень парсинга Telegram: регистрация аккаунта разработчика на my.telegram.org даёт api_id и api_hash для автоматизации реального аккаунта. Пропустишь регистрацию — аккаунт могут забанить навсегда.</p></article>
     </div>
   </section>
 
@@ -649,18 +649,18 @@
     <div class="section-head">
       <span class="section-num">§ II.</span>
       <h2 class="section-title">Методы</h2>
-      <span class="section-kicker">Принципы, с которых Серёжа начинает день третьей недели.</span>
+      <span class="section-kicker">Принципы, с которых Серёжа отвечает на «всё разрастается, агент путается».</span>
     </div>
     <div class="methods-list">
-      <article class="method"><div class="method-num">01</div><div class="method-body"><h3>Чистить штаб через ретро</h3><p>Раз в неделю спрашивать у агента: какие папки и скилы я реально не использую? Серёжа за одно ретро выкинул три папки и два скила — «отлично, удаляем нафик». Чем меньше у тебя сложного, тем лучше — главное, чтобы понимал.</p></div></article>
-      <article class="method"><div class="method-num">02</div><div class="method-body"><h3>Спрашивать цикл принятия решений</h3><p>Когда агент придумывает или пропускает файлы — попросить диаграмму: что прочитал, что выбрал, что проигнорировал. Потом — три гипотезы как улучшить. Это снимает магию с генеративной системы и даёт точку приложения управления.</p></div></article>
-      <article class="method"><div class="method-num">03</div><div class="method-body"><h3>Качество контента, а не размер контекста</h3><p>Не наращивать миллион токенов под задачу — добавлять уточнения и внешние увязки. «Не факт даже, что там впереди такой нужен большой». Чистые данные на входе важнее объёма.</p></div></article>
-      <article class="method"><div class="method-num">04</div><div class="method-body"><h3>Не хранить код в PRD</h3><p>Слой стратегии (тексты, требования) и слой кода живут раздельно — иначе агент перерабатывает гигантский файл за каждый запрос. У Артёма это сразу свернуло проект, как только он разделил.</p></div></article>
-      <article class="method"><div class="method-num">05</div><div class="method-body"><h3>Парсить сырые данные перед агентом</h3><p>Транскрипт, почту, чаты сначала пропустить через разметку — методы, инструменты, действия — только потом скармливать агенту в карточки. Иначе он выдумывает: прочитал один из пяти и пропустил, потому что «было лень».</p></div></article>
-      <article class="method"><div class="method-num">06</div><div class="method-body"><h3>Codex Automation вместо ручного cron</h3><p>Кнопка автоматизации в кодексе ставит триггер по времени или событию — без отдельной настройки cron на сервере. Самый простой способ дать агенту регулярную работу: парсинг почты, weekly retro, надзиратель.</p></div></article>
-      <article class="method"><div class="method-num">07</div><div class="method-body"><h3>Live-копилот через diff транскрипта</h3><p>Granola выгружает полный транскрипт — `state/diff.py` режет его до дельты, cheaper-сабагент обновляет вкладки JS-приложения. Родительский контекст не раздувается, токены экономятся.</p></div></article>
-      <article class="method"><div class="method-num">08</div><div class="method-body"><h3>CRM как четыре связанные карточки</h3><p>Account / Contact / Opportunity / Meeting — каждая со своим фронтматтером, scorecard и questions backlog. Сделка идёт стадиями `idea → verbal_yes → negotiation → confirmed → delivered`. Карточки ссылаются друг на друга через [[slug]].</p></div></article>
-      <article class="method"><div class="method-num">09</div><div class="method-body"><h3>Codex и Claude Code — два разных напарника</h3><p>Claude — «классный, умный напарник», понимает с полуслова, держит креатив и тексты. Codex — «исправительный трудяга», доводит длинные задачи и не бросает. Длинные автономные запуски — на Codex со скиллом `just do it`.</p></div></article>
+      <article class="method"><div class="method-num">01</div><div class="method-body"><h3>Чистить штаб через еженедельное ретро</h3><p>Перед каждым лайвом и в конце недели спрашивать агента: какие папки и скилы я реально не использую? Серёжа за одно ретро по папке CRM выкинул три папки и два скила — «удаляем это всё нафик». Чем меньше у тебя сложного, тем лучше — главное, чтобы понимал.</p></div></article>
+      <article class="method"><div class="method-num">02</div><div class="method-body"><h3>Не начинать с большого базиса</h3><p>Кажется, что сначала надо «нормально научиться программировать» или заложить большой фундамент, — это оверинженеринг и прокрастинация. Начинаем с малого и потихоньку добавляем; кто-то так месяц «пилил отдел» под задачу на два дня.</p></div></article>
+      <article class="method"><div class="method-num">03</div><div class="method-body"><h3>Спрашивать у агента его цикл принятия решений</h3><p>Когда агент из пяти файлов читает один-два, а остальное «придумал, потому что лень» — попросить диаграмму его шагов, потом «как это можно улучшить?» и три гипотезы. Это даёт точку приложения управления к генеративной системе.</p></div></article>
+      <article class="method"><div class="method-num">04</div><div class="method-body"><h3>Качество контента, а не размер контекста</h3><p>Не наращивать миллион токенов под задачу — это «булочка». Чистить данные на входе, добавлять уточнения и внешние увязки. «Не факт даже, что там впереди такой нужен большой» контекст.</p></div></article>
+      <article class="method"><div class="method-num">05</div><div class="method-body"><h3>Не хранить код в PRD</h3><p>Слой стратегии (тексты, требования) и слой кода держать раздельно — иначе агент перерабатывает гигантский файл за каждый запрос. У Артёма проект «сразу свернулся» (стал управляемым), как только он это разделил.</p></div></article>
+      <article class="method"><div class="method-num">06</div><div class="method-body"><h3>Парсить сырые данные перед агентом, в три уровня</h3><p>Сначала ручной экспорт (Telegram Desktop → JSON, выгрузка чатов из ChatGPT/Claude/Notion), потом готовые API/MCP-плагины (Gmail, Calendar), и только в крайнем случае — своя прослойка. Не начинать сразу со всех трёх.</p></div></article>
+      <article class="method"><div class="method-num">07</div><div class="method-body"><h3>Дешёвые агенты на перелопачивание файлов</h3><p>Для переформатирования и оптимизации файлов не нужен Opus — Серёжа просит «используй суб-агентов на Haiku», использовал китайских агентов. Это ручной труд, дорогая модель тут не нужна; режим планирования тоже гоняет двух агентов на Haiku.</p></div></article>
+      <article class="method"><div class="method-num">08</div><div class="method-body"><h3>Codex Automation вместо ручного cron</h3><p>«Не нужно теперь делать cron, который раньше делали» — кнопка автоматизации в кодексе ставит триггер по времени или событию. Самый простой способ дать агенту регулярную работу: парсинг почты, weekly retro, ежедневное обогащение CRM.</p></div></article>
+      <article class="method"><div class="method-num">09</div><div class="method-body"><h3>Сначала руками, потом скилл, потом автоматизация</h3><p>Прежде чем запускать скилл в автоматизацию, Серёжа проходит несколько сессий итераций и обновляет скилл. Делаешь действие вручную → когда понятно, пакуешь в скилл → потом ставишь на расписание. Иначе «грязная» автоматизация съест в десять раз больше времени.</p></div></article>
     </div>
   </section>
 
@@ -669,17 +669,17 @@
     <div class="section-head">
       <span class="section-num">§ III.</span>
       <h2 class="section-title">Инструменты</h2>
-      <span class="section-kicker">Стек Серёжи для парсинга, CRM и живых созвонов.</span>
+      <span class="section-kicker">Стек Серёжи для парсинга, CRM на карточках и живых созвонов.</span>
     </div>
     <div class="tools-grid">
-      <article class="tool"><div class="tool-name">Codex Automation <span class="tool-mark">01</span></div><p class="tool-role">Кнопка cron внутри кодекса: триггер времени или события запускает агента. Настройка живёт в самом приложении, а не в /etc/crontab.</p></article>
-      <article class="tool"><div class="tool-name">Granola <span class="tool-mark">02</span></div><p class="tool-role">Источник транскриптов созвонов с локальным API. Серёжа дёргает текущий транскрипт во время созвона — на нём строится Meeting Copilot и КП на лету.</p></article>
-      <article class="tool"><div class="tool-name">Super Powers <span class="tool-mark">03</span></div><p class="tool-role">Плагин со скиллами для Codex и Claude Code. `brainstorming` показывает три варианта дизайна локально через HTML-сервер; обновляется автоматически, если ставить через плагин-механику.</p></article>
-      <article class="tool"><div class="tool-name">ChatGPT GitHub Connector <span class="tool-mark">04</span></div><p class="tool-role">Коннектор подсасывает репо штаба как контекст в чат-боте. Заменяет отдельный OpenClaw-агент: «расскажи статус по клиенту» работает прямо из приложения.</p></article>
-      <article class="tool"><div class="tool-name">GitHub Projects + weekly skills <span class="tool-mark">05</span></div><p class="tool-role">Единый дашборд задач из всех репо с фильтром по неделям. Скилы `weekly` и `weekly retro` ставят лейблы и помогают проводить ретроспективу.</p></article>
-      <article class="tool"><div class="tool-name">Meeting Copilot <span class="tool-mark">06</span></div><p class="tool-role">Промпт-шаблон для генерации live HTML-приложения на одну сессию. Три режима: CREATE (профиль + пресет), UPDATE (дельта транскрипта), CLOSE (`sN.js` + meeting record).</p></article>
-      <article class="tool"><div class="tool-name">CRM Templates <span class="tool-mark">07</span></div><p class="tool-role">Файл `crm-card-templates.html` с четырьмя md-шаблонами: Account, Contact, Opportunity, Meeting. Копируешь в свою CRM-папку и наполняешь по структуре.</p></article>
-      <article class="tool"><div class="tool-name">Cursor / Obsidian <span class="tool-mark">08</span></div><p class="tool-role">Просмотрщики markdown-файлов штаба. Cursor неожиданно стал круто рендерить, Obsidian — культовая программа, ничего учить не надо. Оба необязательны, но удобно.</p></article>
+      <article class="tool"><div class="tool-name">Codex <span class="tool-mark">01</span></div><p class="tool-role">Основное приложение Серёжи — «исправительный трудяга», доводит длинные задачи. Дефолт — модель `gpt-5.5 medium` (extra-high «спорит сам с собой», только для планирования на чистом контексте). Внутри — плагины и кнопка Automation (= cron).</p></article>
+      <article class="tool"><div class="tool-name">Claude Code <span class="tool-mark">02</span></div><p class="tool-role">«Классный, умный напарник» — понимает с полуслова, держит креатив и тексты. Связка с Codex через GitHub-репозиторий, где лежит контекст; начальные промпты ссылаются на нужные файлы.</p></article>
+      <article class="tool"><div class="tool-name">Super Powers <span class="tool-mark">03</span></div><p class="tool-role">Плагин со скилами для Codex и Claude Code; ставить через механику плагинов, тогда обновляется сам. `brainstorming` показывает три варианта дизайна локально через HTML-сервер; `Writing Skills` — must-have для создания своих скилов.</p></article>
+      <article class="tool"><div class="tool-name">weekly / weekly retro · GitHub Projects <span class="tool-mark">04</span></div><p class="tool-role">Два скила Серёжи (`weekly` — планирование, `weekly retro` — ретро): анализируют закрытые задачи и проставляют недельные лейблы в GitHub Projects. GitHub Projects — бесплатный дашборд задач из всех репо с фильтром по неделям; таблица удобнее канбана.</p></article>
+      <article class="tool"><div class="tool-name">Granola <span class="tool-mark">05</span></div><p class="tool-role">Транскрипция созвонов с локальным API. Серёжа дёргает текущий транскрипт прямо во время созвона — на нём строятся Meeting Copilot, КП на лету и обогащение CRM-карточек после встречи.</p></article>
+      <article class="tool"><div class="tool-name">ChatGPT GitHub Connector <span class="tool-mark">06</span></div><p class="tool-role">Коннектор в ChatGPT подсасывает репо штаба как контекст. Заменяет отдельный OpenClaw-агент и экономит токены подписки: «расскажи статус по клиенту X» работает прямо из приложения.</p></article>
+      <article class="tool"><div class="tool-name">Telegram Desktop · бот · Telethon <span class="tool-mark">07</span></div><p class="tool-role">Три уровня доступа к Telegram: Telegram Desktop экспортирует историю любого чата в JSON (даже не админом); бот-админ в группе пишет сообщения в БД (истории «до» не видит); Telethon видит всё, что доступно реальному аккаунту — через api_id/api_hash с my.telegram.org.</p></article>
+      <article class="tool"><div class="tool-name">Codex `goal` (alpha loop) · `just do it` <span class="tool-mark">08</span></div><p class="tool-role">`goal` зацикливает агента, пока не пройдут тесты — «принудительное» дожимание задачи. Скилл `just do it` делает план и файл правил для агента, позволяет ему работать 8–12 часов автономно.</p></article>
     </div>
   </section>
 
@@ -696,21 +696,21 @@
         <h3>Цели урока<span class="tally">5 пунктов</span></h3>
         <ul class="checklist">
           <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Ретро штаба</div><div class="how">Удалить минимум одну неиспользуемую папку или скилл, зафиксировать причину.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Парсинг данных в контекст</div><div class="how">Один источник — транскрипт, почту или Telegram — разметить в действия, методы, инструменты.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Первая Codex Automation</div><div class="how">Триггер по времени или событию — надзиратель раз в день или weekly retro по пятницам.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM на md-карточках</div><div class="how">Четыре шаблона в `10_Accounts/`, `20_People/`, `30_Opportunities/`, плюс одна реальная карточка.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot на живом созвоне</div><div class="how">Один реальный созвон — пройти CREATE / UPDATE / CLOSE.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Три уровня парсинга данных</div><div class="how">Ручной экспорт → готовые плагины → своя прослойка. Не начинать с конца.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Первый плагин-источник</div><div class="how">Gmail / Calendar / Notion через коннекторы — и реальный запрос к нему.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM на md-карточках</div><div class="how">Папка рядом с HQ: people, accounts, deals, meetings + правила и фронтматтер.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot на созвоне</div><div class="how">Один реальный созвон через Granola: CREATE → UPDATE по дельтам → CLOSE.</div></div></li>
         </ul>
       </div>
 
       <div class="col homework-col">
         <h3>Домашнее задание<span class="tally">0 из 5 закрыто</span></h3>
         <ul class="checklist">
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Ретро штаба + чистка</div><div class="how">Спросить агента, какие папки и скилы я реально не использую. Удалить минимум одно. Зафиксировать причину в `practices/`.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM-папка по шаблонам</div><div class="how">Скопировать `crm-card-templates.html` в штаб, создать `10_Accounts/`, `20_People/{slug}/`, `30_Opportunities/`. Завести 1 контакт + 1 встречу.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot — пилот</div><div class="how">Скопировать `meeting-copilot-prompt.md` в штаб. На следующем созвоне запустить CREATE с пресетом, UPDATE по дельтам, CLOSE с `sN.js` и meeting record.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Первая Codex Automation</div><div class="how">Кнопка автоматизации в кодексе — триггер по времени. Например, weekly retro по пятницам или надзиратель раз в день.</div></div></li>
-          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">ChatGPT → GitHub Connector</div><div class="how">В коннекторах ChatGPT включить GitHub, подключить репо штаба, проверить запросом «статус по клиенту X».</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Практика «внешний контекст × свой»</div><div class="how">Перемотать короткое видео, повторить два промпта: подтянуть внешнюю инфу/исследование и смэтчить её со своим контекстом, чтобы сгенерить новые идеи.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Распарсить транскрипт лайва</div><div class="how">Взять файл транскрипта (Серёжа кинул в чат), дать своему агенту в папке штаба: пусть сохранит материалом и предложит, что из него вытащить — методы, инструменты, ДЗ.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Подключить плагин-источник</div><div class="how">Через меню плагинов (Codex) или коннекторы (Claude Code) добавить Gmail / Google Calendar / Notion и попросить агента достать что-то из почты или события.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">CRM-папка по шаблонам</div><div class="how">Запустить из штаба промпт «сделай папку рядом, добавь правило HQ»; скопировать шаблоны карточек (people / account / deal / meeting), завести 1 реальный контакт. Можно дать агенту JSON-экспорт чата и попросить обогатить карточки.</div></div></li>
+          <li class="check todo"><span class="mark"></span><div class="check-body"><div class="label">Meeting Copilot — пилот</div><div class="how">Скопировать prompt Meeting Copilot в папку CRM. На следующем созвоне через Granola запустить: подтянет карточку контакта и summary прошлых встреч, сгенерит вопросы; в конце — обогатит карточки.</div></div></li>
         </ul>
       </div>
 
@@ -721,11 +721,11 @@
   <aside class="quotes-wrap">
     <div class="quotes-label">Из уст Серёжи</div>
     <div class="quotes">
-      <blockquote>Удаляем это всё нафик.</blockquote>
-      <blockquote>Нужно работать над качеством вот этого контента.</blockquote>
-      <blockquote>Не факт даже, что там впереди такой нужен большой.</blockquote>
-      <blockquote>Не нужно теперь делать cron, который раньше делали.</blockquote>
       <blockquote>Контекст — это то, что агент прочитал.</blockquote>
+      <blockquote>Данные — это не является контекст.</blockquote>
+      <blockquote>Нужно работать над качеством вот этого контента, который туда-сюда кидаешь.</blockquote>
+      <blockquote>Не нужно теперь делать cron, который раньше делали.</blockquote>
+      <blockquote>Удаляем это всё нафик.</blockquote>
     </div>
   </aside>
 
@@ -745,7 +745,7 @@
   <footer class="pagefoot">
     <span>Personal Corp · урок 03</span>
     <span>Серёжа Рис <a href="https://sereja.tech" target="_blank" rel="noopener">sereja.tech</a></span>
-    <span>Собрано 4·V·MMXXVI</span>
+    <span>Собрано 12·V·MMXXVI</span>
   </footer>
 
 </main>

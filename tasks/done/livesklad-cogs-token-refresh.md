@@ -1,9 +1,10 @@
 ---
 type: long
-status: pending
+status: completed
 project: apps/dashboard
 priority: P1
 created: 2026-04-23
+completed: 2026-05-12
 ---
 
 # LiveSklad COGS — починить refresh токена, остановить пустые запросы
@@ -21,18 +22,20 @@ Rate-limited mid-fetch, no cache — writing empty
 Pipeline 18:00 успешно тянет COGS из LiveSklad detail API для всех заказов текущего месяца, без пустого fallback. Три запуска подряд без `HTTP 401` + `token refresh failed`.
 
 ## План
-- [ ] Прочитать `fetch_cogs.py`: где refresh-логика, какие токены, откуда читаются
-- [ ] Понять, почему `refresh failed`: истёк refresh token / неверный endpoint / rate-limit на сам refresh
-- [ ] Проверить кеш токена (файл или переменная окружения), посмотреть срок жизни
-- [ ] При необходимости — восстановить credentials вручную через панель LiveSklad
-- [ ] Добавить backoff между batch-запросами, если корень — rate-limit на detail
-- [ ] Прогнать `fetch_cogs.py` локально, убедиться что 102 заказа за 2026-04 попадают в кеш
-- [ ] Дождаться следующего 18:00, сверить, что в логе нет 401 и refresh failed
+- [x] Прочитать `fetch_cogs.py`: где refresh-логика, какие токены, откуда читаются
+- [x] Понять, почему `refresh failed`: истёк refresh token / неверный endpoint / rate-limit на сам refresh
+- [x] Проверить кеш токена (файл или переменная окружения), посмотреть срок жизни
+- [x] При необходимости — восстановить credentials вручную через панель LiveSklad
+- [x] Добавить backoff между batch-запросами, если корень — rate-limit на detail
+- [x] Прогнать `fetch_cogs.py` локально, убедиться что 102 заказа за 2026-04 попадают в кеш
+- [x] Дождаться следующего 18:00, сверить, что в логе нет 401 и refresh failed
 
 ## Делегирование
 Автономно. Исследовательская работа в `apps/dashboard/`, production cron трогать только после ручной проверки.
 
 ## Заметки
+
+- 2026-05-12: закрыто по подтверждению Антона: работа уже выполнена; карточка HQ отставала от факта, поэтому ежедневная сводка ошибочно поднимала закрытую тему.
 Попутно: в `fetch_cogs.py:56` `datetime.utcnow()` помечен как deprecated — исправить заодно на `datetime.now(datetime.UTC)`, если буду трогать файл.
 Токен LiveSklad хранится по Shop ID `5c615f26149eb4750c36b897` (из BOOT.md).
 
